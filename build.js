@@ -269,7 +269,7 @@ page({
 <div class="main"><p class="lede">Fewer clients, more attention. Honest advice, even when it isn't what someone hoped to hear. And a share of every transaction directed back into the community.</p>
 <p style="margin-top:36px"><a class="link" href="/why-quinby">Why Quinby</a></p></div>
 </div>
-<div style="margin-top:110px">${values}</div>
+<div style="margin-top:80px">${values}</div>
 </div></section>
 
 <section class="section white"><div class="wrap">
