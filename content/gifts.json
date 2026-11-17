@@ -1,0 +1,46 @@
+{
+  "gifts": [
+    {
+      "month": "[Month Year]",
+      "nonprofit": "[Nonprofit name]",
+      "cause": "[Cause area]",
+      "neighborhood": "[Neighborhood]",
+      "amount": 1000
+    },
+    {
+      "month": "[Month Year]",
+      "nonprofit": "[Nonprofit name]",
+      "cause": "[Cause area]",
+      "neighborhood": "[Neighborhood]",
+      "amount": 1000
+    },
+    {
+      "month": "[Month Year]",
+      "nonprofit": "[Nonprofit name]",
+      "cause": "[Cause area]",
+      "neighborhood": "[Neighborhood]",
+      "amount": 1000
+    },
+    {
+      "month": "[Month Year]",
+      "nonprofit": "[Nonprofit name]",
+      "cause": "[Cause area]",
+      "neighborhood": "[Neighborhood]",
+      "amount": 1000
+    },
+    {
+      "month": "[Month Year]",
+      "nonprofit": "[Nonprofit name]",
+      "cause": "[Cause area]",
+      "neighborhood": "[Neighborhood]",
+      "amount": 1000
+    },
+    {
+      "month": "[Month Year]",
+      "nonprofit": "[Nonprofit name]",
+      "cause": "[Cause area]",
+      "neighborhood": "[Neighborhood]",
+      "amount": 1000
+    }
+  ]
+}

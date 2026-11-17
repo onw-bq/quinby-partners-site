@@ -1,0 +1,171 @@
+# Pages CMS configuration: what Becky and Elena can edit at app.pagescms.org.
+# Saving in Pages CMS commits to GitHub, and Cloudflare republishes the site automatically.
+media:
+  input: src/media
+  output: /media
+
+content:
+  - name: collection
+    label: The Collection (listings & sales)
+    type: file
+    path: content/collection.json
+    fields:
+      - name: homes
+        label: Homes (newest first; the first one is shown large)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} · {neighborhood} · {status}"
+        fields:
+          - { name: name, label: Home name, type: string, required: true }
+          - { name: neighborhood, label: Neighborhood, type: string }
+          - { name: style, label: Style, type: string }
+          - { name: year, label: Year built, type: string }
+          - name: status
+            label: Status
+            type: select
+            options:
+              values: [For sale, Coming soon, Pending, Sold]
+          - { name: photo, label: Photo, type: image }
+          - { name: link, label: Link (optional, e.g. the listing page), type: string }
+
+  - name: gifts
+    label: Giving record
+    type: file
+    path: content/gifts.json
+    fields:
+      - name: gifts
+        label: Gifts (newest first; totals on the site add up automatically)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{month} · {nonprofit}"
+        fields:
+          - { name: month, label: Month closed (e.g. November 2026), type: string }
+          - { name: nonprofit, label: Nonprofit, type: string, required: true }
+          - { name: cause, label: Cause area, type: string }
+          - { name: neighborhood, label: Neighborhood of the home (never the address), type: string }
+          - { name: amount, label: Amount, type: number, default: 1000 }
+
+  - name: testimonials
+    label: Testimonials
+    type: file
+    path: content/testimonials.json
+    fields:
+      - name: testimonials
+        label: Testimonials (the featured one shows large on the homepage, plus the next two)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} · {detail}"
+        fields:
+          - { name: quote, label: Quote, type: text, required: true }
+          - { name: name, label: Client name, type: string }
+          - { name: detail, label: Detail (e.g. Sold in Kenwood), type: string }
+          - { name: featured, label: Feature on the homepage, type: boolean }
+
+  - name: publication
+    label: Publication (feature & Register)
+    type: file
+    path: content/publication.json
+    fields:
+      - name: feature
+        label: This month's feature
+        type: object
+        fields:
+          - { name: name, label: Home name, type: string }
+          - { name: neighborhood, label: Neighborhood, type: string }
+          - { name: year, label: Year built, type: string }
+          - { name: style, label: Style, type: string }
+          - { name: line, label: One line on what makes it singular, type: text }
+          - { name: photo, label: Photo, type: image }
+      - name: register
+        label: Register entries (newest first)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} · {neighborhood}"
+        fields:
+          - { name: name, label: Home name, type: string }
+          - { name: neighborhood, label: Neighborhood, type: string }
+          - { name: year, label: Year built, type: string }
+          - { name: style, label: Style, type: string }
+          - { name: photo, label: Photo, type: image }
+
+  - name: home
+    label: Homepage
+    type: file
+    path: content/home.json
+    fields:
+      - { name: heroEyebrow, label: Small line above the headline, type: string }
+      - { name: heroTitle, label: Headline, type: string }
+      - { name: heroSub, label: Line under the headline, type: text }
+      - { name: phrases, label: "\"We sell…\" phrases (in order; the last one stays on screen)", type: string, list: true }
+
+  - name: neighborhoods
+    label: Neighborhood pages
+    type: file
+    path: content/neighborhoods.json
+    fields:
+      - name: neighborhoods
+        label: Neighborhoods with full pages
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} · {city}"
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: slug, label: Web address (lowercase-with-dashes; don't change after launch), type: string }
+          - { name: city, label: City, type: string }
+          - name: area
+            label: Area
+            type: select
+            options:
+              values: [south-minneapolis, around-the-lakes, st-paul, edina, golden-valley]
+          - { name: summary, label: One-sentence summary (describe places, never people), type: text }
+          - { name: architecture, label: The architecture, type: text }
+          - { name: setting, label: The setting, type: text }
+          - { name: clip, label: B-roll description, type: string }
+          - { name: photo, label: Hero photo, type: image }
+
+  - name: areas
+    label: Neighborhood areas
+    type: file
+    path: content/areas.json
+    fields:
+      - name: areas
+        label: Areas
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - { name: name, label: Area name, type: string }
+          - { name: slug, label: Web address (don't change after launch), type: string }
+          - { name: lede, label: Intro line, type: text }
+          - name: neighborhoods
+            label: Neighborhoods in this area
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - { name: name, label: Name, type: string }
+              - { name: page, label: "Full page web address, if it has one (e.g. kenwood)", type: string }
+              - { name: line, label: One line about its homes (places, never people), type: text }
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: content/settings.json
+    fields:
+      - { name: publicationName, label: Publication name, type: string }
+      - { name: phone, label: Phone, type: string }
+      - { name: email, label: Email, type: string }

@@ -1,0 +1,22 @@
+{
+  "testimonials": [
+    {
+      "quote": "[A client's words about working with Quinby Partners.]",
+      "name": "[Client name]",
+      "detail": "Sold in Kenwood",
+      "featured": true
+    },
+    {
+      "quote": "[A shorter quote from a buyer.]",
+      "name": "[Name]",
+      "detail": "Bought in East Harriet",
+      "featured": false
+    },
+    {
+      "quote": "[A shorter quote from a seller.]",
+      "name": "[Name]",
+      "detail": "Sold in Summit Hill",
+      "featured": false
+    }
+  ]
+}

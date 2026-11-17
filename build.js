@@ -5,10 +5,18 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE = 'https://www.quinbypartners.com';
-const PUB = '[Publication name]';          // swap in the publication's name when chosen
+// Editable content lives in /content (JSON), edited in Pages CMS or by hand.
+const load = (n) => JSON.parse(fs.readFileSync(path.join(__dirname, 'content', n + '.json'), 'utf8'));
+const SETTINGS = load('settings');
+const HOME = load('home');
+const COLLECTION = load('collection').homes || [];
+const GIFTS = load('gifts').gifts || [];
+const TESTIMONIALS = load('testimonials').testimonials || [];
+const PUBLICATION = load('publication');
+const PUB = SETTINGS.publicationName || '[Publication name]';
 const PUB_PATH = '/journal';               // the publication's address on the site
-const PHONE = '612-232-3165';
-const EMAIL = 'becky@quinbypartners.com';
+const PHONE = SETTINGS.phone;
+const EMAIL = SETTINGS.email;
 const ADDRESS = ['1250 Wayzata Blvd E, Unit 1910', 'Wayzata, MN 55391'];
 const BROKER_LICENSE = '40847796';
 
@@ -18,7 +26,20 @@ const VIDEO = {};
 
 const OUT = path.join(__dirname, 'dist');
 const pages = [];
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const metaLine = (...xs) => xs.filter((x) => x && String(x).trim()).map(esc).join(' · ');
+const photo = (src, alt, label) => src ? `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">` : `<span class="caps">${esc(label)}</span>`;
+const realGifts = GIFTS.filter((g) => g.nonprofit && !String(g.nonprofit).startsWith('['));
+const giftTotal = realGifts.reduce((s, g) => s + (Number(g.amount) || 0), 0);
+const STATS = realGifts.length
+  ? { given: '$' + giftTotal.toLocaleString('en-US'), closings: String(realGifts.length), nonprofits: String(new Set(realGifts.map((g) => g.nonprofit.trim().toLowerCase())).size) }
+  : { given: '[$—]', closings: '[—]', nonprofits: '[—]' };
+const giftRow = (g) => `<li><div class="row"><span class="n" style="font-size:22px">${esc(g.nonprofit)}</span><span class="m">${metaLine(g.cause, g.month)}</span></div></li>`;
+const homeCard = (h, i, tag = 'div') => `<${tag} class="card"${tag === 'a' ? ` href="${esc(h.link || '/the-collection')}"` : ''}><div class="ph">${photo(h.photo, h.name, 'Photo')}</div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. ${String(i + 1).padStart(2, '0')}</span><div><p class="name">${esc(h.name)}</p><p class="meta">${metaLine(h.neighborhood, h.style, h.status)}</p></div></div></${tag}>`;
+const regCard = (r, tagLabel) => `<a class="card" href="${PUB_PATH}"><div class="ph wide">${photo(r.photo, r.name, '')}</div>${tagLabel ? `<p class="eyebrow" style="margin:0">${tagLabel}</p>` : ''}<p class="name">${esc(r.name)}</p><p class="meta">${metaLine(r.neighborhood, r.year, r.style)}</p></a>`;
+const featureImg = (src, label) => `<div class="feature-img media plain">${src ? `<img class="poster" src="${esc(src)}" alt="">` : `<p class="label">${esc(label)}</p>`}</div>`;
+const quote = (t) => `\u201c${esc(t.quote)}\u201d`;
 
 // ---------- shared pieces ----------
 const NAV = [
@@ -43,15 +64,16 @@ ${links}
 </div></header>`;
 }
 
-function media(key, label, cls = 'band') {
+function media(key, label, cls = 'band', still) {
   const v = VIDEO[key];
   const data = v ? ` data-video="${v.src}"${v.small ? ` data-video-small="${v.small}"` : ''}${v.poster ? ` data-poster="${v.poster}"` : ''}` : '';
-  const poster = v && v.poster ? `<img class="poster" src="${v.poster}" alt="">` : '';
+  const posterSrc = (v && v.poster) || still;
+  const poster = posterSrc ? `<img class="poster" src="${esc(posterSrc)}" alt="">` : '';
   return { open: `<div class="media ${cls}"${data}>${poster}<p class="label" aria-hidden="true">B-roll · ${esc(label)}</p>`, close: '</div>' };
 }
 
-function hero(key, label, { eyebrow, title, sub, short } = {}) {
-  const m = media(key, label, 'hero' + (short ? ' short' : ''));
+function hero(key, label, { eyebrow, title, sub, short, still } = {}) {
+  const m = media(key, label, 'hero' + (short ? ' short' : ''), still);
   return `${m.open}<div class="wrap">
 ${eyebrow ? `<p class="eyebrow">${eyebrow}</p>` : ''}<h1>${title}</h1>
 ${sub ? `<p class="sub">${sub}</p>` : ''}</div>${m.close}`;
@@ -68,7 +90,7 @@ function bands() {
 <p style="max-width:560px;margin-top:14px">Stories of the Twin Cities' most remarkable homes: their architecture, their makers and the people who care for them.</p>
 </div><a class="link" href="${PUB_PATH}">Read the latest</a></div>
 <div class="grid">
-${['This month\'s feature', 'From the Register', 'From the Register'].map((t) => `<a class="card" href="${PUB_PATH}"><div class="ph wide"></div><p class="eyebrow" style="margin:0">${t}</p><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Year] · [Style]</p></a>`).join('\n')}
+${[regCard(PUBLICATION.feature, 'This month\'s feature'), ...(PUBLICATION.register || []).slice(0, 2).map((r) => regCard(r, 'From the Register'))].join('\n')}
 </div></div></section>
 <section class="section pine tight" aria-labelledby="db-band">
 <div class="wrap split" style="align-items:center">
@@ -181,75 +203,9 @@ const consultForm = (kind) => `<div class="ghl-form" data-form="${kind}">
 </div>`;
 
 // ---------- neighborhoods ----------
-const AREAS = [
-  { slug: 'south-minneapolis', name: 'South Minneapolis', lede: 'Home base. Lakes, creeks and parkways, and street after street of bungalows, foursquares, Tudors and period-revival homes from the early twentieth century.',
-    hoods: [
-      ['East Harriet', '/neighborhoods/east-harriet', 'Early-twentieth-century homes beside Lake Harriet and the Lyndale Park gardens.'],
-      ['Kingfield', null, 'Bungalows, foursquares and two-stories close to the shops of Nicollet Avenue.'],
-      ['Lynnhurst', null, 'Period-revival and Tudor homes between Lake Harriet and Minnehaha Creek.'],
-      ['Tangletown', null, 'Curving streets around the Washburn Water Tower, with Tudor and Arts and Crafts homes.'],
-      ['Fulton', null, 'Craftsman and period-revival homes west of Lake Harriet, near 50th & France.'],
-      ['Linden Hills', null, 'Craftsman homes and cottages between Lake Harriet and Bde Maka Ska, around a village of small shops.'],
-      ['Armatage', null, 'Postwar and mid-century homes in the southwest corner of the city.'],
-      ['Around Lake Nokomis', null, 'Bungalows and period homes near Lake Nokomis and Minnehaha Creek.'],
-    ] },
-  { slug: 'around-the-lakes', name: 'Around the Lakes', lede: 'The neighborhoods around Lake of the Isles, Bde Maka Ska and Cedar Lake, where many of the city\'s grandest early-1900s homes stand.',
-    hoods: [
-      ['Kenwood', '/neighborhoods/kenwood', 'Early-twentieth-century homes on winding streets between Lake of the Isles and Cedar Lake.'],
-      ['East Isles', '/neighborhoods/east-isles', 'Early-1900s homes along the east shore of Lake of the Isles.'],
-      ['Lowry Hill', null, 'Grand early-1900s homes on the hill above the Walker Art Center and the Sculpture Garden.'],
-      ['ECCO', null, 'Early-twentieth-century homes between Bde Maka Ska and the shops of Uptown.'],
-      ['CARAG', null, 'Early-1900s homes on walkable blocks near Bde Maka Ska and Uptown.'],
-      ['Bryn Mawr', null, 'Craftsman and Tudor homes tucked beside Theodore Wirth Park.'],
-    ] },
-  { slug: 'st-paul', name: 'St. Paul', lede: 'Victorian and early-twentieth-century homes south of I-94, from the mansions of Summit Avenue to the tree-lined blocks around Grand Avenue.',
-    hoods: [
-      ['Summit Hill', '/neighborhoods/summit-hill', 'Victorian and early-twentieth-century homes along Summit and Grand Avenues.'],
-      ['Macalester-Groveland', '/neighborhoods/macalester-groveland', 'Early-twentieth-century homes around Macalester College and Grand Avenue.'],
-      ['Crocus Hill', null, 'Victorian and early-1900s homes on quiet streets just south of Summit Avenue.'],
-      ['Ramsey Hill', null, 'Some of St. Paul\'s most ornate Victorian homes, near the Cathedral and the east end of Summit Avenue.'],
-      ['Highland Park', null, 'Period-revival and mid-century homes near the Mississippi River bluffs.'],
-    ] },
-  { slug: 'edina', name: 'Edina', lede: 'From the 1920s period-revival homes of the Country Club District to the city\'s postwar and mid-century neighborhoods.',
-    hoods: [
-      ['Country Club', '/neighborhoods/country-club', 'A planned 1920s neighborhood of period-revival homes near 50th & France.'],
-      ['Morningside', null, 'Cottage-scale 1920s to 1940s homes on the Minneapolis border.'],
-      ['Parkwood Knolls', null, 'Postwar and mid-century homes on wooded lots.'],
-      ['Mid-century Edina', null, 'Mid-century modern and postwar homes across the city\'s later neighborhoods.'],
-    ] },
-  { slug: 'golden-valley', name: 'Golden Valley', lede: 'Wooded hills and one of the Twin Cities\' strongest collections of mid-century modern homes.',
-    hoods: [
-      ['Tyrol Hills', null, 'Wooded hills and a notable collection of mid-century modern homes.'],
-      ['Mid-century Golden Valley', null, 'Mid-century modern and postwar homes across the city\'s wooded neighborhoods.'],
-    ] },
-];
+const AREAS = load('areas').areas.map((a) => ({ ...a, hoods: (a.neighborhoods || []).map((n) => [n.name, n.page ? '/neighborhoods/' + n.page : null, n.line]) }));
 
-const HOODS = [
-  { slug: 'kenwood', name: 'Kenwood', city: 'Minneapolis', area: 'around-the-lakes', video: 'kenwood', clip: 'a quiet curved street under old trees, toward the lake',
-    summary: 'Kenwood is a Minneapolis neighborhood between Lake of the Isles and Cedar Lake, known for its early-twentieth-century homes on winding, tree-lined streets.',
-    architecture: 'Kenwood\'s homes date mostly from the early 1900s, when the neighborhood grew into one of the city\'s most sought-after addresses. You\'ll find Colonial Revival, Tudor Revival, Prairie School and Arts and Crafts homes, many architect-designed, with original woodwork, leaded glass and generous porches. [Add notable architects and streets.]',
-    setting: 'Kenwood Park, the Kenwood Parkway and the shores of Lake of the Isles and Cedar Lake are all close by, along with the trails of the Chain of Lakes. [Add local landmarks and shops.]' },
-  { slug: 'east-isles', name: 'East Isles', city: 'Minneapolis', area: 'around-the-lakes', video: 'east-isles', clip: 'Lake of the Isles shoreline at dusk',
-    summary: 'East Isles is a Minneapolis neighborhood along the east shore of Lake of the Isles, known for its early-1900s homes near the lake and the shops of Uptown.',
-    architecture: 'Most East Isles homes were built in the early twentieth century, from large lakefront houses to Craftsman and period-revival homes on the blocks behind them. [Add notable architects, styles and streets.]',
-    setting: 'Lake of the Isles and its parkway and trails form the neighborhood\'s western edge, with the shops and restaurants of Uptown nearby. [Add local landmarks.]' },
-  { slug: 'east-harriet', name: 'East Harriet', city: 'Minneapolis', area: 'south-minneapolis', video: 'east-harriet', clip: 'morning light through the Lyndale Park gardens',
-    summary: 'East Harriet is a South Minneapolis neighborhood beside Lake Harriet, known for its early-twentieth-century homes and the Lyndale Park gardens.',
-    architecture: 'East Harriet\'s streets hold Craftsman bungalows, Tudor and Colonial Revival homes and foursquares, most from the first decades of the twentieth century. Becky has lived here herself, in a 1916 Craftsman. [Add notable streets and details.]',
-    setting: 'Lake Harriet, its bandshell and trails, and the rose and peace gardens of Lyndale Park are all close by. [Add local landmarks and shops.]' },
-  { slug: 'country-club', name: 'Country Club', city: 'Edina', area: 'edina', video: 'country-club', clip: 'a tree-lined street of period-revival homes',
-    summary: 'The Country Club District is an Edina neighborhood planned in the 1920s, known for its period-revival homes on tree-lined streets near 50th & France.',
-    architecture: 'The Country Club District was planned and built largely in the 1920s and 1930s, with Colonial Revival, Tudor Revival and other period-revival homes. Becky is restoring a 1928 Cape Cod here. [Add history, notable homes and any design guidelines.]',
-    setting: 'The shops and restaurants of 50th & France, Minnehaha Creek and nearby parks are all close by. [Add local landmarks.]' },
-  { slug: 'summit-hill', name: 'Summit Hill', city: 'St. Paul', area: 'st-paul', video: 'summit-hill', clip: 'Summit Avenue in autumn',
-    summary: 'Summit Hill is a St. Paul neighborhood along Summit and Grand Avenues, known for its Victorian-era and early-twentieth-century homes.',
-    architecture: 'Summit Hill holds some of the Twin Cities\' finest Victorian and early-twentieth-century architecture, from grand homes on Summit Avenue to the smaller houses and rowhouses on the streets around it. [Add notable architects, homes and historic district details.]',
-    setting: 'Summit Avenue\'s boulevard and the shops and restaurants of Grand Avenue are at the heart of the neighborhood. [Add local landmarks.]' },
-  { slug: 'macalester-groveland', name: 'Macalester-Groveland', city: 'St. Paul', area: 'st-paul', video: 'mac-groveland', clip: 'a porch-lined block under old elms',
-    summary: 'Macalester-Groveland is a St. Paul neighborhood around Macalester College and Grand Avenue, known for its early-twentieth-century homes on tree-lined streets.',
-    architecture: 'Mac-Groveland\'s homes are mostly from the early twentieth century: Craftsman bungalows, foursquares, and Colonial and Tudor Revival homes. [Add notable streets and details.]',
-    setting: 'Grand Avenue\'s shops, the campuses of Macalester College and the University of St. Thomas, and the Mississippi River bluffs are all nearby. [Add local landmarks.]' },
-];
+const HOODS = load('neighborhoods').neighborhoods.map((h) => ({ ...h, video: h.slug }));
 
 // ---------- pages ----------
 
@@ -257,12 +213,12 @@ const HOODS = [
 page({
   path: '/', title: 'Quinby Partners | Historic, Architectural & Unique Homes in the Twin Cities',
   description: 'Quinby Partners is an independent, woman-owned Twin Cities brokerage for historic, architect-designed and one-of-a-kind homes. We find passionate buyers for unique homes.',
-  body: `${hero('home', 'slow pan up a carved oak staircase, morning light', { eyebrow: 'Twin Cities Real Estate · Est. 2012', title: 'We find passionate buyers for unique homes.', sub: 'Independent, woman-owned, and deeply rooted in the Twin Cities. Historic, architect-designed and one-of-a-kind homes, presented with the care they were built with.' })}
+  body: `${hero('home', 'slow pan up a carved oak staircase, morning light', { eyebrow: esc(HOME.heroEyebrow), title: esc(HOME.heroTitle), sub: esc(HOME.heroSub) })}
 
 <section class="section we-sell" aria-label="What we sell"><div class="wrap center">
 <hr class="rule" style="margin:0 auto 40px">
 <p class="first">We don't just sell homes. We sell</p>
-<p class="phrase" aria-live="polite" data-phrases='${esc(JSON.stringify(['works of art.', 'pieces of history.', 'the butler’s pantry you didn’t know you needed.', 'houses with a story.', 'good causes, too.', 'the right home to the right person.']))}'>the right home to the right person.</p>
+<p class="phrase" aria-live="polite" data-phrases='${esc(JSON.stringify(HOME.phrases))}'>${esc(HOME.phrases[HOME.phrases.length - 1])}</p>
 </div></section>
 
 <section class="section"><div class="wrap">
@@ -275,27 +231,25 @@ page({
 </div></section>
 
 <section class="feature" aria-labelledby="feat-h">
-<div class="feature-img media plain"><p class="label">Photo · one editorial image of this month's featured home</p></div>
+${featureImg(PUBLICATION.feature.photo, 'Photo · one editorial image of this month\'s featured home')}
 <div class="wrap feature-cap">
 <p class="eyebrow">From ${esc(PUB)} · This month</p>
-<h2 id="feat-h">[Home name]</h2>
-<p class="meta caps">[Neighborhood] · [Year] · [Style]</p>
-<p style="max-width:620px;margin-top:16px">[One line on what makes this house singular.]</p>
+<h2 id="feat-h">${esc(PUBLICATION.feature.name)}</h2>
+<p class="meta caps">${metaLine(PUBLICATION.feature.neighborhood, PUBLICATION.feature.year, PUBLICATION.feature.style)}</p>
+<p style="max-width:620px;margin-top:16px">${esc(PUBLICATION.feature.line)}</p>
 <p><a class="link" href="${PUB_PATH}">Read the feature</a></p>
 </div></section>
 
 <section class="section white"><div class="wrap">
 <div class="head-row"><div><p class="eyebrow">Our listings &amp; recent sales</p><h2>The Collection</h2></div><a class="link" href="/the-collection">View the collection</a></div>
 <div class="grid">
-${[1, 2, 3].map((n) => `<a class="card" href="/the-collection"><div class="ph"><span class="caps">Photo or b-roll still</span></div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. 0${n}</span><div><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Style] · [For sale / Sold]</p></div></div></a>`).join('\n')}
+${COLLECTION.slice(0, 3).map((h, i) => homeCard(h, i, 'a')).join('\n')}
 </div></div></section>
 
 <section class="section testimonials" aria-labelledby="t-h"><div class="wrap">
 <p class="eyebrow center" id="t-h">In our clients' words</p>
-<blockquote class="pull" style="border:0;padding:24px 0 0"><p>\u201c[A client's words about working with Quinby Partners.]\u201d</p><footer>[Client name · Sold in Kenwood]</footer></blockquote>
-<div class="grid t-small">
-<blockquote><p>\u201c[A shorter quote from a buyer.]\u201d</p><footer>[Name · Bought in East Harriet]</footer></blockquote>
-<blockquote><p>\u201c[A shorter quote from a seller.]\u201d</p><footer>[Name · Sold in Summit Hill]</footer></blockquote>
+${(() => { const f = TESTIMONIALS.find((t) => t.featured) || TESTIMONIALS[0]; const rest = TESTIMONIALS.filter((t) => t !== f).slice(0, 2); return f ? `<blockquote class="pull" style="border:0;padding:24px 0 0"><p>${quote(f)}</p><footer>${metaLine(f.name, f.detail)}</footer></blockquote>
+${rest.length ? `<div class="grid t-small">${rest.map((t) => `<blockquote><p>${quote(t)}</p><footer>${metaLine(t.name, t.detail)}</footer></blockquote>`).join('')}</div>` : ''}` : ''; })()}
 </div></div></section>
 
 ${(() => { const m = media('architecture', 'a mix: leaded glass, a mid-century window wall, a gallery wall in a new build', 'navy-band'); return `<section class="section navy" style="position:relative;padding:0">${m.open}<div class="wrap" style="position:relative;z-index:1;padding-top:120px;padding-bottom:120px">
@@ -325,15 +279,15 @@ ${HOODS.map((h) => `<li><a href="/neighborhoods/${h.slug}"><span class="n">${h.n
 <p class="eyebrow">Giving</p>
 <h2 id="give-h" style="font-size:clamp(32px,3.6vw,44px);line-height:1.25">At every closing, we give $1,000 to a nonprofit you choose.</h2>
 <div style="display:flex;flex-wrap:wrap;gap:48px;margin-top:44px">
-<div class="stat"><p class="big">[$—]</p><p class="cap">Given so far</p></div>
-<div class="stat"><p class="big">[—]</p><p class="cap">Nonprofits supported</p></div>
+<div class="stat"><p class="big">${STATS.given}</p><p class="cap">Given so far</p></div>
+<div class="stat"><p class="big">${STATS.nonprofits}</p><p class="cap">Nonprofits supported</p></div>
 </div>
 <p style="margin-top:40px"><a class="link" href="/giving">See every gift</a></p>
 </div>
 <div class="main" style="flex:1 1 420px">
 <p class="eyebrow" style="margin-bottom:8px">Recent gifts</p>
 <ul class="rows" style="border-top-color:var(--navy)">
-${[1, 2, 3, 4].map(() => `<li><div class="row"><span class="n" style="font-size:22px">[Nonprofit name]</span><span class="m">[Cause area] · [Month Year]</span></div></li>`).join('\n')}
+${GIFTS.slice(0, 4).map(giftRow).join('\n')}
 </ul></div></div></section>`,
   faqs: [
     ['What kinds of homes does Quinby Partners specialize in?', 'Historic, architect-designed and one-of-a-kind homes across Minneapolis, St. Paul, Edina and Golden Valley: prewar homes, mid-century modern homes, standout contemporary homes and homes with exceptional craftsmanship. We work with every kind of home and every price point.'],
@@ -528,9 +482,9 @@ page({
   description: 'At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. See every gift and the causes we celebrate.',
   body: `${hero('giving', 'keys handed over on a front porch', { eyebrow: 'Giving', title: 'Every home we sell gives back.', sub: 'At every closing, Quinby Partners gives $1,000 to a nonprofit you choose. Your move becomes a lasting investment in the community you call home.', short: true })}
 <section class="section tight"><div class="wrap grid">
-<div class="stat"><p class="big">[$—]</p><p class="cap">Given so far</p></div>
-<div class="stat"><p class="big">[—]</p><p class="cap">Closings that gave back</p></div>
-<div class="stat"><p class="big">[—]</p><p class="cap">Nonprofits supported</p></div>
+<div class="stat"><p class="big">${STATS.given}</p><p class="cap">Given so far</p></div>
+<div class="stat"><p class="big">${STATS.closings}</p><p class="cap">Closings that gave back</p></div>
+<div class="stat"><p class="big">${STATS.nonprofits}</p><p class="cap">Nonprofits supported</p></div>
 </div></section>
 <section class="section tight"><div class="wrap"><p class="eyebrow" style="margin-bottom:40px">How it works</p><div class="grid">
 ${principle('I.', 'You choose the cause', 'Any nonprofit that matters to you. If you are undecided, we suggest three to choose from.')}
@@ -539,7 +493,7 @@ ${principle('III.', 'We share it, with your okay', 'The gift joins the record be
 </div></div></section>
 <section class="section white"><div class="wrap"><p class="eyebrow">The record</p><h2 style="margin-bottom:44px">Every gift, every closing</h2>
 <div class="table-wrap"><table class="compare"><thead><tr><th scope="col">Closed</th><th scope="col">Nonprofit</th><th scope="col">Cause</th><th scope="col">Home in</th><th scope="col" style="text-align:right">Gift</th></tr></thead><tbody>
-${[1, 2, 3, 4, 5, 6].map(() => `<tr><td class="typ">[Month Year]</td><td class="ours">[Nonprofit name]</td><td>[Cause area]</td><td>[Neighborhood]</td><td class="num">$1,000</td></tr>`).join('')}
+${GIFTS.map((g) => `<tr><td class="typ">${esc(g.month)}</td><td class="ours">${esc(g.nonprofit)}</td><td>${esc(g.cause)}</td><td>${esc(g.neighborhood)}</td><td class="num">$${(Number(g.amount) || 0).toLocaleString('en-US')}</td></tr>`).join('')}
 </tbody></table></div>
 <p class="small" style="margin-top:22px">Shared with each client's permission. We never list names or addresses.</p></div></section>
 <section class="section"><div class="wrap split" style="align-items:center">
@@ -624,15 +578,15 @@ page({
 <p class="lede" style="max-width:820px;margin-top:24px">The homes we’ve been trusted with. Each one comes with its own house biography: its design, its makers and its story.</p>
 </div></section>
 <section class="feature" aria-label="Newest in the collection">
-<div class="feature-img media plain"><p class="label">Photo · newest home in the collection</p></div>
+${featureImg(COLLECTION[0] && COLLECTION[0].photo, 'Photo · newest home in the collection')}
 <div class="wrap feature-cap">
 <p class="eyebrow">No. 01 · Newest</p>
-<h2>[Home name]</h2>
-<p class="meta caps">[Neighborhood] · [Style] · [For sale / Sold]</p>
+<h2>${esc(COLLECTION[0] ? COLLECTION[0].name : '')}</h2>
+<p class="meta caps">${COLLECTION[0] ? metaLine(COLLECTION[0].neighborhood, COLLECTION[0].style, COLLECTION[0].status) : ''}</p>
 </div></section>
 <section class="section"><div class="wrap">
 <div class="grid">
-${[2, 3, 4, 5, 6, 7].map((n) => `<div class="card"><div class="ph"><span class="caps">Photo</span></div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. 0${n}</span><div><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Style] · [For sale / Sold]</p></div></div></div>`).join('\n')}
+${COLLECTION.slice(1).map((h, i) => homeCard(h, i + 1)).join('\n')}
 </div></div></section>
 ${ctaBand('Should your home be in the collection?', 'We’d love to see it and hear its story.', '/selling', 'How we market your home')}`,
 });
@@ -647,11 +601,11 @@ page({
 <p class="lede" style="max-width:820px;margin-top:24px">Stories of the Twin Cities’ most remarkable homes: their architecture, their makers and the people who care for them. Most aren’t for sale.</p>
 </div></section>
 <section class="section white"><div class="wrap"><p class="eyebrow">This month’s feature</p>
-<div class="split" style="margin-top:24px"><div class="main"><div class="card"><div class="ph wide"></div></div></div>
-<div class="side"><p class="no" style="font-family:var(--serif);color:var(--brass-text)">Feature No. 01</p><h2>[Home name]</h2><p class="meta caps" style="color:var(--muted);margin-top:12px">[Neighborhood] · [Year] · [Style]</p><p style="margin-top:18px">[One line on what makes this house singular.]</p></div></div></div></section>
+<div class="split" style="margin-top:24px"><div class="main"><div class="card"><div class="ph wide">${photo(PUBLICATION.feature.photo, PUBLICATION.feature.name, '')}</div></div></div>
+<div class="side"><h2>${esc(PUBLICATION.feature.name)}</h2><p class="meta caps" style="color:var(--muted);margin-top:12px">${metaLine(PUBLICATION.feature.neighborhood, PUBLICATION.feature.year, PUBLICATION.feature.style)}</p><p style="margin-top:18px">${esc(PUBLICATION.feature.line)}</p></div></div></div></section>
 <section class="section"><div class="wrap"><p class="eyebrow">The Register</p><h2 style="margin-bottom:16px">Notable homes, one at a time</h2>
 <p style="max-width:640px;margin-bottom:44px">A running catalog of remarkable homes across the Twin Cities: one great photo, the essentials, and a few lines of story.</p>
-<div class="grid">${[1, 2, 3].map(() => `<div class="card"><div class="ph wide"></div><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Year] · [Style]</p></div>`).join('')}</div></div></section>
+<div class="grid">${(PUBLICATION.register || []).map((r) => regCard(r)).join('')}</div></div></section>
 ${ctaBand('Know a home that belongs here?', 'We feature homes with their owners’ permission, and never share addresses.', '/contact', 'Nominate a home')}`,
 });
 
@@ -701,7 +655,7 @@ for (const h of HOODS) {
     path: `/neighborhoods/${h.slug}`, title: `${h.name} Homes & Real Estate | ${h.city} | Quinby Partners`,
     description: h.summary,
     schema: [{ '@type': 'Place', name: `${h.name}, ${h.city}, MN`, description: h.summary }],
-    body: `${hero(h.video, h.clip, { eyebrow: `Neighborhoods · ${h.city}`, title: h.name, short: true })}
+    body: `${hero(h.video, h.clip, { eyebrow: `Neighborhoods · ${h.city}`, title: h.name, short: true, still: h.photo })}
 <section class="section"><div class="wrap split">
 <div class="side"><p class="eyebrow">The neighborhood</p><hr class="rule"><p class="small">Part of <a href="/neighborhoods/${area.slug}">${area.name}</a></p></div>
 <div class="main prose"><p class="lede">${h.summary}</p><h2>The architecture</h2><p>${h.architecture}</p><h2>The setting</h2><p>${h.setting}</p></div>
@@ -727,6 +681,7 @@ const copyDir = (from, to) => { if (!fs.existsSync(from)) return; for (const e o
 copyDir(path.join(__dirname, 'src', 'assets'), path.join(OUT, 'assets'));
 copyDir(path.join(__dirname, 'src', 'video'), path.join(OUT, 'video'));
 copyDir(path.join(__dirname, 'src', 'fonts'), path.join(OUT, 'fonts'));
+copyDir(path.join(__dirname, 'src', 'media'), path.join(OUT, 'media'));
 copyDir(path.join(__dirname, 'public'), OUT);
 fs.copyFileSync(path.join(__dirname, 'src', 'styles.css'), path.join(OUT, 'styles.css'));
 fs.copyFileSync(path.join(__dirname, 'src', 'main.js'), path.join(OUT, 'main.js'));

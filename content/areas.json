@@ -1,0 +1,164 @@
+{
+  "areas": [
+    {
+      "slug": "south-minneapolis",
+      "name": "South Minneapolis",
+      "lede": "Home base. Lakes, creeks and parkways, and street after street of bungalows, foursquares, Tudors and period-revival homes from the early twentieth century.",
+      "neighborhoods": [
+        {
+          "name": "East Harriet",
+          "page": "east-harriet",
+          "line": "Early-twentieth-century homes beside Lake Harriet and the Lyndale Park gardens."
+        },
+        {
+          "name": "Kingfield",
+          "page": "",
+          "line": "Bungalows, foursquares and two-stories close to the shops of Nicollet Avenue."
+        },
+        {
+          "name": "Lynnhurst",
+          "page": "",
+          "line": "Period-revival and Tudor homes between Lake Harriet and Minnehaha Creek."
+        },
+        {
+          "name": "Tangletown",
+          "page": "",
+          "line": "Curving streets around the Washburn Water Tower, with Tudor and Arts and Crafts homes."
+        },
+        {
+          "name": "Fulton",
+          "page": "",
+          "line": "Craftsman and period-revival homes west of Lake Harriet, near 50th & France."
+        },
+        {
+          "name": "Linden Hills",
+          "page": "",
+          "line": "Craftsman homes and cottages between Lake Harriet and Bde Maka Ska, around a village of small shops."
+        },
+        {
+          "name": "Armatage",
+          "page": "",
+          "line": "Postwar and mid-century homes in the southwest corner of the city."
+        },
+        {
+          "name": "Around Lake Nokomis",
+          "page": "",
+          "line": "Bungalows and period homes near Lake Nokomis and Minnehaha Creek."
+        }
+      ]
+    },
+    {
+      "slug": "around-the-lakes",
+      "name": "Around the Lakes",
+      "lede": "The neighborhoods around Lake of the Isles, Bde Maka Ska and Cedar Lake, where many of the city's grandest early-1900s homes stand.",
+      "neighborhoods": [
+        {
+          "name": "Kenwood",
+          "page": "kenwood",
+          "line": "Early-twentieth-century homes on winding streets between Lake of the Isles and Cedar Lake."
+        },
+        {
+          "name": "East Isles",
+          "page": "east-isles",
+          "line": "Early-1900s homes along the east shore of Lake of the Isles."
+        },
+        {
+          "name": "Lowry Hill",
+          "page": "",
+          "line": "Grand early-1900s homes on the hill above the Walker Art Center and the Sculpture Garden."
+        },
+        {
+          "name": "ECCO",
+          "page": "",
+          "line": "Early-twentieth-century homes between Bde Maka Ska and the shops of Uptown."
+        },
+        {
+          "name": "CARAG",
+          "page": "",
+          "line": "Early-1900s homes on walkable blocks near Bde Maka Ska and Uptown."
+        },
+        {
+          "name": "Bryn Mawr",
+          "page": "",
+          "line": "Craftsman and Tudor homes tucked beside Theodore Wirth Park."
+        }
+      ]
+    },
+    {
+      "slug": "st-paul",
+      "name": "St. Paul",
+      "lede": "Victorian and early-twentieth-century homes south of I-94, from the mansions of Summit Avenue to the tree-lined blocks around Grand Avenue.",
+      "neighborhoods": [
+        {
+          "name": "Summit Hill",
+          "page": "summit-hill",
+          "line": "Victorian and early-twentieth-century homes along Summit and Grand Avenues."
+        },
+        {
+          "name": "Macalester-Groveland",
+          "page": "macalester-groveland",
+          "line": "Early-twentieth-century homes around Macalester College and Grand Avenue."
+        },
+        {
+          "name": "Crocus Hill",
+          "page": "",
+          "line": "Victorian and early-1900s homes on quiet streets just south of Summit Avenue."
+        },
+        {
+          "name": "Ramsey Hill",
+          "page": "",
+          "line": "Some of St. Paul's most ornate Victorian homes, near the Cathedral and the east end of Summit Avenue."
+        },
+        {
+          "name": "Highland Park",
+          "page": "",
+          "line": "Period-revival and mid-century homes near the Mississippi River bluffs."
+        }
+      ]
+    },
+    {
+      "slug": "edina",
+      "name": "Edina",
+      "lede": "From the 1920s period-revival homes of the Country Club District to the city's postwar and mid-century neighborhoods.",
+      "neighborhoods": [
+        {
+          "name": "Country Club",
+          "page": "country-club",
+          "line": "A planned 1920s neighborhood of period-revival homes near 50th & France."
+        },
+        {
+          "name": "Morningside",
+          "page": "",
+          "line": "Cottage-scale 1920s to 1940s homes on the Minneapolis border."
+        },
+        {
+          "name": "Parkwood Knolls",
+          "page": "",
+          "line": "Postwar and mid-century homes on wooded lots."
+        },
+        {
+          "name": "Mid-century Edina",
+          "page": "",
+          "line": "Mid-century modern and postwar homes across the city's later neighborhoods."
+        }
+      ]
+    },
+    {
+      "slug": "golden-valley",
+      "name": "Golden Valley",
+      "lede": "Wooded hills and one of the Twin Cities' strongest collections of mid-century modern homes.",
+      "neighborhoods": [
+        {
+          "name": "Tyrol Hills",
+          "page": "",
+          "line": "Wooded hills and a notable collection of mid-century modern homes."
+        },
+        {
+          "name": "Mid-century Golden Valley",
+          "page": "",
+          "line": "Mid-century modern and postwar homes across the city's wooded neighborhoods."
+        }
+      ]
+    }
+  ]
+}

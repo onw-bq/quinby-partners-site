@@ -14,6 +14,16 @@ A fast, static site for quinbypartners.com. `node build.js` builds it into `dist
 
 Every change pushed to GitHub republishes the site automatically.
 
+## Editing content (Pages CMS)
+
+Day-to-day content lives in `content/*.json` and is edited at **app.pagescms.org**:
+The Collection, the giving record (totals add up automatically), testimonials, the publication feature and Register,
+neighborhood pages and areas, the homepage hero and "We sell…" phrases, and site settings (including the publication name).
+Photos uploaded there go to `src/media`. Saving commits to GitHub and the site republishes in a minute or two.
+What appears in the editor is set in `.pages.yml`.
+
+Longer page copy (Why Quinby, Selling, Buying, guides) stays in `build.js`; ask Claude to change it.
+
 ## Where things live
 
 - `build.js`: every page's words, the menu, neighborhoods and areas (`HOODS`, `AREAS`), and the publication's name (`PUB`, currently a placeholder).

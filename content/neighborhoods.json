@@ -1,0 +1,70 @@
+{
+  "neighborhoods": [
+    {
+      "slug": "kenwood",
+      "name": "Kenwood",
+      "city": "Minneapolis",
+      "area": "around-the-lakes",
+      "summary": "Kenwood is a Minneapolis neighborhood between Lake of the Isles and Cedar Lake, known for its early-twentieth-century homes on winding, tree-lined streets.",
+      "architecture": "Kenwood's homes date mostly from the early 1900s, when the neighborhood grew into one of the city's most sought-after addresses. You'll find Colonial Revival, Tudor Revival, Prairie School and Arts and Crafts homes, many architect-designed, with original woodwork, leaded glass and generous porches. [Add notable architects and streets.]",
+      "setting": "Kenwood Park, the Kenwood Parkway and the shores of Lake of the Isles and Cedar Lake are all close by, along with the trails of the Chain of Lakes. [Add local landmarks and shops.]",
+      "clip": "a quiet curved street under old trees, toward the lake",
+      "photo": ""
+    },
+    {
+      "slug": "east-isles",
+      "name": "East Isles",
+      "city": "Minneapolis",
+      "area": "around-the-lakes",
+      "summary": "East Isles is a Minneapolis neighborhood along the east shore of Lake of the Isles, known for its early-1900s homes near the lake and the shops of Uptown.",
+      "architecture": "Most East Isles homes were built in the early twentieth century, from large lakefront houses to Craftsman and period-revival homes on the blocks behind them. [Add notable architects, styles and streets.]",
+      "setting": "Lake of the Isles and its parkway and trails form the neighborhood's western edge, with the shops and restaurants of Uptown nearby. [Add local landmarks.]",
+      "clip": "Lake of the Isles shoreline at dusk",
+      "photo": ""
+    },
+    {
+      "slug": "east-harriet",
+      "name": "East Harriet",
+      "city": "Minneapolis",
+      "area": "south-minneapolis",
+      "summary": "East Harriet is a South Minneapolis neighborhood beside Lake Harriet, known for its early-twentieth-century homes and the Lyndale Park gardens.",
+      "architecture": "East Harriet's streets hold Craftsman bungalows, Tudor and Colonial Revival homes and foursquares, most from the first decades of the twentieth century. Becky has lived here herself, in a 1916 Craftsman. [Add notable streets and details.]",
+      "setting": "Lake Harriet, its bandshell and trails, and the rose and peace gardens of Lyndale Park are all close by. [Add local landmarks and shops.]",
+      "clip": "morning light through the Lyndale Park gardens",
+      "photo": ""
+    },
+    {
+      "slug": "country-club",
+      "name": "Country Club",
+      "city": "Edina",
+      "area": "edina",
+      "summary": "The Country Club District is an Edina neighborhood planned in the 1920s, known for its period-revival homes on tree-lined streets near 50th & France.",
+      "architecture": "The Country Club District was planned and built largely in the 1920s and 1930s, with Colonial Revival, Tudor Revival and other period-revival homes. Becky is restoring a 1928 Cape Cod here. [Add history, notable homes and any design guidelines.]",
+      "setting": "The shops and restaurants of 50th & France, Minnehaha Creek and nearby parks are all close by. [Add local landmarks.]",
+      "clip": "a tree-lined street of period-revival homes",
+      "photo": ""
+    },
+    {
+      "slug": "summit-hill",
+      "name": "Summit Hill",
+      "city": "St. Paul",
+      "area": "st-paul",
+      "summary": "Summit Hill is a St. Paul neighborhood along Summit and Grand Avenues, known for its Victorian-era and early-twentieth-century homes.",
+      "architecture": "Summit Hill holds some of the Twin Cities' finest Victorian and early-twentieth-century architecture, from grand homes on Summit Avenue to the smaller houses and rowhouses on the streets around it. [Add notable architects, homes and historic district details.]",
+      "setting": "Summit Avenue's boulevard and the shops and restaurants of Grand Avenue are at the heart of the neighborhood. [Add local landmarks.]",
+      "clip": "Summit Avenue in autumn",
+      "photo": ""
+    },
+    {
+      "slug": "macalester-groveland",
+      "name": "Macalester-Groveland",
+      "city": "St. Paul",
+      "area": "st-paul",
+      "summary": "Macalester-Groveland is a St. Paul neighborhood around Macalester College and Grand Avenue, known for its early-twentieth-century homes on tree-lined streets.",
+      "architecture": "Mac-Groveland's homes are mostly from the early twentieth century: Craftsman bungalows, foursquares, and Colonial and Tudor Revival homes. [Add notable streets and details.]",
+      "setting": "Grand Avenue's shops, the campuses of Macalester College and the University of St. Thomas, and the Mississippi River bluffs are all nearby. [Add local landmarks.]",
+      "clip": "a porch-lined block under old elms",
+      "photo": ""
+    }
+  ]
+}

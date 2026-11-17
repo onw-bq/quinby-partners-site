@@ -1,0 +1,33 @@
+{
+  "feature": {
+    "name": "[Home name]",
+    "neighborhood": "[Neighborhood]",
+    "year": "[Year]",
+    "style": "[Style]",
+    "line": "[One line on what makes this house singular.]",
+    "photo": ""
+  },
+  "register": [
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "year": "[Year]",
+      "style": "[Style]",
+      "photo": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "year": "[Year]",
+      "style": "[Style]",
+      "photo": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "year": "[Year]",
+      "style": "[Style]",
+      "photo": ""
+    }
+  ]
+}

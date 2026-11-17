@@ -1,0 +1,67 @@
+{
+  "homes": [
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    },
+    {
+      "name": "[Home name]",
+      "neighborhood": "[Neighborhood]",
+      "style": "[Style]",
+      "year": "",
+      "status": "Sold",
+      "photo": "",
+      "link": ""
+    }
+  ]
+}
