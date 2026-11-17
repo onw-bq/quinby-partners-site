@@ -103,7 +103,7 @@ function footer() {
 <div class="legal">
 <span class="eho">Equal Housing Opportunity</span>
 <span>Quinby Partners · Minnesota real estate brokerage license ${BROKER_LICENSE}</span>
-<span>© ${new Date().getFullYear()} Quinby Partners</span>
+<span>Est. 2012 · © ${new Date().getFullYear()} Quinby Partners</span>
 </div></div></footer>`;
 }
 
@@ -116,6 +116,7 @@ const ORG = {
   telephone: '+1-' + PHONE,
   email: EMAIL,
   slogan: 'We find passionate buyers for unique homes.',
+  foundingDate: '2012',
   description: 'Quinby Partners is an independent, woman-owned real estate brokerage in the Twin Cities specializing in historic, architect-designed and one-of-a-kind homes. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses.',
   address: { '@type': 'PostalAddress', streetAddress: ADDRESS[0], addressLocality: 'Wayzata', addressRegion: 'MN', postalCode: '55391', addressCountry: 'US' },
   areaServed: ['Minneapolis, MN', 'St. Paul, MN', 'Edina, MN', 'Golden Valley, MN'].map((n) => ({ '@type': 'City', name: n })),
@@ -149,7 +150,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
-<body>
+<body${body.trimStart().startsWith('<div class="media hero') ? ' class="has-hero"' : ''}>
 ${header(p)}
 <main id="main">
 ${body}
@@ -256,7 +257,7 @@ const HOODS = [
 page({
   path: '/', title: 'Quinby Partners | Historic, Architectural & Unique Homes in the Twin Cities',
   description: 'Quinby Partners is an independent, woman-owned Twin Cities brokerage for historic, architect-designed and one-of-a-kind homes. We find passionate buyers for unique homes.',
-  body: `${hero('home', 'slow pan up a carved oak staircase, morning light', { eyebrow: 'Twin Cities Real Estate', title: 'We find passionate buyers for unique homes.', sub: 'Independent, woman-owned, and deeply rooted in the Twin Cities. Historic, architect-designed and one-of-a-kind homes, presented with the care they were built with.' })}
+  body: `${hero('home', 'slow pan up a carved oak staircase, morning light', { eyebrow: 'Twin Cities Real Estate · Est. 2012', title: 'We find passionate buyers for unique homes.', sub: 'Independent, woman-owned, and deeply rooted in the Twin Cities. Historic, architect-designed and one-of-a-kind homes, presented with the care they were built with.' })}
 
 <section class="section we-sell" aria-label="What we sell"><div class="wrap center">
 <hr class="rule" style="margin:0 auto 40px">
@@ -273,10 +274,28 @@ page({
 <div style="margin-top:80px">${values}</div>
 </div></section>
 
+<section class="feature" aria-labelledby="feat-h">
+<div class="feature-img media plain"><p class="label">Photo · one editorial image of this month's featured home</p></div>
+<div class="wrap feature-cap">
+<p class="eyebrow">From ${esc(PUB)} · This month</p>
+<h2 id="feat-h">[Home name]</h2>
+<p class="meta caps">[Neighborhood] · [Year] · [Style]</p>
+<p style="max-width:620px;margin-top:16px">[One line on what makes this house singular.]</p>
+<p><a class="link" href="${PUB_PATH}">Read the feature</a></p>
+</div></section>
+
 <section class="section white"><div class="wrap">
 <div class="head-row"><div><p class="eyebrow">Our listings &amp; recent sales</p><h2>The Collection</h2></div><a class="link" href="/the-collection">View the collection</a></div>
 <div class="grid">
 ${[1, 2, 3].map((n) => `<a class="card" href="/the-collection"><div class="ph"><span class="caps">Photo or b-roll still</span></div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. 0${n}</span><div><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Style] · [For sale / Sold]</p></div></div></a>`).join('\n')}
+</div></div></section>
+
+<section class="section testimonials" aria-labelledby="t-h"><div class="wrap">
+<p class="eyebrow center" id="t-h">In our clients' words</p>
+<blockquote class="pull" style="border:0;padding:24px 0 0"><p>\u201c[A client's words about working with Quinby Partners.]\u201d</p><footer>[Client name · Sold in Kenwood]</footer></blockquote>
+<div class="grid t-small">
+<blockquote><p>\u201c[A shorter quote from a buyer.]\u201d</p><footer>[Name · Bought in East Harriet]</footer></blockquote>
+<blockquote><p>\u201c[A shorter quote from a seller.]\u201d</p><footer>[Name · Sold in Summit Hill]</footer></blockquote>
 </div></div></section>
 
 ${(() => { const m = media('architecture', 'a mix: leaded glass, a mid-century window wall, a gallery wall in a new build', 'navy-band'); return `<section class="section navy" style="position:relative;padding:0">${m.open}<div class="wrap" style="position:relative;z-index:1;padding-top:120px;padding-bottom:120px">
@@ -603,8 +622,17 @@ page({
   body: `<section class="section"><div class="wrap">
 <p class="eyebrow">Our listings &amp; recent sales</p><h1>The Collection</h1>
 <p class="lede" style="max-width:820px;margin-top:24px">The homes we’ve been trusted with. Each one comes with its own house biography: its design, its makers and its story.</p>
-<div class="grid" style="margin-top:64px">
-${[1, 2, 3].map((n) => `<div class="card"><div class="ph"><span class="caps">Photo or b-roll still</span></div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. 0${n}</span><div><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Style] · [For sale / Sold]</p></div></div></div>`).join('\n')}
+</div></section>
+<section class="feature" aria-label="Newest in the collection">
+<div class="feature-img media plain"><p class="label">Photo · newest home in the collection</p></div>
+<div class="wrap feature-cap">
+<p class="eyebrow">No. 01 · Newest</p>
+<h2>[Home name]</h2>
+<p class="meta caps">[Neighborhood] · [Style] · [For sale / Sold]</p>
+</div></section>
+<section class="section"><div class="wrap">
+<div class="grid">
+${[2, 3, 4, 5, 6, 7].map((n) => `<div class="card"><div class="ph"><span class="caps">Photo</span></div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. 0${n}</span><div><p class="name">[Home name]</p><p class="meta">[Neighborhood] · [Style] · [For sale / Sold]</p></div></div></div>`).join('\n')}
 </div></div></section>
 ${ctaBand('Should your home be in the collection?', 'We’d love to see it and hear its story.', '/selling', 'How we market your home')}`,
 });
