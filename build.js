@@ -445,7 +445,7 @@ ${compare('Most listings', 'A Quinby Partners listing', [
 // Buying
 page({
   path: '/buying', title: 'Buying a Historic, Architectural or Unique Home | Quinby Partners',
-  description: 'Buy a home with character with confidence. Quinby Partners helps buyers find historic, mid-century and architect-designed homes and understand the real costs before they offer.',
+  description: 'Buy a home with character with confidence. Search by photo for the details you love, and understand the real costs before you offer. Historic, mid-century and architect-designed homes.',
   body: `${hero('buying', 'a front door opening onto a sunlit entry hall', { eyebrow: 'Buying with Quinby Partners', title: 'Find the home you’ll love for its details.', sub: 'We help you find a home with character, see it clearly, and buy it with confidence, whether it was built in 1905, 1955 or last year.' })}
 <section class="section"><div class="wrap"><p class="eyebrow" style="margin-bottom:48px">How we think about buying</p>
 <div class="grid">
@@ -455,7 +455,7 @@ ${principle('III.', 'We hear about homes early', 'Through our publication, our n
 </div></div></section>
 <section class="section white"><div class="wrap"><p class="eyebrow">The process</p><h2 style="margin-bottom:52px">From first showing to closing</h2>
 <ol class="steps">
-${step('I.', 'Start with what you love', 'Styles, eras, details and neighborhoods. We help you put words to it, and we keep an eye out for homes that fit.')}
+${step('I.', 'Start with what you love', 'Styles, eras, details and neighborhoods. Save photos of homes, rooms and details you love, and our photo search finds homes on the market that match them.')}
 ${step('II.', 'Hear about homes early', 'Owners we know through our publication, our neighborhoods and our architect and builder partners, plus everything on the MLS.')}
 ${step('III.', 'Tour with an expert eye', 'We point out what’s original, what’s been changed, and what each detail means for value and upkeep.')}
 ${step('IV.', 'Know the real costs', 'Inspectors who specialize in older homes, realistic restoration budgets, insurance questions and any historic district rules, before you write an offer.')}
@@ -463,10 +463,20 @@ ${step('V.', 'Write a strong offer', 'Clear pricing advice for homes with few tr
 ${step('VI.', 'Close with your team in place', 'Introductions to architects, design-builders and tradespeople who know homes like yours.')}
 ${step('VII.', 'Close, and give back', 'At closing, Quinby Partners gives $1,000 to a nonprofit you choose.')}
 </ol></div></section>
+<section class="section paper" aria-labelledby="photo-search-h"><div class="wrap split" style="align-items:center">
+<div class="main"><p class="eyebrow">Search by photo</p>
+<h2 id="photo-search-h">Search for the details you love, not just the numbers.</h2>
+<p style="margin-top:22px;max-width:620px">Most searches stop at filters: price, bedrooms, square footage. Character doesn’t fit in a checkbox. Our buyers can search by image instead: a staircase, a kitchen, a window wall, a front porch. Save the photos that speak to you, and we’ll find homes on the market with the same feel.</p>
+<p style="max-width:620px">It also becomes a living inspiration board for your search, and later for your renovations and design projects once you’ve moved in.</p>
+<p style="margin-top:28px"><a class="link" href="#buyer-consult-h">Start a photo search with us</a></p></div>
+<div class="side"><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+${['A staircase', 'A kitchen', 'A window wall', 'A front porch'].map((t) => `<div class="card"><div class="ph" style="aspect-ratio:1/1"><span class="caps">${t}</span></div></div>`).join('')}
+</div></div>
+</div></section>
 ${band('buying-walk', 'walking through a home, pointing out details')}
 <section class="section"><div class="wrap"><p class="eyebrow">The difference</p><h2 style="margin-bottom:44px">A typical search, and ours</h2>
 ${compare('A typical search', 'Searching with Quinby Partners', [
-  ['Alerts for whatever matches the filters', 'A search built around the details you love'],
+  ['Filters for price, beds and square feet', 'Search by photo: find homes that match the details you love'],
   ['Only what’s already on the market', 'Owners we know, as well as everything listed'],
   ['A general home inspection', 'Specialists for older and architect-designed homes'],
   ['Original features called “dated”', 'Original features explained: what’s rare, what to keep, what it costs'],
@@ -474,12 +484,13 @@ ${compare('A typical search', 'Searching with Quinby Partners', [
 ])}</div></section>
 <section class="section paper"><div class="wrap"><blockquote class="pull"><p>“[A buyer's words about finding their home with us.]”</p><footer>[Buyer name, neighborhood]</footer></blockquote></div></section>
 <section class="section"><div class="wrap split">
-<div class="main"><h2>Tell us what you're looking for.</h2><p style="margin-top:20px">A style, a neighborhood, a feeling you get walking through the door. Whether you're buying this season or just starting to look, we'd love to help you find it.</p>
+<div class="main"><h2 id="buyer-consult-h">Tell us what you're looking for.</h2><p style="margin-top:20px">A style, a neighborhood, a feeling you get walking through the door. Whether you're buying this season or just starting to look, we'd love to help you find it.</p>
 <p><a class="link" href="/historic-and-architectural-homes">Buying a historic or architectural home: what's different</a></p></div>
 <div class="side">${consultForm('buyer-consult')}</div>
 </div></section>`,
   faqs: [
     ['What should I know before buying an older home?', 'Plan for specialist inspections (sewer, wiring, roof, foundation, plaster), realistic upkeep and restoration budgets, insurance questions, and any historic district rules that limit exterior changes.'],
+    ['Can I search for homes by photo?', 'Yes. Quinby Partners buyers can search by image: save photos of homes, rooms or details you love, and the search finds homes on the market with similar features, alongside the usual filters.'],
     ['Does Quinby Partners help with homes that aren’t historic?', 'Yes. We help buyers find homes with character of every era, from prewar to mid-century to contemporary, at every price point.'],
   ],
 });
