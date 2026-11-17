@@ -297,7 +297,7 @@ ${(() => { const m = media('architecture', 'a mix: leaded glass, a mid-century w
 <a class="link" href="/architecture-design#art-lovers">Homes for art lovers</a>
 <a class="link" href="/architecture-design#craftsmanship">One-of-a-kind craftsmanship</a>
 </p>
-<p style="margin-top:36px;color:var(--stone)">Buying or selling one? <a href="/historic-and-architectural-homes">Here's how it's different.</a></p>
+<p style="margin-top:36px;color:var(--stone)">Buying or selling one? <a href="/unique-and-architectural-homes">Here's how it's different.</a></p>
 </div>${m.close}</section>`; })()}
 
 <section class="section"><div class="wrap">
@@ -433,11 +433,11 @@ ${compare('Most listings', 'A Quinby Partners listing', [
 <section class="section paper"><div class="wrap"><blockquote class="pull"><p>“[A seller's words about how their home was presented and who bought it.]”</p><footer>[Seller name, neighborhood]</footer></blockquote></div></section>
 <section class="section"><div class="wrap split">
 <div class="main"><h2>Tell us about your home.</h2><p style="margin-top:20px">Whether you're selling this season or years from now, we'd love to see it, hear its story, and talk through what it's worth and who it's for.</p>
-<p><a class="link" href="/historic-and-architectural-homes">Selling a historic or architectural home: what's different</a></p></div>
+<p><a class="link" href="/unique-and-architectural-homes">Selling a home with character: what's different</a></p></div>
 <div class="side">${consultForm('seller-consult')}</div>
 </div></section>`,
   faqs: [
-    ['How is selling a historic home different?', 'There are few true comparables, so value lives in the details. It takes knowing which original features to protect, which repairs pay back, how to tell the house\'s story, and how long it may take to find the right buyer.'],
+    ['How is selling a unique or architectural home different?', 'There are few true comparables, so value lives in the details. It takes knowing which features to protect, which updates pay back, how to tell the story of the home\'s design and craftsmanship, and how long it may take to find the right buyer.'],
     ['How does Quinby Partners market a home?', 'With a researched house biography, editorial photography and short films, and a multi-week campaign through our publication, newsletter, social media and the MLS.'],
   ],
 });
@@ -485,7 +485,7 @@ ${compare('A typical search', 'Searching with Quinby Partners', [
 <section class="section paper"><div class="wrap"><blockquote class="pull"><p>“[A buyer's words about finding their home with us.]”</p><footer>[Buyer name, neighborhood]</footer></blockquote></div></section>
 <section class="section"><div class="wrap split">
 <div class="main"><h2 id="buyer-consult-h">Tell us what you're looking for.</h2><p style="margin-top:20px">A style, a neighborhood, a feeling you get walking through the door. Whether you're buying this season or just starting to look, we'd love to help you find it.</p>
-<p><a class="link" href="/historic-and-architectural-homes">Buying a historic or architectural home: what's different</a></p></div>
+<p><a class="link" href="/unique-and-architectural-homes">Buying a home with character: what's different</a></p></div>
 <div class="side">${consultForm('buyer-consult')}</div>
 </div></section>`,
   faqs: [
@@ -565,52 +565,55 @@ ${cat('architect-designed', 'Architect-designed', 'Homes from any era with a nam
 ${cat('art-lovers', 'Homes for art lovers', 'Gallery walls, good natural light, studios, ceiling height and room to live with a collection.')}
 ${cat('craftsmanship', 'One-of-a-kind craftsmanship', 'Built-ins, tile, stained glass, a butler’s pantry, a hidden staircase: the details you won’t find twice.')}
 </div></section>
-${ctaBand('Buying or selling a home like this?', 'Pricing, preparing, marketing and inspecting these homes all work differently.', '/historic-and-architectural-homes', 'How it’s different')}`,
+${ctaBand('Buying or selling a home like this?', 'Pricing, preparing, marketing and inspecting these homes all work differently.', '/unique-and-architectural-homes', 'How it’s different')}`,
   faqs: [
     ['Do I need a historic home to work with Quinby Partners?', 'No. We specialize in homes with character of every era, including mid-century, contemporary and architect-designed homes, and we work with every kind of home and price point.'],
   ],
 });
 
-// Historic & architectural homes guide
+// Unique & architectural homes guide
 page({
-  path: '/historic-and-architectural-homes', title: 'Buying & Selling Historic and Architectural Homes in the Twin Cities',
-  description: 'What makes buying or selling a historic, mid-century or architect-designed home different: pricing, preparation, marketing, inspections, costs and historic district rules.',
+  path: '/unique-and-architectural-homes', title: 'Buying & Selling Unique, Architectural and Historic Homes in the Twin Cities',
+  description: 'What makes buying or selling a one-of-a-kind, architect-designed, mid-century or historic home different: pricing, preparation, marketing, inspections and costs.',
   body: `<section class="section"><div class="wrap split">
 <div class="side"><p class="eyebrow">A guide</p><hr class="rule"></div>
 <div class="main prose">
-<h1 style="font-size:clamp(40px,5vw,64px)">Buying and selling historic and architectural homes</h1>
-<p class="lede" style="margin-top:28px">Historic, mid-century and architect-designed homes don’t sell like other homes. Here’s what’s different, and how we help.</p>
-<h2>What counts</h2>
+<h1 style="font-size:clamp(40px,5vw,64px)">Buying and selling homes with character</h1>
+<p class="lede" style="margin-top:28px">One-of-a-kind homes don’t sell like other homes. Whether it was built in 1910, 1960 or last year, a house with real design and craftsmanship needs a different approach. Here’s what’s different, and how we help.</p>
+<h2>What we mean by a home with character</h2>
 <ul>
-<li><strong>Historic:</strong> prewar homes that are strong examples of their style.</li>
-<li><strong>Mid-century:</strong> 1940s to 1970s architect-designed or textbook modern homes.</li>
-<li><strong>Contemporary:</strong> new homes with exceptional, architect-led design.</li>
-<li><strong>One of a kind:</strong> any home with craftsmanship or features you won’t find twice.</li>
+<li><strong>Architect-designed:</strong> homes from any era with a clear design vision behind them.</li>
+<li><strong>Unique and one of a kind:</strong> a remarkable layout, an unexpected room, a setting or a detail you won’t find twice.</li>
+<li><strong>Craftsmanship:</strong> woodwork, built-ins, tile, stone, glass and materials chosen with care.</li>
+<li><strong>Modern and mid-century:</strong> window walls, open plans and a close connection to the landscape.</li>
+<li><strong>Historic:</strong> older homes that are strong examples of their style.</li>
+<li><strong>Homes for art lovers:</strong> light, wall space, ceiling height and room to live with a collection.</li>
 </ul>
-<p>It’s the architecture and character, not the price.</p>
+<p>It’s the design and character that make a home singular, not its age or its price.</p>
 <h2>Selling one is different</h2>
 <ul>
-<li><strong>Pricing:</strong> there are few true comparables, so value lives in the details. It takes knowing which features carry value and which updates pay back at sale.</li>
-<li><strong>Preparing:</strong> which repairs matter, and which original features to protect rather than “update.”</li>
-<li><strong>Marketing:</strong> a house biography, editorial photography and film, and a multi-week campaign instead of a one-week launch. <a href="/selling">How we market your home.</a></li>
-<li><strong>Timing:</strong> the right buyer can take longer to find, so we plan for it rather than cutting the price.</li>
-<li><strong>Disclosures:</strong> including lead-based paint disclosure for homes built before 1978, older systems, and any historic district rules.</li>
+<li><strong>Pricing:</strong> a one-of-a-kind home has few true comparables, so value lives in the details. It takes knowing which features carry value, and how to show buyers why.</li>
+<li><strong>Preparing:</strong> some updates add value; others erase exactly what makes the home special. We help you decide what to fix, what to protect and how to present it.</li>
+<li><strong>Marketing:</strong> a story about the home’s design and makers, editorial photography and film, and a multi-week campaign instead of a one-week launch. <a href="/selling">How we market your home.</a></li>
+<li><strong>The right buyer:</strong> a unique home isn’t for everyone, and that’s the point. We look for the person who will love it, rather than cutting the price to reach everyone.</li>
+<li><strong>Disclosures:</strong> including lead-based paint disclosure for homes built before 1978, and any rules that apply to the property.</li>
 </ul>
 <h2>Buying one is different</h2>
 <ul>
-<li><strong>Inspections:</strong> specialists for older homes, such as sewer scopes, wiring, plaster, roofs and foundations.</li>
-<li><strong>Costs:</strong> insurance and upkeep on older homes, and realistic restoration budgets.</li>
-<li><strong>Rules:</strong> local historic districts in Minneapolis and St. Paul can limit exterior changes, so check before you plan a project.</li>
-<li><strong>Partners:</strong> introductions to architects and design-builders who know older and architect-designed homes. <a href="/buying">Buying with us.</a></li>
+<li><strong>Finding it:</strong> character doesn’t show up in a search filter. Our buyers can search by photo for the details they love. <a href="/buying">Buying with us.</a></li>
+<li><strong>Seeing it clearly:</strong> what’s original, what’s been changed, which details are rare and what each means for value and upkeep.</li>
+<li><strong>Inspections and costs:</strong> specialists for unusual construction, materials and systems, and realistic budgets for care and improvements. Older homes may need a sewer scope, wiring, plaster or roof review, and some neighborhoods have rules on exterior changes.</li>
+<li><strong>Your team:</strong> introductions to architects, designers and builders who know homes like yours.</li>
 </ul>
 <h2>How we work with these homes</h2>
-<p>Becky has bought, renovated and lived in homes spanning nearly a century of Minneapolis architecture, and restores historic investment properties of her own. Our publication, <a href="${PUB_PATH}">${esc(PUB)}</a>, reaches buyers who care about architecture. And at every closing, we give $1,000 to a nonprofit you choose; history, conservation and arts organizations are natural fits.</p>
+<p>Becky has bought, renovated and lived in homes across nearly a century of design, and Elena’s background in film and advertising shapes how we show every home. Our publication, <a href="${PUB_PATH}">${esc(PUB)}</a>, reaches buyers who care about design and craftsmanship. And at every closing, we give $1,000 to a nonprofit you choose.</p>
 </div></div></section>
 ${ctaBand('Let’s talk about your home.', null, '/work-with-us', 'Work with us')}`,
   faqs: [
-    ['How do you price a historic home?', 'With few true comparables, pricing depends on the details: original features, quality of past restorations, condition of systems, and how the home compares with its era and style. We price from that knowledge rather than square footage alone.'],
-    ['Do historic districts limit what I can change?', 'Local historic districts in Minneapolis and St. Paul can require approval for exterior changes. Check the rules for a specific property before planning a project.'],
-    ['Do I need a special inspection for an older home?', 'A general inspection is a start. Older homes often warrant specialists for the sewer line, wiring, roof, foundation and plaster.'],
+    ['How do you price a one-of-a-kind home?', 'Unique homes have few true comparables, so pricing depends on the details: the design, materials and craftsmanship, the condition of the home and its systems, and how it compares with the few homes like it. We price from that knowledge rather than square footage alone.'],
+    ['What makes a home architecturally significant?', 'A clear design vision, often from a named architect, carried through in the layout, materials and details. It can be a home from any era, including mid-century and contemporary homes.'],
+    ['How do you find buyers for unique homes?', 'With a story about the home’s design and makers, editorial photography and film, and a multi-week campaign through our publication, newsletter, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.'],
+    ['Should I update my home before selling?', 'Sometimes. Some updates add value; others remove the features buyers of unique homes are looking for. We help you decide what to fix and what to protect.'],
   ],
 });
 
@@ -882,7 +885,7 @@ write('llms.txt', `# Quinby Partners
 ${group((p) => p === '/' || p === '/why-quinby-partners' || p.startsWith('/about') || p === '/giving')}
 
 ## Selling and buying
-${group((p) => ['/selling', '/buying', '/work-with-us', '/historic-and-architectural-homes'].includes(p))}
+${group((p) => ['/selling', '/buying', '/work-with-us', '/unique-and-architectural-homes'].includes(p))}
 
 ## Architecture and homes
 ${group((p) => ['/architecture-design', '/the-collection', PUB_PATH].includes(p))}
