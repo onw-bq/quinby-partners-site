@@ -213,12 +213,13 @@ const AREAS = [
     hoods: [
       ['Country Club', '/neighborhoods/country-club', 'A planned 1920s neighborhood of period-revival homes near 50th & France.'],
       ['Morningside', null, 'Cottage-scale 1920s to 1940s homes on the Minneapolis border.'],
+      ['Parkwood Knolls', null, 'Postwar and mid-century homes on wooded lots.'],
       ['Mid-century Edina', null, 'Mid-century modern and postwar homes across the city\'s later neighborhoods.'],
     ] },
   { slug: 'golden-valley', name: 'Golden Valley', lede: 'Wooded hills and one of the Twin Cities\' strongest collections of mid-century modern homes.',
     hoods: [
       ['Tyrol Hills', null, 'Wooded hills and a notable collection of mid-century modern homes.'],
-      ['Parkwood Knolls', null, 'Postwar and mid-century homes on wooded lots.'],
+      ['Mid-century Golden Valley', null, 'Mid-century modern and postwar homes across the city\'s wooded neighborhoods.'],
     ] },
 ];
 
