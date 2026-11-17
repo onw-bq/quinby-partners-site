@@ -574,7 +574,7 @@ ${ctaBand('Buying or selling a home like this?', 'Pricing, preparing, marketing 
 // Homes with character guide
 page({
   path: '/homes-with-character', title: 'Buying & Selling Homes with Character: One-of-a-Kind, Architectural and Historic Homes in the Twin Cities',
-  description: 'What makes buying or selling a one-of-a-kind, architect-designed, mid-century or historic home different: pricing, preparation, marketing, inspections and costs.',
+  description: 'What makes buying or selling a unique, architect-designed, mid-century or historic home different: pricing, preparation, marketing, inspections and costs.',
   body: `<section class="section"><div class="wrap split">
 <div class="side"><p class="eyebrow">A guide</p><hr class="rule"></div>
 <div class="main prose">
@@ -583,7 +583,7 @@ page({
 <h2>What we mean by a home with character</h2>
 <ul>
 <li><strong>Architect-designed:</strong> homes from any era with a clear design vision behind them.</li>
-<li><strong>One of a kind:</strong> a remarkable layout, an unexpected room, a setting or a detail you won’t find twice.</li>
+<li><strong>Unique and one of a kind:</strong> a remarkable layout, an unexpected room, a setting or a detail you won’t find twice.</li>
 <li><strong>Craftsmanship:</strong> woodwork, built-ins, tile, stone, glass and materials chosen with care.</li>
 <li><strong>Modern and mid-century:</strong> window walls, open plans and a close connection to the landscape.</li>
 <li><strong>Historic:</strong> older homes that are strong examples of their style.</li>
@@ -612,7 +612,7 @@ ${ctaBand('Let’s talk about your home.', null, '/work-with-us', 'Work with us'
   faqs: [
     ['How do you price a one-of-a-kind home?', 'One-of-a-kind homes have few true comparables, so pricing depends on the details: the design, materials and craftsmanship, the condition of the home and its systems, and how it compares with the few homes like it. We price from that knowledge rather than square footage alone.'],
     ['What makes a home architecturally significant?', 'A clear design vision, often from a named architect, carried through in the layout, materials and details. It can be a home from any era, including mid-century and contemporary homes.'],
-    ['How do you find buyers for homes with character?', 'With a story about the home’s design and makers, editorial photography and film, and a multi-week campaign through our publication, newsletter, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.'],
+    ['How do you find buyers for unique homes?', 'With a story about the home’s design and makers, editorial photography and film, and a multi-week campaign through our publication, newsletter, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.'],
     ['Should I update my home before selling?', 'Sometimes. Some updates add value; others remove the features buyers of homes with character are looking for. We help you decide what to fix and what to protect.'],
   ],
 });
@@ -879,7 +879,7 @@ const line = (p) => `- [${p.title}](${SITE}${p.path === '/' ? '/' : p.path}): ${
 const group = (pre) => pages.filter((p) => !p.noindex && pre(p.path)).map(line).join('\n');
 write('llms.txt', `# Quinby Partners
 
-> Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed and one-of-a-kind homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for homes with character," and the next stewards who will love and care for them. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
+> Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed, unique and one-of-a-kind homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for homes with character," and the next stewards who will love and care for them. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
 
 ## About
 ${group((p) => p === '/' || p === '/why-quinby-partners' || p.startsWith('/about') || p === '/giving')}
