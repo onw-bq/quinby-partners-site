@@ -1,0 +1,8 @@
+# Old Squarespace addresses → new pages. Add any old URLs that have search traffic.
+/home                /                     301
+/about               /why-quinby           301
+/buying-1            /buying               301
+/selling-1           /selling              301
+/contact-us          /contact              301
+/minnesota-housing   /contact              301
+/cart                /                     301
