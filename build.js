@@ -409,7 +409,7 @@ page({
 <div class="grid">
 ${principle('I.', 'A piece of art, not a listing', 'We present your home the way a museum presents a work: carefully lit, carefully framed, with the details given room to be seen.')}
 ${principle('II.', 'The house\'s story, told well', 'Who designed it, who built it, what has changed and what has been kept. Craftsmanship and history are what set a home like yours apart, so they lead.')}
-${principle('III.', 'The passionate buyer, not just any buyer', 'A one-of-a-kind home needs the person who sees what it is. We go looking for them, through our readers, our neighborhoods, and the architects and builders we work with.')}
+${principle('III.', 'Its next stewards, not just any buyer', 'A one-of-a-kind home needs people who see what it is and will care for it. We go looking for them, through our readers, our neighborhoods, and the architects and builders we work with.')}
 </div></div></section>
 <section class="section white"><div class="wrap"><p class="eyebrow">The process</p><h2 style="margin-bottom:52px">From history to closing</h2>
 <ol class="steps">
@@ -418,7 +418,7 @@ ${step('II.', 'Prepare it with care', 'We help you decide which repairs matter a
 ${step('III.', 'Photograph and film it like an editorial', 'Styled, editorial photography and short films of the details, light and rooms, shaped by Elena\'s background in film and advertising.')}
 ${step('IV.', 'Write the house biography', 'A printed piece at every showing, a story on our site and in The Front Porch, and the backbone of every post.')}
 ${step('V.', 'Run a campaign, not a launch', 'Several weeks of fresh angles: the reveal, the history, the details, the house through the seasons, the neighborhood around it.')}
-${step('VI.', 'Find the passionate buyer', 'Our readers and followers, buyers looking for homes like yours, and the architects and design-builders we partner with, plus every agent through the MLS.')}
+${step('VI.', 'Find its next stewards', 'Our readers and followers, buyers looking for homes like yours, and the architects and design-builders we partner with, plus every agent through the MLS. We look for the people who will love it and care for it.')}
 ${step('VII.', 'Close, and give back', 'At closing, Quinby Partners gives $1,000 to a nonprofit you choose.')}
 </ol></div></section>
 ${band('listing-film', 'sample listing film, 30–60 seconds')}
@@ -427,12 +427,12 @@ ${compare('Most listings', 'A Quinby Partners listing', [
   ['Photos on day one, the same for every house', 'An editorial shoot and short films of the details'],
   ['Bedrooms, baths and square footage', 'The house\'s story: its design, its makers, its history'],
   ['A one-week launch, then waiting', 'A multi-week campaign with a new angle each week'],
-  ['As many buyers as possible', 'The buyer who will love it most'],
+  ['As many buyers as possible', 'Its next stewards: the people who will love it and care for it most'],
   ['Original features listed as “dated”', 'Original features presented as what they are: craftsmanship'],
 ])}</div></section>
 <section class="section paper"><div class="wrap"><blockquote class="pull"><p>“[A seller's words about how their home was presented and who bought it.]”</p><footer>[Seller name, neighborhood]</footer></blockquote></div></section>
 <section class="section"><div class="wrap split">
-<div class="main"><h2>Tell us about your home.</h2><p style="margin-top:20px">Whether you're selling this season or years from now, we'd love to see it, hear its story, and talk through what it's worth and who it's for.</p>
+<div class="main"><h2>Tell us about your home.</h2><p style="margin-top:20px">Whether you're selling this season or years from now, we'd love to see it, hear its story, and talk through what it's worth and who its next stewards might be.</p>
 <p><a class="link" href="/unique-and-architectural-homes">Selling a home with character: what's different</a></p></div>
 <div class="side">${consultForm('seller-consult')}</div>
 </div></section>`,
@@ -460,7 +460,7 @@ ${step('II.', 'Hear about homes early', 'Owners we know through our publication,
 ${step('III.', 'Tour with an expert eye', 'We point out what’s original, what’s been changed, and what each detail means for value and upkeep.')}
 ${step('IV.', 'Know the real costs', 'Inspectors who specialize in older homes, realistic restoration budgets, insurance questions and any historic district rules, before you write an offer.')}
 ${step('V.', 'Write a strong offer', 'Clear pricing advice for homes with few true comparables, and steady negotiation at the table.')}
-${step('VI.', 'Close with your team in place', 'Introductions to architects, design-builders and tradespeople who know homes like yours.')}
+${step('VI.', 'Become its next steward', 'Introductions to architects, design-builders and tradespeople who know homes like yours, so you can care for it well for years to come.')}
 ${step('VII.', 'Close, and give back', 'At closing, Quinby Partners gives $1,000 to a nonprofit you choose.')}
 </ol></div></section>
 <section class="section paper" aria-labelledby="photo-search-h"><div class="wrap split" style="align-items:center">
@@ -502,7 +502,7 @@ page({
   body: `<section class="section"><div class="wrap">
 <p class="eyebrow">Work with us</p><h1 style="max-width:900px">Let's talk about your home, or the one you're looking for.</h1>
 <div class="grid" style="margin-top:72px">
-<div class="principle"><p class="num">Selling</p><h3>Your home is a work of art.</h3><p>House biographies, editorial photography and film, and a campaign to find the passionate buyer.</p><p><a class="link" href="/selling">How we market your home</a></p></div>
+<div class="principle"><p class="num">Selling</p><h3>Your home is a work of art.</h3><p>House biographies, editorial photography and film, and a campaign to find its next stewards.</p><p><a class="link" href="/selling">How we market your home</a></p></div>
 <div class="principle"><p class="num">Buying</p><h3>Find the home you'll love for its details.</h3><p>An expert eye on every home, the real costs up front, and owners we know before they list.</p><p><a class="link" href="/buying">Buying with us</a></p></div>
 </div>
 <div style="margin-top:80px;max-width:640px">${consultForm('consult')}</div>
@@ -595,7 +595,7 @@ page({
 <li><strong>Pricing:</strong> a one-of-a-kind home has few true comparables, so value lives in the details. It takes knowing which features carry value, and how to show buyers why.</li>
 <li><strong>Preparing:</strong> some updates add value; others erase exactly what makes the home special. We help you decide what to fix, what to protect and how to present it.</li>
 <li><strong>Marketing:</strong> a story about the home’s design and makers, editorial photography and film, and a multi-week campaign instead of a one-week launch. <a href="/selling">How we market your home.</a></li>
-<li><strong>The right buyer:</strong> a unique home isn’t for everyone, and that’s the point. We look for the person who will love it, rather than cutting the price to reach everyone.</li>
+<li><strong>Its next stewards:</strong> a unique home isn’t for everyone, and that’s the point. We look for the people who will love it and care for it, rather than cutting the price to reach everyone.</li>
 <li><strong>Disclosures:</strong> including lead-based paint disclosure for homes built before 1978, and any rules that apply to the property.</li>
 </ul>
 <h2>Buying one is different</h2>
@@ -710,7 +710,7 @@ for (const h of HOODS) {
 <div class="main prose"><p class="lede">${h.summary}</p><h2>The architecture</h2><p>${h.architecture}</p><h2>The setting</h2><p>${h.setting}</p></div>
 </div></section>
 ${band(h.video + '-2', h.clip)}
-${ctaBand(`Own a home in ${h.name}?`, 'We’d love to hear its story, whether you’re selling now or someday.', '/selling', 'How we market your home')}`,
+${ctaBand(`Own a home in ${h.name}?`, 'We’d love to hear its story and help find its next stewards, whether you’re selling now or someday.', '/selling', 'How we market your home')}`,
     faqs: [
       [`What kinds of homes are in ${h.name}?`, h.architecture.replace(/ \[.*?\]/g, '')],
       [`Who is a real estate agent for historic homes in ${h.name}?`, `Quinby Partners is an independent, woman-owned Twin Cities brokerage specializing in historic, architect-designed and one-of-a-kind homes, including in ${h.name}.`],
@@ -756,7 +756,7 @@ ${h.quote ? `<section class="section tight"><div class="wrap narrow"><blockquote
 ${h.credits ? `<section class="wrap"><p class="small">${esc(h.credits)}</p></section>` : ''}
 <section class="section paper cta-band"><div class="wrap">
 <div><p class="eyebrow">${kind === 'collection' ? 'This home\'s giving' : 'Giving'}</p><p class="lede" style="max-width:720px">${giving}</p></div>
-${forSale ? `<a class="btn" href="/contact">Request a showing</a>` : `<a class="btn" href="/selling">Selling a home like this?</a>`}
+${forSale ? `<a class="btn" href="/contact">Request a showing</a>` : `<a class="btn" href="/selling">Finding stewards for your home?</a>`}
 </div></section>
 ${others.length ? `<section class="section"><div class="wrap"><p class="eyebrow" style="margin-bottom:32px">${kind === 'collection' ? 'Continue through the collection' : 'More from ' + esc(PUB)}</p><div class="grid">${others.map((o) => `<a class="card" href="${pathPrefix}/${esc(o.slug)}"><div class="ph wide">${photo(o.photo, o.name, '')}</div><p class="name">${esc(o.name)}</p><p class="meta">${metaLine(o.neighborhood, o.year, o.style)}</p></a>`).join('')}</div></div></section>` : ''}`,
   });
@@ -879,7 +879,7 @@ const line = (p) => `- [${p.title}](${SITE}${p.path === '/' ? '/' : p.path}): ${
 const group = (pre) => pages.filter((p) => !p.noindex && pre(p.path)).map(line).join('\n');
 write('llms.txt', `# Quinby Partners
 
-> Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed and one-of-a-kind homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for unique homes." At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
+> Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed and one-of-a-kind homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for unique homes," and the next stewards who will love and care for them. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
 
 ## About
 ${group((p) => p === '/' || p === '/why-quinby-partners' || p.startsWith('/about') || p === '/giving')}
