@@ -637,7 +637,7 @@ ${COLLECTION[0] ? `<p><a class="link" href="${homeHref(COLLECTION[0])}">See the 
 <div class="grid">
 ${COLLECTION.slice(1).map((h, i) => homeCard(h, i + 1)).join('\n')}
 </div></div></section>
-${ctaBand('Should your home be in the collection?', 'We’d love to see it and hear its story.', '/selling', 'How we market your home')}`,
+${ctaBand('Should your home be in the collection?', 'We’d love to see it, hear its story, and help find its next stewards: the people who will love it and care for it as much as you have.', '/selling', 'How we market your home')}`,
 });
 
 // Publication
