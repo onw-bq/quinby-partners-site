@@ -38,8 +38,8 @@
 
 // "We don't just sell homes. We sell…" — plays once when it scrolls into view, ends on the last phrase.
 (function () {
-  var el = document.querySelector('.we-sell .phrase');
-  if (!el) return;
+  document.querySelectorAll('.we-sell .phrase').forEach(function (el) { roll(el); });
+  function roll(el) {
   var phrases;
   try { phrases = JSON.parse(el.dataset.phrases); } catch (e) { return; }
   var last = phrases[phrases.length - 1];
@@ -62,6 +62,7 @@
     if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); run(); }
   }, { threshold: 0.6 });
   io.observe(el);
+  }
 })();
 
 // Lead forms: send to /api/lead and show a thank-you in place.

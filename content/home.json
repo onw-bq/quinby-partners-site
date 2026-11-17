@@ -9,5 +9,27 @@
     "houses with a story.",
     "good causes, too.",
     "the right home to the right person."
-  ]
+  ],
+  "buyingLine": {
+    "first": "We help buyers who appreciate",
+    "phrases": [
+      "the finer details.",
+      "original woodwork and the hands that made it.",
+      "light that moves through a room all day.",
+      "a butler’s pantry, a window seat, a hidden stair.",
+      "a home with a point of view.",
+      "the home that feels like it was waiting for them."
+    ]
+  },
+  "sellingLine": {
+    "first": "Your home deserves a buyer who notices",
+    "phrases": [
+      "the craftsmanship.",
+      "the way the light falls in the morning.",
+      "every detail you’ve cared for.",
+      "the story in its walls.",
+      "what made it home.",
+      "and will care for it as much as you have."
+    ]
+  }
 }

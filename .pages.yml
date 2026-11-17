@@ -134,6 +134,18 @@ content:
       - { name: heroTitle, label: Headline, type: string }
       - { name: heroSub, label: Line under the headline, type: text }
       - { name: phrases, label: "\"We sell…\" phrases (in order; the last one stays on screen)", type: string, list: true }
+      - name: buyingLine
+        label: Buying page rolling line
+        type: object
+        fields:
+          - { name: first, label: Opening words, type: string }
+          - { name: phrases, label: Phrases (in order; the last one stays on screen), type: string, list: true }
+      - name: sellingLine
+        label: Selling page rolling line
+        type: object
+        fields:
+          - { name: first, label: Opening words, type: string }
+          - { name: phrases, label: Phrases (in order; the last one stays on screen), type: string, list: true }
 
   - name: neighborhoods
     label: Neighborhood pages

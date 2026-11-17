@@ -43,6 +43,11 @@ const regCard = (r, tagLabel) => `<a class="card" href="${r === PUBLICATION.feat
 const featureImg = (src, label) => `<div class="feature-img media plain">${src ? `<img class="poster" src="${esc(src)}" alt="">` : `<p class="label">${esc(label)}</p>`}</div>`;
 const quote = (t) => `\u201c${esc(t.quote)}\u201d`;
 
+const rollLine = (first, phrases, label) => `<section class="section we-sell" aria-label="${esc(label)}"><div class="wrap center">
+<hr class="rule" style="margin:0 auto 40px">
+<p class="first">${esc(first)}</p>
+<p class="phrase" aria-live="polite" data-phrases='${esc(JSON.stringify(phrases))}'>${esc(phrases[phrases.length - 1])}</p>
+</div></section>`;
 // ---------- shared pieces ----------
 const NAV = [
   ['The Collection', '/the-collection'],
@@ -405,6 +410,7 @@ page({
   path: '/selling', title: 'Selling a Home with Character | How Quinby Partners Markets Your Home',
   description: 'Quinby Partners markets historic, architect-designed and one-of-a-kind homes like works of art: house biographies, editorial photography and film, and a multi-week campaign to find the passionate buyer.',
   body: `${hero('selling', 'a hand on an original newel post, then light across a parquet floor', { eyebrow: 'Selling with Quinby Partners', title: 'Your home is a work of art. We market it like one.', sub: 'We tell the story of its craftsmanship and history, and we look for the buyer who will love it as much as you have.' })}
+${rollLine(HOME.sellingLine.first, HOME.sellingLine.phrases, 'What we do for sellers')}
 <section class="section"><div class="wrap"><p class="eyebrow" style="margin-bottom:48px">How we think about selling</p>
 <div class="grid">
 ${principle('I.', 'A piece of art, not a listing', 'We present your home the way a museum presents a work: carefully lit, carefully framed, with the details given room to be seen.')}
@@ -447,6 +453,7 @@ page({
   path: '/buying', title: 'Buying a Home with Character | Quinby Partners',
   description: 'Buy a home with character with confidence. Search by photo for the details you love, and understand the real costs before you offer. Historic, mid-century and architect-designed homes.',
   body: `${hero('buying', 'a front door opening onto a sunlit entry hall', { eyebrow: 'Buying with Quinby Partners', title: 'Find the home you’ll love for its details.', sub: 'We help you find a home with character, see it clearly, and buy it with confidence, whether it was built in 1905, 1955 or last year.' })}
+${rollLine(HOME.buyingLine.first, HOME.buyingLine.phrases, 'What we help buyers find')}
 <section class="section"><div class="wrap"><p class="eyebrow" style="margin-bottom:48px">How we think about buying</p>
 <div class="grid">
 ${principle('I.', 'We see what makes a home special', 'Original woodwork, a butler’s pantry, a mid-century window wall. We know which details are rare, which carry value, and which are worth protecting.')}
