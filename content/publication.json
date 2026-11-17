@@ -5,7 +5,24 @@
     "year": "[Year]",
     "style": "[Style]",
     "line": "[One line on what makes this house singular.]",
-    "photo": ""
+    "photo": "",
+    "slug": "feature-01",
+    "architect": "",
+    "story": "[Opening paragraph: the house’s story. Who built it and when, what it was made for, and what you notice first when you walk in.]\n\n[Second paragraph: the details that carry its character. Woodwork, plaster, leaded glass, a butler’s pantry, the way the rooms flow and where the light falls.]\n\n[Third paragraph: how it has been cared for, and what the next owner inherits.]",
+    "gallery": [
+      {
+        "photo": "",
+        "caption": "[Caption, written like a museum placard: the feature, its material, its era.]"
+      },
+      {
+        "photo": "",
+        "caption": "[Caption.]"
+      }
+    ],
+    "video": "",
+    "quote": "",
+    "quoteBy": "",
+    "credits": "[Photography: name · Architect: name · Builder: name]"
   },
   "register": [
     {

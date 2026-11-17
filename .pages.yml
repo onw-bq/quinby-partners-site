@@ -27,8 +27,23 @@ content:
             type: select
             options:
               values: [For sale, Coming soon, Pending, Sold]
-          - { name: photo, label: Photo, type: image }
-          - { name: link, label: Link (optional, e.g. the listing page), type: string }
+          - { name: slug, label: "Web address (lowercase-with-dashes, e.g. 1912-lake-of-the-isles; don't change after launch)", type: string, required: true }
+          - { name: tagline, label: One line on what makes it singular, type: string }
+          - { name: architect, label: Architect or builder, type: string }
+          - { name: details, label: "Details (optional, e.g. 4 bedrooms · 3 baths)", type: string }
+          - { name: price, label: Price (shown only while for sale or coming soon), type: string }
+          - { name: photo, label: Main photo, type: image }
+          - { name: story, label: "The house's story (leave a blank line between paragraphs)", type: text }
+          - name: gallery
+            label: Gallery
+            type: object
+            list: true
+            fields:
+              - { name: photo, label: Photo, type: image }
+              - { name: caption, label: Caption (like a museum placard), type: string }
+          - { name: video, label: Film (YouTube link), type: string }
+          - { name: quote, label: Quote (optional), type: text }
+          - { name: quoteBy, label: Quote by, type: string }
 
   - name: gifts
     label: Giving record
@@ -81,7 +96,21 @@ content:
           - { name: year, label: Year built, type: string }
           - { name: style, label: Style, type: string }
           - { name: line, label: One line on what makes it singular, type: text }
-          - { name: photo, label: Photo, type: image }
+          - { name: slug, label: "Web address (lowercase-with-dashes; use a new one for each month's feature)", type: string }
+          - { name: architect, label: Architect or builder, type: string }
+          - { name: photo, label: Main photo, type: image }
+          - { name: story, label: "The story (leave a blank line between paragraphs)", type: text }
+          - name: gallery
+            label: Gallery
+            type: object
+            list: true
+            fields:
+              - { name: photo, label: Photo, type: image }
+              - { name: caption, label: Caption (like a museum placard), type: string }
+          - { name: video, label: Film (YouTube link), type: string }
+          - { name: quote, label: Quote (optional), type: text }
+          - { name: quoteBy, label: Quote by, type: string }
+          - { name: credits, label: "Credits (photographer, architect, builder)", type: string }
       - name: register
         label: Register entries (newest first)
         type: object

@@ -36,8 +36,10 @@ const STATS = realGifts.length
   ? { given: '$' + giftTotal.toLocaleString('en-US'), closings: String(realGifts.length), nonprofits: String(new Set(realGifts.map((g) => g.nonprofit.trim().toLowerCase())).size) }
   : { given: '[$—]', closings: '[—]', nonprofits: '[—]' };
 const giftRow = (g) => `<li><div class="row"><span class="n" style="font-size:22px">${esc(g.nonprofit)}</span><span class="m">${metaLine(g.cause, g.month)}</span></div></li>`;
-const homeCard = (h, i, tag = 'div') => `<${tag} class="card"${tag === 'a' ? ` href="${esc(h.link || '/the-collection')}"` : ''}><div class="ph">${photo(h.photo, h.name, 'Photo')}</div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. ${String(i + 1).padStart(2, '0')}</span><div><p class="name">${esc(h.name)}</p><p class="meta">${metaLine(h.neighborhood, h.style, h.status)}</p></div></div></${tag}>`;
-const regCard = (r, tagLabel) => `<a class="card" href="${PUB_PATH}"><div class="ph wide">${photo(r.photo, r.name, '')}</div>${tagLabel ? `<p class="eyebrow" style="margin:0">${tagLabel}</p>` : ''}<p class="name">${esc(r.name)}</p><p class="meta">${metaLine(r.neighborhood, r.year, r.style)}</p></a>`;
+const homeHref = (h) => `/the-collection/${esc(h.slug)}`;
+const homeCard = (h, i) => `<a class="card" href="${homeHref(h)}"><div class="ph">${photo(h.photo, h.name, 'Photo')}</div><div style="display:flex;gap:16px;align-items:baseline"><span class="no">No. ${String(i + 1).padStart(2, '0')}</span><div><p class="name">${esc(h.name)}</p><p class="meta">${metaLine(h.neighborhood, h.style, h.status)}</p></div></div></a>`;
+const featureHref = () => `${PUB_PATH}/${esc(PUBLICATION.feature.slug)}`;
+const regCard = (r, tagLabel) => `<a class="card" href="${r === PUBLICATION.feature ? featureHref() : PUB_PATH}"><div class="ph wide">${photo(r.photo, r.name, '')}</div>${tagLabel ? `<p class="eyebrow" style="margin:0">${tagLabel}</p>` : ''}<p class="name">${esc(r.name)}</p><p class="meta">${metaLine(r.neighborhood, r.year, r.style)}</p></a>`;
 const featureImg = (src, label) => `<div class="feature-img media plain">${src ? `<img class="poster" src="${esc(src)}" alt="">` : `<p class="label">${esc(label)}</p>`}</div>`;
 const quote = (t) => `\u201c${esc(t.quote)}\u201d`;
 
@@ -237,13 +239,13 @@ ${featureImg(PUBLICATION.feature.photo, 'Photo · one editorial image of this mo
 <h2 id="feat-h">${esc(PUBLICATION.feature.name)}</h2>
 <p class="meta caps">${metaLine(PUBLICATION.feature.neighborhood, PUBLICATION.feature.year, PUBLICATION.feature.style)}</p>
 <p style="max-width:620px;margin-top:16px">${esc(PUBLICATION.feature.line)}</p>
-<p><a class="link" href="${PUB_PATH}">Read the feature</a></p>
+<p><a class="link" href="${featureHref()}">Read the feature</a></p>
 </div></section>
 
 <section class="section white"><div class="wrap">
 <div class="head-row"><div><p class="eyebrow">Our listings &amp; recent sales</p><h2>The Collection</h2></div><a class="link" href="/the-collection">View the collection</a></div>
 <div class="grid">
-${COLLECTION.slice(0, 3).map((h, i) => homeCard(h, i, 'a')).join('\n')}
+${COLLECTION.slice(0, 3).map((h, i) => homeCard(h, i)).join('\n')}
 </div></div></section>
 
 <section class="section testimonials" aria-labelledby="t-h"><div class="wrap">
@@ -581,8 +583,9 @@ page({
 ${featureImg(COLLECTION[0] && COLLECTION[0].photo, 'Photo · newest home in the collection')}
 <div class="wrap feature-cap">
 <p class="eyebrow">No. 01 · Newest</p>
-<h2>${esc(COLLECTION[0] ? COLLECTION[0].name : '')}</h2>
+<h2>${COLLECTION[0] ? `<a href="${homeHref(COLLECTION[0])}" style="text-decoration:none">${esc(COLLECTION[0].name)}</a>` : ''}</h2>
 <p class="meta caps">${COLLECTION[0] ? metaLine(COLLECTION[0].neighborhood, COLLECTION[0].style, COLLECTION[0].status) : ''}</p>
+${COLLECTION[0] ? `<p><a class="link" href="${homeHref(COLLECTION[0])}">See the home</a></p>` : ''}
 </div></section>
 <section class="section"><div class="wrap">
 <div class="grid">
@@ -602,7 +605,7 @@ page({
 </div></section>
 <section class="section white"><div class="wrap"><p class="eyebrow">This month’s feature</p>
 <div class="split" style="margin-top:24px"><div class="main"><div class="card"><div class="ph wide">${photo(PUBLICATION.feature.photo, PUBLICATION.feature.name, '')}</div></div></div>
-<div class="side"><h2>${esc(PUBLICATION.feature.name)}</h2><p class="meta caps" style="color:var(--muted);margin-top:12px">${metaLine(PUBLICATION.feature.neighborhood, PUBLICATION.feature.year, PUBLICATION.feature.style)}</p><p style="margin-top:18px">${esc(PUBLICATION.feature.line)}</p></div></div></div></section>
+<div class="side"><h2><a href="${featureHref()}" style="text-decoration:none">${esc(PUBLICATION.feature.name)}</a></h2><p class="meta caps" style="color:var(--muted);margin-top:12px">${metaLine(PUBLICATION.feature.neighborhood, PUBLICATION.feature.year, PUBLICATION.feature.style)}</p><p style="margin-top:18px">${esc(PUBLICATION.feature.line)}</p><p><a class="link" href="${featureHref()}">Read the feature</a></p></div></div></div></section>
 <section class="section"><div class="wrap"><p class="eyebrow">The Register</p><h2 style="margin-bottom:16px">Notable homes, one at a time</h2>
 <p style="max-width:640px;margin-bottom:44px">A running catalog of remarkable homes across the Twin Cities: one great photo, the essentials, and a few lines of story.</p>
 <div class="grid">${(PUBLICATION.register || []).map((r) => regCard(r)).join('')}</div></div></section>
@@ -668,6 +671,53 @@ ${ctaBand(`Own a home in ${h.name}?`, 'We’d love to hear its story, whether yo
     ],
   });
 }
+
+// ---------- home pages (The Collection) and the publication feature ----------
+const paras = (t) => String(t || '').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+const youtubeId = (u) => { const m = String(u || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : null; };
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+
+function storyPage(h, { pathPrefix, eyebrow, list, kind }) {
+  const facts = [['Built', h.year], ['Style', h.style], ['Architect', h.architect], ['Neighborhood', h.neighborhood], ['Status', h.status], ['Details', h.details], ['Offered at', h.status === 'For sale' || h.status === 'Coming soon' ? h.price : '']].filter(([, v]) => v && String(v).trim());
+  const hoodPage = HOODS.find((n) => n.name.toLowerCase() === String(h.neighborhood || '').toLowerCase());
+  const factHtml = facts.map(([k, v]) => `<div><dt class="eyebrow" style="margin:0">${k}</dt><dd style="margin:6px 0 0;font-family:var(--serif);font-size:22px">${k === 'Neighborhood' && hoodPage ? `<a href="/neighborhoods/${hoodPage.slug}">${esc(v)}</a>` : esc(v)}</dd></div>`).join('');
+  const ps = paras(h.story);
+  const vid = youtubeId(h.video);
+  const gallery = (h.gallery || []).filter((g) => g.photo || g.caption);
+  const others = list.filter((x) => x !== h).slice(0, 2);
+  const forSale = h.status === 'For sale' || h.status === 'Coming soon';
+  const giving = kind === 'collection'
+    ? `When this home changes hands with us, Quinby Partners gives $1,000 to a nonprofit the owners choose.`
+    : `At every closing, Quinby Partners gives $1,000 to a nonprofit our clients choose.`;
+  page({
+    path: `${pathPrefix}/${h.slug}`,
+    title: `${h.name} | ${metaLine(h.neighborhood, h.style).replace(/&amp;/g, '&')} | Quinby Partners`,
+    description: (h.tagline || h.line || ps[0] || `${h.name}, ${h.neighborhood}`).replace(/\[|\]/g, '').slice(0, 155),
+    schema: [{ '@type': kind === 'collection' ? 'SingleFamilyResidence' : 'Article', name: h.name, ...(kind === 'collection' ? { address: { '@type': 'PostalAddress', addressLocality: h.neighborhood, addressRegion: 'MN' } } : { headline: h.name, publisher: { '@id': SITE + '/#org' } }) }],
+    body: `<section class="section tight center"><div class="wrap">
+<p class="eyebrow">${eyebrow}</p>
+<h1 style="max-width:980px;margin:0 auto">${esc(h.name)}</h1>
+${(h.tagline || h.line) ? `<p class="lede" style="font-style:italic;color:var(--pine);max-width:680px;margin:26px auto 0">${esc(h.tagline || h.line)}</p>` : ''}
+</div></section>
+<div class="wrap" style="padding-bottom:0">${featureImg(h.photo, 'Photo or b-roll · the home\'s best view')}</div>
+<section class="section"><div class="wrap split">
+<aside class="side" aria-label="About this home"><div style="border-top:1px solid var(--brass);padding-top:26px"><dl style="margin:0;display:grid;gap:22px">${factHtml}</dl></div></aside>
+<article class="main prose">${ps.map((p, i) => i === 0 ? `<p class="lede" style="font-size:clamp(22px,2.2vw,30px)">${esc(p)}</p>` : `<p>${esc(p)}</p>`).join('\n')}</article>
+</div></section>
+${vid ? `<section class="section tight"><div class="wrap"><div style="position:relative;aspect-ratio:16/9;background:var(--navy)"><iframe src="https://www.youtube-nocookie.com/embed/${vid}" title="${esc(h.name)} film" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div></div></section>` : ''}
+${gallery.length ? `<section class="section tight"><div class="wrap grid">${gallery.map((g, i) => `<figure style="margin:0"><div class="card"><div class="ph">${photo(g.photo, g.caption, 'Photo')}</div></div><figcaption style="margin-top:14px;font-size:14px;color:var(--muted)"><span style="font-family:var(--serif);color:var(--brass-text)">${ROMAN[i] || i + 1}.</span> ${esc(g.caption)}</figcaption></figure>`).join('')}</div></section>` : ''}
+${h.quote ? `<section class="section tight"><div class="wrap narrow"><blockquote class="pull"><p>${quote(h)}</p>${h.quoteBy ? `<footer>${esc(h.quoteBy)}</footer>` : ''}</blockquote></div></section>` : ''}
+${h.credits ? `<section class="wrap"><p class="small">${esc(h.credits)}</p></section>` : ''}
+<section class="section paper cta-band"><div class="wrap">
+<div><p class="eyebrow">${kind === 'collection' ? 'This home\'s giving' : 'Giving'}</p><p class="lede" style="max-width:720px">${giving}</p></div>
+${forSale ? `<a class="btn" href="/contact">Request a showing</a>` : `<a class="btn" href="/selling">Selling a home like this?</a>`}
+</div></section>
+${others.length ? `<section class="section"><div class="wrap"><p class="eyebrow" style="margin-bottom:32px">${kind === 'collection' ? 'Continue through the collection' : 'More from ' + esc(PUB)}</p><div class="grid">${others.map((o) => `<a class="card" href="${pathPrefix}/${esc(o.slug)}"><div class="ph wide">${photo(o.photo, o.name, '')}</div><p class="name">${esc(o.name)}</p><p class="meta">${metaLine(o.neighborhood, o.year, o.style)}</p></a>`).join('')}</div></div></section>` : ''}`,
+  });
+}
+
+COLLECTION.filter((h) => h.slug).forEach((h, i) => storyPage(h, { pathPrefix: '/the-collection', eyebrow: `The Collection · No. ${String(i + 1).padStart(2, '0')}`, list: COLLECTION, kind: 'collection' }));
+if (PUBLICATION.feature && PUBLICATION.feature.slug) storyPage(PUBLICATION.feature, { pathPrefix: PUB_PATH, eyebrow: `${esc(PUB)} · This month’s feature`, list: [], kind: 'publication' });
 
 // 404
 page({ path: '/404', title: 'Page not found | Quinby Partners', description: 'This page could not be found.', bandsOn: false, noindex: true,
