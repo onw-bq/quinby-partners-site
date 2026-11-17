@@ -1,0 +1,12 @@
+{
+  "books": [
+    {
+      "slug": "sample-a7k2",
+      "homeName": "[Home name]",
+      "recipients": "[The owners' names]",
+      "note": "[A personal note to these owners: what you admire about their home, and an invitation to talk whenever they're ready.]",
+      "coverPhoto": "",
+      "tag": "book: sample"
+    }
+  ]
+}

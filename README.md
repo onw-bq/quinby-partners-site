@@ -24,6 +24,19 @@ What appears in the editor is set in `.pages.yml`.
 
 Longer page copy (Why Quinby, Selling, Buying, guides) stays in `build.js`; ask Claude to change it.
 
+## Lead capture and the books
+
+- Every form (consultations, contact, newsletter, books) posts to `/api/lead` (`functions/api/lead.js`), which creates or updates
+  the contact in Go High Level and **adds** tags (never replaces them), plus a note with any message or mailing address.
+- Cloudflare Pages environment variables: `GHL_LOCATION_ID` (Quinby Partners) and `GHL_TOKEN` (a GHL Private Integration token with
+  contacts read/write; add it as an encrypted secret). Until the token is set, forms still thank the visitor but nothing is saved.
+- Tags: `src: website`, plus `form: seller consult`, `form: buyer consult`, `form: consult`, `form: contact`,
+  `newsletter: the front porch`, `book: master`, `book: personalized`, the book's own tag, `book-request: printed copy`, `book-request: consultation`.
+- **Master book:** `/book`. Asks for name and email after `gateAfter` pages. Add `?known=1` to the link (e.g. in a GHL trigger link to
+  existing contacts) to skip the ask.
+- **Personalized books:** `/book/[slug]`, set in `content/books.json`. Never gated. Send through a GHL trigger link so clicks are recorded.
+- Books are hidden from search (noindex) and left out of the sitemap and llms.txt. "Save as PDF" prints every page.
+
 ## Where things live
 
 - `build.js`: every page's words, the menu, neighborhoods and areas (`HOODS`, `AREAS`), and the publication's name (`PUB`, currently a placeholder).

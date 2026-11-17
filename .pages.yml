@@ -198,3 +198,44 @@ content:
       - { name: publicationName, label: Publication name, type: string }
       - { name: phone, label: Phone, type: string }
       - { name: email, label: Email, type: string }
+
+  - name: books
+    label: Books for icon homes (private)
+    type: file
+    path: content/books.json
+    fields:
+      - name: books
+        label: "Personalized books. Each lives at quinbypartners.com/book/[web address]; send it through a GHL trigger link."
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{homeName} · {recipients}"
+        fields:
+          - { name: homeName, label: Home name (shown on the cover), type: string, required: true }
+          - { name: recipients, label: "Prepared for (e.g. Anne and David)", type: string }
+          - { name: slug, label: "Private web address (add a few random letters, e.g. lake-isles-k7q2)", type: string, required: true }
+          - { name: note, label: "Personal note from Becky (blank line between paragraphs)", type: text }
+          - { name: coverPhoto, label: Cover photo of their home, type: image }
+          - { name: tag, label: "GHL tag for this book (e.g. book: lake isles tudor)", type: string }
+
+  - name: book
+    label: The master book
+    type: file
+    path: content/book.json
+    fields:
+      - { name: title, label: Book title, type: string }
+      - { name: gateAfter, label: "Ask for name and email after this many pages", type: number }
+      - name: pages
+        label: Pages (in order; the first is the cover, the last is the note from Becky)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{eyebrow} · {title}"
+        fields:
+          - { name: eyebrow, label: Small heading, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: body, label: "Text (blank line between paragraphs)", type: text }
+          - { name: photo, label: Photo, type: image }
+          - { name: clip, label: "B-roll description (shown until a photo is added; leave both empty for a text-only page)", type: string }

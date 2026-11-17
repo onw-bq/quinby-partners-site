@@ -111,7 +111,14 @@ function footer() {
 <div class="col wide">
 <p class="title">The Front Porch</p>
 <p>Our monthly letter: homes, neighborhoods and giving.</p>
-<div class="ghl-form" data-form="newsletter"><p><a href="/contact">Sign up</a></p></div>
+<form class="lead-form inline" action="/api/lead" method="post" data-thanks="You\u2019re on the list. Thank you.">
+<input type="hidden" name="tags" value="newsletter: the front porch"><input type="hidden" name="source" value="Footer newsletter signup">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="skip" for="nl-email">Email address</label>
+<input id="nl-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+<button type="submit">Subscribe</button>
+<p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
+</form>
 </div>
 <div class="col">
 <p class="title" style="font-size:18px">Quinby Partners</p>
@@ -200,9 +207,34 @@ const values = `<div class="grid four">
 <div class="value"><h3>Generosity</h3><p>Every transaction gives back, by design.</p></div>
 </div>`;
 
-const consultForm = (kind) => `<div class="ghl-form" data-form="${kind}">
-<p>Call or text <a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a>, or email <a href="mailto:${EMAIL}">${EMAIL}</a>. We reply within one business day.</p>
-</div>`;
+// Lead forms post to /api/lead (functions/api/lead.js), which saves the contact and tags in Go High Level.
+let formN = 0;
+const FIELD = {
+  name: (id) => `<label for="${id}-name">Name</label><input id="${id}-name" name="name" autocomplete="name" required>`,
+  email: (id) => `<label for="${id}-email">Email</label><input id="${id}-email" name="email" type="email" autocomplete="email" required>`,
+  phone: (id) => `<label for="${id}-phone">Phone (optional)</label><input id="${id}-phone" name="phone" type="tel" autocomplete="tel">`,
+  message: (id) => `<label for="${id}-msg">Anything we should know?</label><textarea id="${id}-msg" name="message"></textarea>`,
+  address: (id) => `<label for="${id}-addr">Mailing address</label><input id="${id}-addr" name="address" autocomplete="street-address" required>
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:12px"><div><label for="${id}-city">City</label><input id="${id}-city" name="city" autocomplete="address-level2" required></div><div><label for="${id}-zip">ZIP</label><input id="${id}-zip" name="postalCode" autocomplete="postal-code" required></div></div>`,
+};
+function leadForm({ tags, source, fields = ['name', 'email', 'phone', 'message'], button = 'Send', thanks = 'Thank you. We\u2019ll be in touch within one business day.' }) {
+  const id = 'f' + (++formN);
+  return `<form class="form lead-form" action="/api/lead" method="post" data-thanks="${esc(thanks)}">
+<input type="hidden" name="tags" value="${esc(tags)}"><input type="hidden" name="source" value="${esc(source)}">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+${fields.map((f) => FIELD[f](id)).join('\n')}
+<button class="btn" type="submit">${esc(button)}</button>
+<p class="form-status" role="status" aria-live="polite"></p>
+</form>`;
+}
+const CONSULT = {
+  'seller-consult': ['form: seller consult', 'Selling page', 'Request a consultation'],
+  'buyer-consult': ['form: buyer consult', 'Buying page', 'Start the conversation'],
+  consult: ['form: consult', 'Work with us page', 'Send'],
+  contact: ['form: contact', 'Contact page', 'Send'],
+};
+const consultForm = (kind) => { const [tags, source, button] = CONSULT[kind]; return `${leadForm({ tags, source, button })}
+<p class="small" style="margin-top:18px">Or call or text <a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a>, or email <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>`; };
 
 // ---------- neighborhoods ----------
 const AREAS = load('areas').areas.map((a) => ({ ...a, hoods: (a.neighborhoods || []).map((n) => [n.name, n.page ? '/neighborhoods/' + n.page : null, n.line]) }));
@@ -718,6 +750,90 @@ ${others.length ? `<section class="section"><div class="wrap"><p class="eyebrow"
 
 COLLECTION.filter((h) => h.slug).forEach((h, i) => storyPage(h, { pathPrefix: '/the-collection', eyebrow: `The Collection · No. ${String(i + 1).padStart(2, '0')}`, list: COLLECTION, kind: 'collection' }));
 if (PUBLICATION.feature && PUBLICATION.feature.slug) storyPage(PUBLICATION.feature, { pathPrefix: PUB_PATH, eyebrow: `${esc(PUB)} · This month’s feature`, list: [], kind: 'publication' });
+
+// ---------- the flip book: private, full-screen pages (not in the sitemap, hidden from search) ----------
+const BOOK = load('book');
+const BOOKS = load('books').books || [];
+
+function bookPage(pg, i, { cover, locked } = {}) {
+  const media = pg.photo ? `<img src="${esc(pg.photo)}" alt="" loading="${i < 2 ? 'eager' : 'lazy'}">` : `<p class="label">${pg.clip ? 'B-roll · ' + esc(pg.clip) : ''}</p>`;
+  const body = paras(pg.body).map((p) => `<p>${esc(p)}</p>`).join('');
+  if (cover) return `<section class="bpage cover" aria-label="Cover"><div class="bmedia">${media}</div><div class="btext"><p class="eyebrow">${esc(pg.eyebrow)}</p><h1>${esc(pg.title)}</h1>${body}<p class="hint">Swipe or use the arrows to turn the page</p></div></section>`;
+  const textOnly = !pg.photo && !pg.clip;
+  return `<section class="bpage${locked ? ' locked' : ''}${textOnly ? ' text-only' : ''}" aria-label="${esc(pg.title)}">${textOnly ? '' : `<div class="bmedia">${media}</div>`}<div class="btext"><p class="eyebrow">${esc(pg.eyebrow)}</p><h2>${esc(pg.title)}</h2>${body}</div></section>`;
+}
+
+function bookEnd(tags, source) {
+  return `<section class="bpage end locked-end" aria-label="Next steps"><div class="btext wide">
+<div class="end-grid">
+<div><p class="eyebrow">The printed edition</p><h2>Would you like a printed copy?</h2><p>We’ll deliver a printed edition of this book to your door.</p>
+${leadForm({ tags: tags + ', book-request: printed copy', source: source + ' · printed copy', fields: ['name', 'email', 'phone', 'address'], button: 'Send me the printed edition', thanks: 'Thank you. Your printed copy is on its way.' })}</div>
+<div><p class="eyebrow">A private conversation</p><h2>Talk with Becky</h2><p>Whether you’re selling this season or years from now, we’d love to see your home and hear its story.</p>
+${leadForm({ tags: tags + ', book-request: consultation', source: source + ' · consultation', fields: ['name', 'email', 'phone', 'message'], button: 'Request a conversation' })}
+<p class="small">Or call or text <a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a> · <a href="mailto:${EMAIL}">${EMAIL}</a></p></div>
+</div></div></section>`;
+}
+
+function bookGate(tags, source) {
+  return `<section class="bpage gate" aria-label="Keep reading"><div class="btext">
+<p class="eyebrow">Keep reading</p><h2>The rest of the book is yours.</h2>
+<p>Add your name and email to read on. We’ll only send things worth your time, like our monthly letter, The Front Porch.</p>
+${leadForm({ tags, source, fields: ['name', 'email', 'phone'], button: 'Keep reading', thanks: 'Thank you. Turn the page.' })}
+</div></section>`;
+}
+
+function bookShell({ path: p, title, pagesHtml, gated }) {
+  const html = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>${esc(title)} | Quinby Partners</title>
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="A short book from Quinby Partners.">
+<meta property="og:site_name" content="Quinby Partners">
+<link rel="icon" href="/assets/qp-monogram-gold.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="book-body">
+<header class="book-top"><a class="brand" href="/"><img src="/assets/qp-monogram-gold.png" alt="" width="40" height="29"><span>Quinby Partners</span></a>
+<span class="book-count" aria-live="polite"></span>
+<button type="button" class="book-print">Save as PDF</button></header>
+<main class="book-track" data-gated="${gated ? 'true' : 'false'}" tabindex="0" aria-label="${esc(title)}">
+${pagesHtml}
+</main>
+<nav class="book-nav" aria-label="Pages"><button type="button" class="prev" aria-label="Previous page">←</button><div class="book-progress"><span></span></div><button type="button" class="next" aria-label="Next page">→</button></nav>
+<script src="/main.js" defer></script>
+</body>
+</html>
+`;
+  pages.push({ path: p, title, description: '', html, noindex: true });
+}
+
+// The master book: gated after a few pages
+(() => {
+  const n = Math.max(1, Number(BOOK.gateAfter) || 3);
+  const tags = 'book: master';
+  const src = 'Book: How we sell homes like yours';
+  const ps = BOOK.pages.map((pg, i) => i === 0 ? bookPage(pg, i, { cover: true }) : bookPage(pg, i, { locked: i >= n }));
+  ps.splice(n, 0, bookGate(tags, src));
+  ps.push(bookEnd(tags, src).replace('locked-end', 'locked'));
+  bookShell({ path: '/book', title: BOOK.title, pagesHtml: ps.join('\n'), gated: true });
+})();
+
+// Personalized copies for specific homes: not gated, each at its own private address
+for (const pb of BOOKS.filter((x) => x.slug)) {
+  const tags = ['book: personalized', pb.tag].filter(Boolean).join(', ');
+  const src = `Book for ${pb.homeName}`;
+  const cover = bookPage({ eyebrow: pb.recipients ? `Prepared for ${pb.recipients}` : 'Prepared for you', title: pb.homeName, body: 'How Quinby Partners would present and sell this home.', photo: pb.coverPhoto || BOOK.pages[0].photo, clip: BOOK.pages[0].clip }, 0, { cover: true });
+  const note = bookPage({ eyebrow: 'A note from Becky', title: `Dear ${pb.recipients || 'friends'},`, body: `${pb.note}\n\nBecky Quinby, Founder and Broker`, photo: '', clip: '' }, 1);
+  const middle = BOOK.pages.slice(1, -1).map((pg, i) => bookPage(pg, i + 2));
+  bookShell({ path: `/book/${pb.slug}`, title: `${pb.homeName} | How we would sell it`, pagesHtml: [cover, note, ...middle, bookEnd(tags, src).replace(' locked-end', '')].join('\n'), gated: false });
+}
 
 // 404
 page({ path: '/404', title: 'Page not found | Quinby Partners', description: 'This page could not be found.', bandsOn: false, noindex: true,

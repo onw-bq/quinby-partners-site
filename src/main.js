@@ -63,3 +63,73 @@
   }, { threshold: 0.6 });
   io.observe(el);
 })();
+
+// Lead forms: send to /api/lead and show a thank-you in place.
+(function () {
+  document.querySelectorAll('form.lead-form').forEach(function (form) {
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var status = form.querySelector('.form-status');
+      var btn = form.querySelector('[type="submit"]');
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = v; });
+      if (btn) btn.disabled = true;
+      if (status) status.textContent = 'Sending…';
+      fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok && j.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.j && res.j.error);
+          form.classList.add('sent');
+          if (status) status.textContent = form.dataset.thanks || 'Thank you.';
+          form.dispatchEvent(new CustomEvent('lead:sent', { bubbles: true }));
+        })
+        .catch(function (e) {
+          if (btn) btn.disabled = false;
+          if (status) status.textContent = (e && e.message) || 'Something went wrong. Please call or text 612-232-3165.';
+        });
+    });
+  });
+})();
+
+// The flip book: swipe, arrow keys and buttons; the master book unlocks after the reader's details.
+(function () {
+  var track = document.querySelector('.book-track');
+  if (!track) return;
+  var prev = document.querySelector('.book-nav .prev');
+  var next = document.querySelector('.book-nav .next');
+  var bar = document.querySelector('.book-progress span');
+  var count = document.querySelector('.book-count');
+  var KEY = 'qp-book-unlocked';
+  var params = new URLSearchParams(location.search);
+  function store(get) { try { return get ? localStorage.getItem(KEY) : localStorage.setItem(KEY, '1'); } catch (e) { return null; } }
+  function unlock() { track.classList.add('unlocked'); store(false); update(); }
+  if (track.dataset.gated !== 'true' || params.has('known') || store(true)) track.classList.add('unlocked');
+  function pagesNow() { return Array.prototype.filter.call(track.querySelectorAll('.bpage'), function (p) { return p.offsetParent !== null || getComputedStyle(p).display !== 'none'; }); }
+  function index() { return Math.round(track.scrollLeft / track.clientWidth); }
+  function update() {
+    var ps = pagesNow(), i = index();
+    if (count) count.textContent = (i + 1) + ' / ' + ps.length;
+    if (bar) bar.style.width = (ps.length > 1 ? (i / (ps.length - 1)) * 100 : 100) + '%';
+    if (prev) prev.disabled = i <= 0;
+    if (next) next.disabled = i >= ps.length - 1;
+  }
+  function go(d) { track.scrollTo({ left: (index() + d) * track.clientWidth }); }
+  if (prev) prev.addEventListener('click', function () { go(-1); });
+  if (next) next.addEventListener('click', function () { go(1); });
+  document.addEventListener('keydown', function (e) {
+    if (/INPUT|TEXTAREA|SELECT/.test((e.target && e.target.tagName) || '')) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+  });
+  var t;
+  track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(update, 60); });
+  window.addEventListener('resize', update);
+  var gate = track.querySelector('.bpage.gate');
+  if (gate) gate.addEventListener('lead:sent', function () {
+    var at = index();
+    setTimeout(function () { unlock(); track.scrollTo({ left: at * track.clientWidth, behavior: 'auto' }); }, 900);
+  });
+  var pr = document.querySelector('.book-print');
+  if (pr) pr.addEventListener('click', function () { window.print(); });
+  update();
+})();
