@@ -45,12 +45,12 @@ const quote = (t) => `\u201c${esc(t.quote)}\u201d`;
 
 // ---------- shared pieces ----------
 const NAV = [
-  ['Architecture & Design', '/architecture-design'],
   ['The Collection', '/the-collection'],
-  [PUB, PUB_PATH],
   ['Neighborhoods', '/neighborhoods'],
+  ['Architecture & Design', '/architecture-design'],
+  [PUB, PUB_PATH],
+  ['Why Quinby Partners', '/why-quinby-partners'],
   ['Giving', '/giving'],
-  ['Why Quinby', '/why-quinby'],
 ];
 
 function header(current) {
@@ -61,7 +61,7 @@ function header(current) {
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
 <nav class="nav" id="site-nav" aria-label="Main">
 ${links}
-<a class="contact" href="/contact"${current === '/contact' ? ' aria-current="page"' : ''}>Contact</a>
+<a class="contact" href="/work-with-us"${current === '/work-with-us' ? ' aria-current="page"' : ''}>Work with us</a>
 </nav>
 </div></header>`;
 }
@@ -118,7 +118,7 @@ function footer() {
 <p>${ADDRESS.join('<br>')}<br><a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a><br><a href="mailto:${EMAIL}">${EMAIL}</a></p>
 </div>
 <div class="col">
-<p><a href="/work-with-us">Work with us</a><br><a href="/selling">Selling</a><br><a href="/buying">Buying</a><br><a href="/neighborhoods">Neighborhoods</a><br><a href="/doing-better">Doing Better podcast</a><br><a href="/about/becky-quinby">Becky Quinby</a> · <a href="/about/elena-quinby">Elena Quinby</a></p>
+<p><a href="/work-with-us">Work with us</a><br><a href="/selling">Selling</a><br><a href="/buying">Buying</a><br><a href="/neighborhoods">Neighborhoods</a><br><a href="/doing-better">Doing Better podcast</a><br><a href="/contact">Contact</a><br><a href="/about/becky-quinby">Becky Quinby</a> · <a href="/about/elena-quinby">Elena Quinby</a></p>
 </div>
 <div class="col">
 <p>Onward Impact Partner<br>$1,000 to a nonprofit you choose at every closing</p>
@@ -227,7 +227,7 @@ page({
 <div class="split">
 <div class="side"><p class="eyebrow">Our approach</p><hr class="rule"></div>
 <div class="main"><p class="lede">Fewer clients, more attention. Honest advice, even when it isn't what someone hoped to hear. And a share of every transaction directed back into the community.</p>
-<p style="margin-top:36px"><a class="link" href="/why-quinby">Why Quinby</a></p></div>
+<p style="margin-top:36px"><a class="link" href="/why-quinby-partners">Why Quinby Partners</a></p></div>
 </div>
 <div style="margin-top:80px">${values}</div>
 </div></section>
@@ -298,11 +298,11 @@ ${GIFTS.slice(0, 4).map(giftRow).join('\n')}
   ],
 });
 
-// Why Quinby
+// Why Quinby Partners
 page({
-  path: '/why-quinby', title: 'Why Quinby | An Independent, Woman-Owned Boutique Brokerage',
+  path: '/why-quinby-partners', title: 'Why Quinby Partners | An Independent, Woman-Owned Boutique Brokerage',
   description: 'Quinby Partners is an independent, woman-owned and queer-owned boutique brokerage in the Twin Cities. Fewer clients, more attention, honest advice, and $1,000 to charity at every closing.',
-  body: `${hero('why', 'Becky and Elena walking a client through a historic home', { eyebrow: 'Why Quinby', title: 'Independent, woman-owned, and deeply rooted in the Twin Cities.', short: true })}
+  body: `${hero('why', 'Becky and Elena walking a client through a historic home', { eyebrow: 'Why Quinby Partners', title: 'Independent, woman-owned, and deeply rooted in the Twin Cities.', short: true })}
 <section class="section"><div class="wrap split">
 <div class="side"><p class="eyebrow">Our story</p><hr class="rule"></div>
 <div class="main prose">
@@ -752,7 +752,7 @@ write('llms.txt', `# Quinby Partners
 > Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed and one-of-a-kind homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for unique homes." At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
 
 ## About
-${group((p) => p === '/' || p === '/why-quinby' || p.startsWith('/about') || p === '/giving')}
+${group((p) => p === '/' || p === '/why-quinby-partners' || p.startsWith('/about') || p === '/giving')}
 
 ## Selling and buying
 ${group((p) => ['/selling', '/buying', '/work-with-us', '/historic-and-architectural-homes'].includes(p))}
