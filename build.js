@@ -375,7 +375,7 @@ page({
 <p>Homes with character are our specialty, and we know them from the inside. Becky has bought, renovated and lived in homes across nearly a century of design, and cares for historic properties of her own. Since 2012 we’ve sold Craftsman bungalows, Tudors, Victorians, mid-century moderns and artists’ lofts across Minneapolis, St. Paul, Edina and Golden Valley.</p>
 <p>We know what makes these homes valuable: the woodwork, leaded glass, tile, hardware and built-ins that can’t be replaced, and the updates that add value without erasing them. For sellers, that means advice on what to protect and what to fix, a home presented and priced for what it really is, and buyers who will care for it as well as you have. For buyers, it means knowing what’s original, what’s been changed, and what it will take to look after it.</p>
 <h2>Independent by design</h2>
-<p>We answer to our clients, not a franchise playbook. That independence lets us move quickly, tailor every strategy, and give each decision the care it deserves.</p>
+<p>We answer to our clients, not a corporate brokerage. There are no corporate mandates, no franchise-driven rules, and no national playbook deciding how your home is marketed or which tools we have to push. That independence lets us move quickly, tailor every strategy to your home, and give each decision the care it deserves.</p>
 <h2>Boutique, on purpose</h2>
 <p>Hiring a boutique brokerage is a choice to work with the people whose names are on the door. You get the founder's attention, a strategy built for your home rather than a template, and a team small enough that nothing gets lost.</p>
 <h2>Woman-owned</h2>
@@ -393,7 +393,7 @@ page({
 ${ctaBand('Let\'s talk about your home.', 'Whether you\'re buying, selling, or simply considering your options.', '/work-with-us', 'Work with us')}`,
   faqs: [
     ['Does Quinby Partners specialize in older homes?', 'Yes. Older, architectural and original homes are our specialty. We know which original features carry value and how to protect them through a sale, how to tell a home’s story, and how to find buyers who will care for it, across Minneapolis, St. Paul, Edina and Golden Valley.'],
-    ['Is Quinby Partners an independent brokerage?', 'Yes. Quinby Partners is an independent, woman-owned boutique brokerage in the Twin Cities, not part of a franchise.'],
+    ['Is Quinby Partners an independent brokerage?', 'Yes. Quinby Partners is an independent, woman-owned boutique brokerage in the Twin Cities. We aren’t part of a franchise or a national corporate brokerage, so there are no corporate mandates or franchise rules: every decision is made for our clients and their homes.'],
     ['Why choose a boutique brokerage over a large one?', 'You work directly with the people whose names are on the door, with a strategy built for your home and a small team where nothing gets lost.'],
   ],
 });
