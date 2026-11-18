@@ -331,3 +331,11 @@ details.faq p { margin: 14px 0 0; font-size: 16px; }
 .path-form { background: var(--white); padding: 40px; border-top: 3px solid var(--brass); align-self: start; }
 @media (prefers-reduced-motion: reduce) { .path-body:not([hidden]) { animation: none; } .path-tab::after { transition: none; } }
 @media (max-width: 900px) { .paths { grid-template-columns: repeat(2, minmax(0, 1fr)); } .path-tab:nth-child(2) { border-right: 0; } .path-tab:nth-child(-n+2) { border-bottom: 1px solid var(--stone); } .path-panel { grid-template-columns: minmax(0, 1fr); gap: 40px; } .path-form { padding: 28px 22px; } }
+
+/* Doing Better pop-up */
+.soon-dialog { border: 0; padding: 0; max-width: 620px; width: calc(100% - 32px); background: transparent; }
+.soon-dialog::backdrop { background: rgba(27, 42, 61, .72); }
+.soon-dialog .soon-card { box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+.soon-dialog .soon-card h2 { font-size: clamp(30px, 3vw, 40px); }
+.dialog-close { position: absolute; top: 10px; right: 14px; z-index: 1; background: none; border: 0; font-size: 30px; line-height: 1; color: var(--navy); cursor: pointer; width: 44px; height: 44px; }
+.soon-dialog[open] { animation: pathIn .35s ease both; }

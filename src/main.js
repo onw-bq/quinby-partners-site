@@ -168,3 +168,16 @@
   var start = document.querySelector('.path-tab[data-path="' + location.hash.slice(1) + '"]');
   if (start) choose(start); else { var m = form && form.querySelector('[name=message]'); if (m && cfg.selling) m.placeholder = cfg.selling.ph; }
 })();
+
+// Footer pop-ups (Doing Better)
+(function () {
+  function open(d) { if (d && d.showModal && !d.open) d.showModal(); }
+  document.querySelectorAll('[data-dialog]').forEach(function (a) {
+    a.addEventListener('click', function (e) { var d = document.getElementById(a.getAttribute('data-dialog')); if (d && d.showModal) { e.preventDefault(); open(d); } });
+  });
+  document.querySelectorAll('dialog').forEach(function (d) {
+    var x = d.querySelector('.dialog-close'); if (x) x.addEventListener('click', function () { d.close(); });
+    d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+  });
+  if (location.hash === '#doing-better') open(document.getElementById('db-dialog'));
+})();

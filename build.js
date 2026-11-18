@@ -102,13 +102,24 @@ function bands() {
 ${[regCard(PUBLICATION.feature, 'This month\'s feature'), ...(PUBLICATION.register || []).slice(0, 2).map((r) => regCard(r, 'From the Register'))].join('\n')}
 </div></div></section>` : '';
   return `${pubSection}
-<section class="section pine tight" aria-labelledby="db-band">
+${PUB_LIVE ? '' : `<section class="section pine tight" aria-labelledby="pub-soon">
 <div class="wrap db-grid solo">
-${dbSoon('db')}
-</div></section>`;
+<div class="soon-card">
+<p class="eyebrow">Coming in 2027</p>
+<h2 id="pub-soon">A new publication from Quinby Partners</h2>
+<p>Stories of the Twin Cities’ old homes: their original features, the people who made them, and the people who care for them now.</p>
+<form class="lead-form inline" action="/api/lead" method="post" data-thanks="You’re on the list. We’ll let you know when the first issue arrives.">
+<input type="hidden" name="tags" value="publication: waitlist"><input type="hidden" name="source" value="Publication waitlist">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="skip" for="pub-email">Email address</label>
+<input id="pub-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+<button type="submit">Be the first to read it</button>
+<p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
+</form></div>
+</div></section>`}`;
 }
 
-// Doing Better is coming in 2027: one card, used in the band and on its page
+// Doing Better: hidden for now, opened as a pop-up from the footer link (or /#doing-better)
 const dbSoon = (id) => `<div class="soon-card">
 <p class="eyebrow">Coming in 2027</p>
 <h2 id="${id}-band">Doing Better</h2>
@@ -142,7 +153,7 @@ function footer() {
 <p>${ADDRESS.join('<br>')}<br><a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a><br><a href="mailto:${EMAIL}">${EMAIL}</a></p>
 </div>
 <div class="col">
-<p><a href="/work-with-us">Work with us</a><br><a href="/selling">Selling</a><br><a href="/buying">Buying</a><br><a href="/neighborhoods">Neighborhoods</a><br><a href="/doing-better">Doing Better</a> (coming 2027)<br><a href="/contact">Contact</a><br><a href="/about/becky-quinby">Becky Quinby</a> · <a href="/about/elena-quinby">Elena Quinby</a></p>
+<p><a href="/work-with-us">Work with us</a><br><a href="/selling">Selling</a><br><a href="/buying">Buying</a><br><a href="/neighborhoods">Neighborhoods</a><br><a href="/#doing-better" data-dialog="db-dialog">Doing Better</a><br><a href="/contact">Contact</a><br><a href="/about/becky-quinby">Becky Quinby</a> · <a href="/about/elena-quinby">Elena Quinby</a></p>
 </div>
 <div class="col">
 <p>Onward Impact Partner<br>$1,000 to a nonprofit you choose at every closing</p>
@@ -152,7 +163,8 @@ function footer() {
 <span class="eho">Equal Housing Opportunity</span>
 <span>Quinby Partners · Minnesota real estate brokerage license ${BROKER_LICENSE}</span>
 <span>Est. 2012 · © ${new Date().getFullYear()} Quinby Partners</span>
-</div></div></footer>`;
+</div></div></footer>
+<dialog id="db-dialog" class="soon-dialog" aria-labelledby="dbpop-band"><button class="dialog-close" type="button" aria-label="Close">×</button>${dbSoon('dbpop')}</dialog>`;
 }
 
 const ORG = {
@@ -397,7 +409,6 @@ page({
 <p>For more than 15 years, Becky has guided buyers and sellers through the Twin Cities' most storied neighborhoods. Her particular expertise is historic homes and urban living: the craftsmanship, character, and city-rooted lifestyle that make these properties singular, and the nuances of buying, preparing, and marketing them well.</p>
 <p>Her perspective is hands-on. Becky has bought, renovated, and lived in homes spanning nearly a century of Minneapolis architecture, from a 1938 two-story in Kingfield to a 1916 Craftsman in East Harriet to the 1928 Cape Cod in Edina she is restoring today. She also owns and restores a portfolio of historic investment properties, including a Shenandoah Terrace fourplex and a Nokomis duplex. She knows which details carry a home's value and which improvements earn their return at sale.</p>
 <p>Becky is also the founder of Onward, a platform that amplifies businesses who give back through their work and partners with nonprofits to generate more fundraising for the causes they serve. It's the same conviction behind Quinby Partners' giving model, extended to professionals across industries.</p>
-<p>In 2027 she launches <a href="/doing-better">Doing Better</a>, a podcast featuring conversations with nonprofit leaders, purpose-driven professionals, and community partners about building work that does well and does good.</p>
 <p>Becky lives in Edina with her wife, Gracie, and their four children, Millie, Alma, Fitz, and Arthur. Away from work, you'll find her at every kids' activity imaginable, on the golf course, or pursuing her newest passion, tennis.</p>
 <p style="margin-top:36px"><a class="btn" href="/work-with-us">Meet with Becky</a></p>
 </div></div></section>`,
@@ -722,16 +733,6 @@ if (PUB_LIVE) page({
 ${ctaBand('Know a home that belongs here?', 'We feature homes with their owners’ permission, and never share addresses.', '/contact', 'Nominate a home')}`,
 });
 
-// Doing Better
-page({
-  path: '/doing-better', title: 'Doing Better | A Podcast with Becky Quinby',
-  description: 'Doing Better, coming in 2027, is Becky Quinby’s podcast with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.',
-  bandsOn: false,
-  body: `<section class="section pine"><div class="wrap db-grid solo">
-${dbSoon('page')}
-</div></section>`,
-});
-
 // Neighborhoods hub
 page({
   path: '/neighborhoods', title: 'Neighborhoods | Historic & Architectural Homes in Minneapolis, St. Paul, Edina & Golden Valley',
@@ -956,7 +957,7 @@ ${group((p) => ['/architecture-design', '/the-collection', PUB_PATH].includes(p)
 ${group((p) => p.startsWith('/neighborhoods'))}
 
 ## Optional
-${group((p) => p === '/doing-better' || p === '/contact')}
+${group((p) => p === '/contact')}
 `);
 
 console.log(`Built ${pages.length} pages to ${OUT}`);
