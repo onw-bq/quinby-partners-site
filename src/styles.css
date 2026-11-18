@@ -344,3 +344,4 @@ details.faq p { margin: 14px 0 0; font-size: 16px; }
 .path-body .mini-steps { margin-top: 28px; }
 .path-body .mini-steps li:first-child { border-top: 0; }
 .path-body .link::after { content: " →"; }
+@media (max-width: 1300px) { .nav a:last-child, .has-hero .nav a.contact:last-child { border-bottom: 0; } }
