@@ -355,7 +355,7 @@ ${HOODS.map((h) => `<li><a href="/neighborhoods/${h.slug}"><span class="n">${h.n
 ${GIFTS.slice(0, 4).map(giftRow).join('\n')}
 </ul></div></div></section>`,
   faqs: [
-    ['What kinds of homes does Quinby Partners specialize in?', 'Homes with character, from every era: Craftsman bungalows and mid-century moderns, the Tudors and Mediterraneans that line Minnehaha Creek, artists’ lofts like the Bookmen Lofts, and pieces of history along Lake Minnetonka. We work with every kind of home and every price point.'],
+    ['What kinds of homes does Quinby Partners specialize in?', 'Homes with character, from every era: Craftsman bungalows and mid-century moderns, the Tudors and Mediterraneans that line Minnehaha Creek, artists’ lofts, and pieces of history along Lake Minnetonka. We work with every kind of home and every price point.'],
     ['Where does Quinby Partners work?', 'Across the Twin Cities. Minneapolis, St. Paul, Edina and Golden Valley are especially rich in original architecture, and that’s where much of our work is.'],
     ['Does Quinby Partners give back?', 'Yes. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses.'],
   ],
