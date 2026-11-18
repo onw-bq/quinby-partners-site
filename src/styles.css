@@ -299,7 +299,7 @@ details.faq p { margin: 14px 0 0; font-size: 16px; }
 .db-card h2 { margin-top: 0; }
 .soon-card { min-width: 0; background: var(--ivory); color: var(--navy); padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; border-top: 3px solid var(--brass); }
 .soon-card .eyebrow { color: var(--brass-text); }
-.soon-card h3 { font-size: clamp(28px, 2.6vw, 38px); margin: 4px 0 16px; }
+.soon-card h2, .soon-card h3 { font-size: clamp(28px, 2.6vw, 38px); margin: 4px 0 16px; }
 .soon-card p { font-size: 16px; }
 .soon-card .lead-form input { border: 1px solid var(--stone); background: var(--white); color: var(--navy); padding: 14px 16px; font: inherit; flex: 1 1 200px; }
 .soon-card .lead-form button { background: var(--navy); color: var(--ivory); border: 0; padding: 14px 20px; font: inherit; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; min-height: 44px; }

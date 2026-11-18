@@ -101,31 +101,26 @@ function bands() {
 <div class="grid">
 ${[regCard(PUBLICATION.feature, 'This month\'s feature'), ...(PUBLICATION.register || []).slice(0, 2).map((r) => regCard(r, 'From the Register'))].join('\n')}
 </div></div></section>` : '';
-  const pubCard = PUB_LIVE ? '' : `<div class="soon-card">
-<p class="eyebrow">Coming in 2027</p>
-<h3>A new publication from Quinby Partners</h3>
-<p>Stories of the Twin Cities’ most remarkable homes: their design, their makers and the people who care for them.</p>
-<form class="lead-form inline" action="/api/lead" method="post" data-thanks="You’re on the list. We’ll let you know when the first issue arrives.">
-<input type="hidden" name="tags" value="publication: waitlist"><input type="hidden" name="source" value="Publication waitlist">
-<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
-<label class="skip" for="soon-email">Email address</label>
-<input id="soon-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
-<button type="submit">Be the first to read it</button>
-<p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
-</form></div>`;
   return `${pubSection}
 <section class="section pine tight" aria-labelledby="db-band">
-<div class="wrap db-grid${PUB_LIVE ? ' solo' : ''}">
-<div class="db-card">
-<div class="media plain" style="aspect-ratio:16/9;background:var(--navy)"><p class="label">Latest episode · YouTube</p></div>
-<p class="eyebrow" style="margin-top:28px">The podcast</p>
-<h2 id="db-band">Doing Better</h2>
-<p style="margin-top:14px">Becky's conversations with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.</p>
-<p style="margin-top:22px"><a class="link" href="/doing-better">Listen</a></p>
-</div>
-${pubCard}
+<div class="wrap db-grid solo">
+${dbSoon('db')}
 </div></section>`;
 }
+
+// Doing Better is coming in 2027: one card, used in the band and on its page
+const dbSoon = (id) => `<div class="soon-card">
+<p class="eyebrow">Coming in 2027</p>
+<h2 id="${id}-band">Doing Better</h2>
+<p>A podcast with Becky Quinby: conversations with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.</p>
+<form class="lead-form inline" action="/api/lead" method="post" data-thanks="You’re on the list. We’ll let you know when the first episode arrives.">
+<input type="hidden" name="tags" value="doing better: waitlist"><input type="hidden" name="source" value="Doing Better waitlist">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="skip" for="${id}-email">Email address</label>
+<input id="${id}-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+<button type="submit">Tell me when it launches</button>
+<p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
+</form></div>`;
 
 function footer() {
   return `<footer class="site-footer"><div class="wrap">
@@ -147,7 +142,7 @@ function footer() {
 <p>${ADDRESS.join('<br>')}<br><a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a><br><a href="mailto:${EMAIL}">${EMAIL}</a></p>
 </div>
 <div class="col">
-<p><a href="/work-with-us">Work with us</a><br><a href="/selling">Selling</a><br><a href="/buying">Buying</a><br><a href="/neighborhoods">Neighborhoods</a><br><a href="/doing-better">Doing Better podcast</a><br><a href="/contact">Contact</a><br><a href="/about/becky-quinby">Becky Quinby</a> · <a href="/about/elena-quinby">Elena Quinby</a></p>
+<p><a href="/work-with-us">Work with us</a><br><a href="/selling">Selling</a><br><a href="/buying">Buying</a><br><a href="/neighborhoods">Neighborhoods</a><br><a href="/doing-better">Doing Better</a> (coming 2027)<br><a href="/contact">Contact</a><br><a href="/about/becky-quinby">Becky Quinby</a> · <a href="/about/elena-quinby">Elena Quinby</a></p>
 </div>
 <div class="col">
 <p>Onward Impact Partner<br>$1,000 to a nonprofit you choose at every closing</p>
@@ -397,7 +392,7 @@ page({
 <p>For more than 15 years, Becky has guided buyers and sellers through the Twin Cities' most storied neighborhoods. Her particular expertise is historic homes and urban living: the craftsmanship, character, and city-rooted lifestyle that make these properties singular, and the nuances of buying, preparing, and marketing them well.</p>
 <p>Her perspective is hands-on. Becky has bought, renovated, and lived in homes spanning nearly a century of Minneapolis architecture, from a 1938 two-story in Kingfield to a 1916 Craftsman in East Harriet to the 1928 Cape Cod in Edina she is restoring today. She also owns and restores a portfolio of historic investment properties, including a Shenandoah Terrace fourplex and a Nokomis duplex. She knows which details carry a home's value and which improvements earn their return at sale.</p>
 <p>Becky is also the founder of Onward, a platform that amplifies businesses who give back through their work and partners with nonprofits to generate more fundraising for the causes they serve. It's the same conviction behind Quinby Partners' giving model, extended to professionals across industries.</p>
-<p>She is the host of <a href="/doing-better">Doing Better</a>, a podcast featuring conversations with nonprofit leaders, purpose-driven professionals, and community partners about building work that does well and does good.</p>
+<p>In 2027 she launches <a href="/doing-better">Doing Better</a>, a podcast featuring conversations with nonprofit leaders, purpose-driven professionals, and community partners about building work that does well and does good.</p>
 <p>Becky lives in Edina with her wife, Gracie, and their four children, Millie, Alma, Fitz, and Arthur. Away from work, you'll find her at every kids' activity imaginable, on the golf course, or pursuing her newest passion, tennis.</p>
 <p style="margin-top:36px"><a class="btn" href="/work-with-us">Meet with Becky</a></p>
 </div></div></section>`,
@@ -685,13 +680,11 @@ ${ctaBand('Know a home that belongs here?', 'We feature homes with their owners�
 // Doing Better
 page({
   path: '/doing-better', title: 'Doing Better | A Podcast with Becky Quinby',
-  description: 'Doing Better is Becky Quinby’s podcast with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.',
+  description: 'Doing Better, coming in 2027, is Becky Quinby’s podcast with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.',
   bandsOn: false,
-  body: `<section class="section pine"><div class="wrap split" style="align-items:center">
-<div class="main"><p class="eyebrow">The podcast</p><h1>Doing Better</h1><p style="margin-top:24px;max-width:600px">Conversations with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good. Hosted by Becky Quinby.</p></div>
-<div class="side"><div class="media plain" style="aspect-ratio:16/9;background:var(--navy)"><p class="label">Latest episode · YouTube embed</p></div></div>
-</div></section>
-<section class="section"><div class="wrap"><p class="eyebrow">Episodes</p><ul class="rows">${[1, 2, 3].map(() => `<li><div class="row"><span class="n">[Episode title]</span><span class="m">[Guest] · [Date]</span></div></li>`).join('')}</ul></div></section>`,
+  body: `<section class="section pine"><div class="wrap db-grid solo">
+${dbSoon('page')}
+</div></section>`,
 });
 
 // Neighborhoods hub
