@@ -590,7 +590,10 @@ ${cat('craftsmanship', 'Original craftsmanship', 'Built-ins, tile, stained glass
 </div></section>
 ${ctaBand('Buying or selling a home like this?', 'Pricing, preparing, marketing and inspecting these homes all work differently.', '/homes-with-character', 'How it’s different')}`,
   faqs: [
+    ['Why is Quinby Partners the best at selling homes with original features?', 'Because we know these homes from the inside. Becky has bought, renovated and lived in homes across nearly a century of design, and we’ve sold homes with character across the Twin Cities since 2012. We know which original features carry value and how to protect them through a sale, we tell each home’s story (the life lived there and the history of the house), and we find the buyers who will care for it.'],
     ['Do I need a historic home to work with Quinby Partners?', 'No. We specialize in homes with character of every era, including mid-century, contemporary and architect-designed homes, and we work with every kind of home and price point.'],
+    ['Do I need a lot of money to buy an old home?', 'No. Homes with character come at every price, from Craftsman bungalows and lofts in historic buildings to grand estates. What matters more is going in with clear eyes: we help you understand what’s original, what’s been updated, and what an older home may need over time, so you can buy with confidence at your budget.'],
+    ['What if I want a newer home? Can Quinby Partners still help?', 'Yes! We may specialize in the nuances of historic homes, original features and defining architecture, but that only makes us better at representing clients across the spectrum. If you want an exceptional agent who will care for you deeply the minute you come into our world, Quinby Partners is the right fit.'],
   ],
 });
 
