@@ -341,3 +341,6 @@ details.faq p { margin: 14px 0 0; font-size: 16px; }
 .soon-dialog[open] { animation: pathIn .35s ease both; }
 .soon-card h2 em { font-style: italic; font-size: clamp(40px, 4vw, 56px); }
 .soon-card .pub-from { font-family: var(--serif); font-size: 19px; margin: -6px 0 14px; }
+.path-body .mini-steps { margin-top: 28px; }
+.path-body .mini-steps li:first-child { border-top: 0; }
+.path-body .link::after { content: " →"; }
