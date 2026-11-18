@@ -208,6 +208,7 @@ content:
     path: content/settings.json
     fields:
       - { name: publicationName, label: Publication name, type: string }
+      - { name: publicationLive, label: "Publication is live (shows it in the menu, on pages and in the footer band)", type: boolean }
       - { name: phone, label: Phone, type: string }
       - { name: email, label: Email, type: string }
 

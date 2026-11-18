@@ -15,6 +15,8 @@ const TESTIMONIALS = load('testimonials').testimonials || [];
 const PUBLICATION = load('publication');
 const PUB = SETTINGS.publicationName || '[Publication name]';
 const PUB_PATH = '/journal';               // the publication's address on the site
+const PUB_LIVE = SETTINGS.publicationLive === true; // off until the publication launches: hidden from menu, pages and copy
+const PUBS = PUB_LIVE ? 'our publication, newsletter' : 'our newsletter'; // used in copy
 const PHONE = SETTINGS.phone;
 const EMAIL = SETTINGS.email;
 const ADDRESS = ['1250 Wayzata Blvd E, Unit 1910', 'Wayzata, MN 55391'];
@@ -53,7 +55,7 @@ const NAV = [
   ['The Collection', '/the-collection'],
   ['Neighborhoods', '/neighborhoods'],
   ['Architecture & Design', '/architecture-design'],
-  [PUB, PUB_PATH],
+  ...(PUB_LIVE ? [[PUB, PUB_PATH]] : []),
   ['Why Quinby Partners', '/why-quinby-partners'],
   ['Giving', '/giving'],
 ];
@@ -89,7 +91,7 @@ ${sub ? `<p class="sub">${sub}</p>` : ''}</div>${m.close}`;
 function band(key, label) { const m = media(key, label); return m.open + m.close; }
 
 function bands() {
-  return `<section class="section white" aria-labelledby="pub-band">
+  const pubSection = PUB_LIVE ? `<section class="section white" aria-labelledby="pub-band">
 <div class="wrap">
 <div class="head-row"><div>
 <p class="eyebrow">Our publication · Online</p>
@@ -98,16 +100,31 @@ function bands() {
 </div><a class="link" href="${PUB_PATH}">Read the latest</a></div>
 <div class="grid">
 ${[regCard(PUBLICATION.feature, 'This month\'s feature'), ...(PUBLICATION.register || []).slice(0, 2).map((r) => regCard(r, 'From the Register'))].join('\n')}
-</div></div></section>
+</div></div></section>` : '';
+  const pubCard = PUB_LIVE ? '' : `<div class="soon-card">
+<p class="eyebrow">Coming in 2027</p>
+<h3>A new publication from Quinby Partners</h3>
+<p>Stories of the Twin Cities’ most remarkable homes: their design, their makers and the people who care for them.</p>
+<form class="lead-form inline" action="/api/lead" method="post" data-thanks="You’re on the list. We’ll let you know when the first issue arrives.">
+<input type="hidden" name="tags" value="publication: waitlist"><input type="hidden" name="source" value="Publication waitlist">
+<div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="skip" for="soon-email">Email address</label>
+<input id="soon-email" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+<button type="submit">Be the first to read it</button>
+<p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
+</form></div>`;
+  return `${pubSection}
 <section class="section pine tight" aria-labelledby="db-band">
-<div class="wrap split" style="align-items:center">
-<div class="side" style="flex:1 1 420px"><div class="media plain" style="aspect-ratio:16/9;background:var(--navy)"><p class="label">Latest episode · YouTube</p></div></div>
-<div class="main" style="flex:1 1 420px">
-<p class="eyebrow">The podcast</p>
+<div class="wrap db-grid${PUB_LIVE ? ' solo' : ''}">
+<div class="db-card">
+<div class="media plain" style="aspect-ratio:16/9;background:var(--navy)"><p class="label">Latest episode · YouTube</p></div>
+<p class="eyebrow" style="margin-top:28px">The podcast</p>
 <h2 id="db-band">Doing Better</h2>
-<p style="margin-top:18px">Becky's conversations with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.</p>
-<p style="margin-top:26px"><a class="link" href="/doing-better">Listen</a></p>
-</div></div></section>`;
+<p style="margin-top:14px">Becky's conversations with nonprofit leaders, purpose-driven professionals and community partners about building work that does well and does good.</p>
+<p style="margin-top:22px"><a class="link" href="/doing-better">Listen</a></p>
+</div>
+${pubCard}
+</div></section>`;
 }
 
 function footer() {
@@ -269,7 +286,7 @@ page({
 <div style="margin-top:80px">${values}</div>
 </div></section>
 
-<section class="feature" aria-labelledby="feat-h">
+${PUB_LIVE ? `<section class="feature" aria-labelledby="feat-h">
 ${featureImg(PUBLICATION.feature.photo, 'Photo · one editorial image of this month\'s featured home')}
 <div class="wrap feature-cap">
 <p class="eyebrow">From ${esc(PUB)} · This month</p>
@@ -277,7 +294,7 @@ ${featureImg(PUBLICATION.feature.photo, 'Photo · one editorial image of this mo
 <p class="meta caps">${metaLine(PUBLICATION.feature.neighborhood, PUBLICATION.feature.year, PUBLICATION.feature.style)}</p>
 <p style="max-width:620px;margin-top:16px">${esc(PUBLICATION.feature.line)}</p>
 <p><a class="link" href="${featureHref()}">Read the feature</a></p>
-</div></section>
+</div></section>` : ''}
 
 <section class="section white"><div class="wrap">
 <div class="head-row"><div><p class="eyebrow">Our listings &amp; recent sales</p><h2>The Collection</h2></div><a class="link" href="/the-collection">View the collection</a></div>
@@ -444,7 +461,7 @@ ${compare('Most listings', 'A Quinby Partners listing', [
 </div></section>`,
   faqs: [
     ['How is selling a one-of-a-kind or architectural home different?', 'There are few true comparables, so value lives in the details. It takes knowing which features to protect, which updates pay back, how to tell the story of the home\'s design and craftsmanship, and how long it may take to find the right buyer.'],
-    ['How does Quinby Partners market a home?', 'With a researched house biography, editorial photography and short films, and a multi-week campaign through our publication, newsletter, social media and the MLS.'],
+    ['How does Quinby Partners market a home?', `With a researched house biography, editorial photography and short films, and a multi-week campaign through ${PUBS}, social media and the MLS.`],
   ],
 });
 
@@ -458,12 +475,12 @@ ${rollLine(HOME.buyingLine.first, HOME.buyingLine.phrases, 'What we help buyers 
 <div class="grid">
 ${principle('I.', 'We see what makes a home special', 'Original woodwork, a butler’s pantry, a mid-century window wall. We know which details are rare, which carry value, and which are worth protecting.')}
 ${principle('II.', 'We see what it will take', 'Older and architect-designed homes come with their own questions: systems, inspections, insurance, restoration costs and historic district rules. We help you walk in knowing the real picture.')}
-${principle('III.', 'We hear about homes early', 'Through our publication, our neighborhoods and the architects and builders we work with, we often know owners who are thinking about selling.')}
+${principle('III.', 'We hear about homes early', 'Through our newsletter, our neighborhoods and the architects and builders we work with, we often know owners who are thinking about selling.')}
 </div></div></section>
 <section class="section white"><div class="wrap"><p class="eyebrow">The process</p><h2 style="margin-bottom:52px">From first showing to closing</h2>
 <ol class="steps">
 ${step('I.', 'Start with what you love', 'Styles, eras, details and neighborhoods. Save photos of homes, rooms and details you love, and our photo search finds homes on the market that match them.')}
-${step('II.', 'Hear about homes early', 'Owners we know through our publication, our neighborhoods and our architect and builder partners, plus everything on the MLS.')}
+${step('II.', 'Hear about homes early', 'Owners we know through our newsletter, our neighborhoods and our architect and builder partners, plus everything on the MLS.')}
 ${step('III.', 'Tour with an expert eye', 'We point out what’s original, what’s been changed, and what each detail means for value and upkeep.')}
 ${step('IV.', 'Know the real costs', 'Inspectors who specialize in older homes, realistic restoration budgets, insurance questions and any historic district rules, before you write an offer.')}
 ${step('V.', 'Write a strong offer', 'Clear pricing advice for homes with few true comparables, and steady negotiation at the table.')}
@@ -613,13 +630,13 @@ page({
 <li><strong>Your team:</strong> introductions to architects, designers and builders who know homes like yours.</li>
 </ul>
 <h2>How we work with these homes</h2>
-<p>Becky has bought, renovated and lived in homes across nearly a century of design, and Elena’s background in film and advertising shapes how we show every home. Our publication, <a href="${PUB_PATH}">${esc(PUB)}</a>, reaches buyers who care about design and craftsmanship. And at every closing, we give $1,000 to a nonprofit you choose.</p>
+<p>Becky has bought, renovated and lived in homes across nearly a century of design, and Elena’s background in film and advertising shapes how we show every home.${PUB_LIVE ? ` Our publication, <a href="${PUB_PATH}">${esc(PUB)}</a>, reaches buyers who care about design and craftsmanship.` : ' Our newsletter reaches buyers who care about design and craftsmanship.'} And at every closing, we give $1,000 to a nonprofit you choose.</p>
 </div></div></section>
 ${ctaBand('Let’s talk about your home.', null, '/work-with-us', 'Work with us')}`,
   faqs: [
     ['How do you price a one-of-a-kind home?', 'One-of-a-kind homes have few true comparables, so pricing depends on the details: the design, materials and craftsmanship, the condition of the home and its systems, and how it compares with the few homes like it. We price from that knowledge rather than square footage alone.'],
     ['What makes a home architecturally significant?', 'A clear design vision, often from a named architect, carried through in the layout, materials and details. It can be a home from any era, including mid-century and contemporary homes.'],
-    ['How do you find buyers for unique homes?', 'With a story about the home’s design and makers, editorial photography and film, and a multi-week campaign through our publication, newsletter, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.'],
+    ['How do you find buyers for unique homes?', `With a story about the home’s design and makers, editorial photography and film, and a multi-week campaign through ${PUBS}, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.`],
     ['Should I update my home before selling?', 'Sometimes. Some updates add value; others remove the features buyers of homes with character are looking for. We help you decide what to fix and what to protect.'],
   ],
 });
@@ -647,8 +664,8 @@ ${COLLECTION.slice(1).map((h, i) => homeCard(h, i + 1)).join('\n')}
 ${ctaBand('Should your home be in the collection?', 'We’d love to see it, hear its story, and help find its next stewards: the people who will love it and care for it as much as you have.', '/selling', 'How we market your home')}`,
 });
 
-// Publication
-page({
+// Publication (built only once it launches)
+if (PUB_LIVE) page({
   path: PUB_PATH, title: `${PUB} | Remarkable Homes of the Twin Cities`,
   description: 'Stories of the Twin Cities’ most remarkable homes, their architecture, their makers and the people who care for them, from Quinby Partners.',
   bandsOn: false,
@@ -770,7 +787,7 @@ ${others.length ? `<section class="section"><div class="wrap"><p class="eyebrow"
 }
 
 COLLECTION.filter((h) => h.slug).forEach((h, i) => storyPage(h, { pathPrefix: '/the-collection', eyebrow: `The Collection · No. ${String(i + 1).padStart(2, '0')}`, list: COLLECTION, kind: 'collection' }));
-if (PUBLICATION.feature && PUBLICATION.feature.slug) storyPage(PUBLICATION.feature, { pathPrefix: PUB_PATH, eyebrow: `${esc(PUB)} · This month’s feature`, list: [], kind: 'publication' });
+if (PUB_LIVE && PUBLICATION.feature && PUBLICATION.feature.slug) storyPage(PUBLICATION.feature, { pathPrefix: PUB_PATH, eyebrow: `${esc(PUB)} · This month’s feature`, list: [], kind: 'publication' });
 
 // ---------- the flip book: private, full-screen pages (not in the sitemap, hidden from search) ----------
 const BOOK = load('book');

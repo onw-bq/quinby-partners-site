@@ -292,3 +292,18 @@ details.faq p { margin: 14px 0 0; font-size: 16px; }
 .bpage.end .form button { margin-top: 8px; }
 .bpage.end h2 { margin-bottom: 8px; }
 .bpage.end p { margin-bottom: 14px; }
+
+/* Doing Better band with the publication's coming-soon card */
+.db-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: stretch; }
+.db-grid.solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.db-card h2 { margin-top: 0; }
+.soon-card { min-width: 0; background: var(--ivory); color: var(--navy); padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; border-top: 3px solid var(--brass); }
+.soon-card .eyebrow { color: var(--brass-text); }
+.soon-card h3 { font-size: clamp(28px, 2.6vw, 38px); margin: 4px 0 16px; }
+.soon-card p { font-size: 16px; }
+.soon-card .lead-form input { border: 1px solid var(--stone); background: var(--white); color: var(--navy); padding: 14px 16px; font: inherit; flex: 1 1 200px; }
+.soon-card .lead-form button { background: var(--navy); color: var(--ivory); border: 0; padding: 14px 20px; font: inherit; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; min-height: 44px; }
+.soon-card .lead-form.sent .form-status { color: var(--pine); }
+.pine .soon-card a { color: var(--navy); }
+@media (max-width: 900px) { .db-grid { grid-template-columns: minmax(0, 1fr); } .soon-card { padding: 36px 28px; } }
+.lead-form.inline input { min-width: 0; width: 100%; }
