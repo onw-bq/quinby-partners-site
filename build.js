@@ -165,7 +165,7 @@ const ORG = {
   email: EMAIL,
   slogan: 'We find passionate buyers for homes with character.',
   foundingDate: '2012',
-  description: 'Quinby Partners is an independent, woman-owned real estate brokerage in the Twin Cities specializing in historic, architect-designed and one-of-a-kind homes. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses.',
+  description: 'Quinby Partners is an independent, woman-owned real estate brokerage in the Twin Cities specializing in historic, architect-designed and original homes. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses.',
   address: { '@type': 'PostalAddress', streetAddress: ADDRESS[0], addressLocality: 'Wayzata', addressRegion: 'MN', postalCode: '55391', addressCountry: 'US' },
   areaServed: ['Minneapolis, MN', 'St. Paul, MN', 'Edina, MN', 'Golden Valley, MN'].map((n) => ({ '@type': 'City', name: n })),
   knowsAbout: ['Historic homes', 'Architecturally significant homes', 'Mid-century modern homes', 'Architect-designed homes', 'Selling historic homes', 'Buying historic homes'],
@@ -262,8 +262,8 @@ const HOODS = load('neighborhoods').neighborhoods.map((h) => ({ ...h, video: h.s
 
 // Home
 page({
-  path: '/', title: 'Quinby Partners | Homes with Character: Historic, Architectural & One-of-a-Kind in the Twin Cities',
-  description: 'Quinby Partners is an independent, woman-owned Twin Cities brokerage for historic, architect-designed and one-of-a-kind homes. We find passionate buyers for homes with character.',
+  path: '/', title: 'Quinby Partners | Homes with Character: Historic, Architectural & Original Homes in the Twin Cities',
+  description: 'Quinby Partners is an independent, woman-owned Twin Cities brokerage for historic, architect-designed and original homes. We find passionate buyers for homes with character.',
   body: `${hero('home', 'slow pan up a carved oak staircase, morning light', { eyebrow: esc(HOME.heroEyebrow), title: esc(HOME.heroTitle), sub: esc(HOME.heroSub) })}
 
 <section class="section we-sell" aria-label="What we sell"><div class="wrap center">
@@ -312,7 +312,7 @@ ${(() => { const m = media('architecture', 'a mix: leaded glass, a mid-century w
 <a class="link" href="/architecture-design#contemporary">Contemporary</a>
 <a class="link" href="/architecture-design#architect-designed">Architect-designed</a>
 <a class="link" href="/architecture-design#art-lovers">Homes for art lovers</a>
-<a class="link" href="/architecture-design#craftsmanship">One-of-a-kind craftsmanship</a>
+<a class="link" href="/architecture-design#craftsmanship">Original craftsmanship</a>
 </p>
 <p style="margin-top:36px;color:var(--stone)">Buying or selling one? <a href="/homes-with-character">Here's how it's different.</a></p>
 </div>${m.close}</section>`; })()}
@@ -420,21 +420,21 @@ const compare = (a, b, rows) => `<div class="table-wrap"><table class="compare">
 
 page({
   path: '/selling', title: 'Selling a Home with Character | How Quinby Partners Markets Your Home',
-  description: 'Quinby Partners markets historic, architect-designed and one-of-a-kind homes like works of art: house biographies, editorial photography and film, and a multi-week campaign to find the passionate buyer.',
-  body: `${hero('selling', 'a hand on an original newel post, then light across a parquet floor', { eyebrow: 'Selling with Quinby Partners', title: 'Your home is a work of art. We market it like one.', sub: 'We tell the story of its craftsmanship and history, and we look for the buyer who will love it as much as you have.' })}
+  description: 'Quinby Partners markets homes with character like works of art: the home’s story, editorial photography and film, and a multi-week campaign to find the passionate buyer.',
+  body: `${hero('selling', 'a hand on an original newel post, then light across a parquet floor', { eyebrow: 'Selling with Quinby Partners', title: 'Your home is a work of art. We market it like one.', sub: 'We tell its story, your life in it and its history, and we look for the buyer who will love it as much as you have.' })}
 ${rollLine(HOME.sellingLine.first, HOME.sellingLine.phrases, 'What we do for sellers')}
 <section class="section"><div class="wrap"><p class="eyebrow" style="margin-bottom:48px">How we think about selling</p>
 <div class="grid">
 ${principle('I.', 'A piece of art, not a listing', 'We present your home the way a museum presents a work: carefully lit, carefully framed, with the details given room to be seen.')}
-${principle('II.', 'The house\'s story, told well', 'Who designed it, who built it, what has changed and what has been kept. Craftsmanship and history are what set a home like yours apart, so they lead.')}
-${principle('III.', 'Its next stewards, not just any buyer', 'A one-of-a-kind home needs people who see what it is and will care for it. We go looking for them, through our readers, our neighborhoods, and the architects and builders we work with.')}
+${principle('II.', 'Your home’s story, told well', 'We’re storytellers. Your life in the house and the house’s own history, from the people who built it to the way you’ve lived in it, are what set a home like yours apart, so they lead.')}
+${principle('III.', 'Its next stewards, not just any buyer', 'An original home needs people who see what it is and will care for it. We go looking for them, through our readers, our neighborhoods, and the architects and builders we work with.')}
 </div></div></section>
-<section class="section white"><div class="wrap"><p class="eyebrow">The process</p><h2 style="margin-bottom:52px">From history to closing</h2>
+<section class="section white"><div class="wrap"><p class="eyebrow">The process</p><h2 style="margin-bottom:52px">From story to closing</h2>
 <ol class="steps">
-${step('I.', 'Research the house', 'We dig into its history: the architect or builder, the year and style, original owners, and what has changed. That research becomes the house biography.')}
+${step('I.', 'Learn its story', 'We start with you: what drew you to the house, how you’ve lived in it, the rooms and moments you love. Then we add what we can learn of its history: when it was built, its style, who made it.')}
 ${step('II.', 'Prepare it with care', 'We help you decide which repairs matter and which original features to protect. Some updates add value; some erase the thing buyers are looking for.')}
 ${step('III.', 'Photograph and film it like an editorial', 'Styled, editorial photography and short films of the details, light and rooms, shaped by Elena\'s background in film and advertising.')}
-${step('IV.', 'Write the house biography', 'A printed piece at every showing, a story on our site and in The Front Porch, and the backbone of every post.')}
+${step('IV.', 'Tell the story', 'Your home’s story becomes a printed piece at every showing, a story on our site and in The Front Porch, and the thread through every post.')}
 ${step('V.', 'Run a campaign, not a launch', 'Several weeks of fresh angles: the reveal, the history, the details, the house through the seasons, the neighborhood around it.')}
 ${step('VI.', 'Find its next stewards', 'Our readers and followers, buyers looking for homes like yours, and the architects and design-builders we partner with, plus every agent through the MLS. We look for the people who will love it and care for it.')}
 ${step('VII.', 'Close, and give back', 'At closing, Quinby Partners gives $1,000 to a nonprofit you choose.')}
@@ -443,7 +443,7 @@ ${band('listing-film', 'sample listing film, 30–60 seconds')}
 <section class="section"><div class="wrap"><p class="eyebrow">The difference</p><h2 style="margin-bottom:44px">A typical listing, and ours</h2>
 ${compare('Most listings', 'A Quinby Partners listing', [
   ['Photos on day one, the same for every house', 'An editorial shoot and short films of the details'],
-  ['Bedrooms, baths and square footage', 'The house\'s story: its design, its makers, its history'],
+  ['Bedrooms, baths and square footage', 'The home’s story: the life lived there and its history'],
   ['A one-week launch, then waiting', 'A multi-week campaign with a new angle each week'],
   ['As many buyers as possible', 'Its next stewards: the people who will love it and care for it most'],
   ['Original features listed as “dated”', 'Original features presented as what they are: craftsmanship'],
@@ -455,8 +455,8 @@ ${compare('Most listings', 'A Quinby Partners listing', [
 <div class="side">${consultForm('seller-consult')}</div>
 </div></section>`,
   faqs: [
-    ['How is selling a one-of-a-kind or architectural home different?', 'There are few true comparables, so value lives in the details. It takes knowing which features to protect, which updates pay back, how to tell the story of the home\'s design and craftsmanship, and how long it may take to find the right buyer.'],
-    ['How does Quinby Partners market a home?', `With a researched house biography, editorial photography and short films, and a multi-week campaign through ${PUBS}, social media and the MLS.`],
+    ['How is selling an original or architectural home different?', 'There are few true comparables, so value lives in the details and in the story. It takes knowing which features to protect, which updates pay back, how to tell the home’s story (the life lived there and the history of the house), and how long it may take to find its next stewards.'],
+    ['How does Quinby Partners market a home?', `With the home’s story, editorial photography and short films, and a multi-week campaign through ${PUBS}, social media and the MLS.`],
   ],
 });
 
@@ -521,7 +521,7 @@ page({
   body: `<section class="section"><div class="wrap">
 <p class="eyebrow">Work with us</p><h1 style="max-width:900px">Let's talk about your home, or the one you're looking for.</h1>
 <div class="grid" style="margin-top:72px">
-<div class="principle"><p class="num">Selling</p><h3>Your home is a work of art.</h3><p>House biographies, editorial photography and film, and a campaign to find its next stewards.</p><p><a class="link" href="/selling">How we market your home</a></p></div>
+<div class="principle"><p class="num">Selling</p><h3>Your home is a work of art.</h3><p>Your home’s story, editorial photography and film, and a campaign to find its next stewards.</p><p><a class="link" href="/selling">How we market your home</a></p></div>
 <div class="principle"><p class="num">Buying</p><h3>Find the home you'll love for its details.</h3><p>An expert eye on every home, the real costs up front, and owners we know before they list.</p><p><a class="link" href="/buying">Buying with us</a></p></div>
 </div>
 <div style="margin-top:80px;max-width:640px">${consultForm('consult')}</div>
@@ -574,7 +574,7 @@ ${GIFTS.map((g) => `<tr><td class="typ">${esc(g.month)}</td><td class="ours">${e
 const cat = (id, t, b) => `<section id="${id}" class="principle" style="scroll-margin-top:24px"><h3>${t}</h3><p>${b}</p></section>`;
 page({
   path: '/architecture-design', title: 'Architecture & Design | Historic, Mid-Century, Contemporary & Architect-Designed Homes',
-  description: 'Quinby Partners specializes in homes with a point of view: historic, mid-century modern, contemporary, architect-designed and one-of-a-kind homes across the Twin Cities.',
+  description: 'Quinby Partners specializes in homes with a point of view: historic, mid-century modern, contemporary, architect-designed and original homes across the Twin Cities.',
   body: `${hero('architecture-hub', 'details across eras: plaster, teak, glass', { eyebrow: 'Architecture & Design', title: 'Homes with a point of view, from 1905 to last year.', sub: 'It’s the architecture and character that make a home singular, not its age or its price.', short: true })}
 <section class="section"><div class="wrap grid">
 ${cat('historic', 'Historic', 'Prewar homes that are strong examples of their style: Tudor Revival, Craftsman, Prairie School, Colonial Revival and Victorian homes, with the woodwork, plaster and leaded glass that make them singular.')}
@@ -582,7 +582,7 @@ ${cat('modern', 'Mid-century & Modern', 'Homes from the 1940s to the 1970s and t
 ${cat('contemporary', 'Contemporary', 'New homes with real design ambition: architect-led, carefully detailed and built to last.')}
 ${cat('architect-designed', 'Architect-designed', 'Homes from any era with a named architect behind them, and a design worth understanding before you buy or sell.')}
 ${cat('art-lovers', 'Homes for art lovers', 'Gallery walls, good natural light, studios, ceiling height and room to live with a collection.')}
-${cat('craftsmanship', 'One-of-a-kind craftsmanship', 'Built-ins, tile, stained glass, a butler’s pantry, a hidden staircase: the details you won’t find twice.')}
+${cat('craftsmanship', 'Original craftsmanship', 'Built-ins, tile, stained glass, a butler’s pantry, a hidden staircase: the details you won’t find twice.')}
 </div></section>
 ${ctaBand('Buying or selling a home like this?', 'Pricing, preparing, marketing and inspecting these homes all work differently.', '/homes-with-character', 'How it’s different')}`,
   faqs: [
@@ -598,7 +598,7 @@ page({
 <div class="side"><p class="eyebrow">A guide</p><hr class="rule"></div>
 <div class="main prose">
 <h1 style="font-size:clamp(40px,5vw,64px)">Buying and selling homes with character</h1>
-<p class="lede" style="margin-top:28px">One-of-a-kind homes don’t sell like other homes. Whether it was built in 1910, 1960 or last year, a house with real design and craftsmanship needs a different approach. Here’s what’s different, and how we help.</p>
+<p class="lede" style="margin-top:28px">Original homes don’t sell like other homes. Whether it was built in 1910, 1960 or last year, a house with real design and craftsmanship needs a different approach. Here’s what’s different, and how we help.</p>
 <h2>What we mean by a home with character</h2>
 <ul>
 <li><strong>Architect-designed:</strong> homes from any era with a clear design vision behind them.</li>
@@ -611,10 +611,10 @@ page({
 <p>It’s the design and character that make a home singular, not its age or its price.</p>
 <h2>Selling one is different</h2>
 <ul>
-<li><strong>Pricing:</strong> a one-of-a-kind home has few true comparables, so value lives in the details. It takes knowing which features carry value, and how to show buyers why.</li>
+<li><strong>Pricing:</strong> an original home has few true comparables, so value lives in the details. It takes knowing which features carry value, and how to show buyers why.</li>
 <li><strong>Preparing:</strong> some updates add value; others erase exactly what makes the home special. We help you decide what to fix, what to protect and how to present it.</li>
-<li><strong>Marketing:</strong> a story about the home’s design and makers, editorial photography and film, and a multi-week campaign instead of a one-week launch. <a href="/selling">How we market your home.</a></li>
-<li><strong>Its next stewards:</strong> a one-of-a-kind home isn’t for everyone, and that’s the point. We look for the people who will love it and care for it, rather than cutting the price to reach everyone.</li>
+<li><strong>Marketing:</strong> the home’s story, editorial photography and film, and a multi-week campaign instead of a one-week launch. <a href="/selling">How we market your home.</a></li>
+<li><strong>Its next stewards:</strong> an original home isn’t for everyone, and that’s the point. We look for the people who will love it and care for it, rather than cutting the price to reach everyone.</li>
 <li><strong>Disclosures:</strong> including lead-based paint disclosure for homes built before 1978, and any rules that apply to the property.</li>
 </ul>
 <h2>Buying one is different</h2>
@@ -631,7 +631,7 @@ ${ctaBand('Let’s talk about your home.', null, '/work-with-us', 'Work with us'
   faqs: [
     ['How do you price a one-of-a-kind home?', 'One-of-a-kind homes have few true comparables, so pricing depends on the details: the design, materials and craftsmanship, the condition of the home and its systems, and how it compares with the few homes like it. We price from that knowledge rather than square footage alone.'],
     ['What makes a home architecturally significant?', 'A clear design vision, often from a named architect, carried through in the layout, materials and details. It can be a home from any era, including mid-century and contemporary homes.'],
-    ['How do you find buyers for unique homes?', `With a story about the home’s design and makers, editorial photography and film, and a multi-week campaign through ${PUBS}, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.`],
+    ['How do you find buyers for unique homes?', `With the home’s story, editorial photography and film, and a multi-week campaign through ${PUBS}, social media, design partners and the MLS, aimed at the buyers who will value what makes it different.`],
     ['Should I update my home before selling?', 'Sometimes. Some updates add value; others remove the features buyers of homes with character are looking for. We help you decide what to fix and what to protect.'],
   ],
 });
@@ -639,10 +639,10 @@ ${ctaBand('Let’s talk about your home.', null, '/work-with-us', 'Work with us'
 // The Collection
 page({
   path: '/the-collection', title: 'The Collection | Quinby Partners Listings & Recent Sales',
-  description: 'The Collection: historic, architect-designed and one-of-a-kind homes represented by Quinby Partners, each with its own house biography.',
+  description: 'The Collection: historic, architect-designed and original homes represented by Quinby Partners, each with its own story.',
   body: `<section class="section"><div class="wrap">
 <p class="eyebrow">Our listings &amp; recent sales</p><h1>The Collection</h1>
-<p class="lede" style="max-width:820px;margin-top:24px">The homes we’ve been trusted with. Each one comes with its own house biography: its design, its makers and its story.</p>
+<p class="lede" style="max-width:820px;margin-top:24px">The homes we’ve been trusted with. Each one comes with its own story: the people who lived there and the history of the house.</p>
 </div></section>
 <section class="feature" aria-label="Newest in the collection">
 ${featureImg(COLLECTION[0] && COLLECTION[0].photo, 'Photo · newest home in the collection')}
@@ -710,7 +710,7 @@ for (const a of AREAS) {
 ${a.hoods.map(([n, href, line]) => href ? `<li><a href="${href}"><span class="n">${n}</span><span class="m">Neighborhood guide</span><p>${line}</p></a></li>` : `<li><div class="row"><span class="n">${n}</span><p>${line}</p></div></li>`).join('\n')}
 </ul></div></section>
 ${ctaBand(`Buying or selling in ${a.name}?`, null, '/work-with-us', 'Work with us')}`,
-    faqs: [[`Does Quinby Partners work in ${a.name}?`, `Yes. Quinby Partners helps buyers and sellers of historic, architect-designed and one-of-a-kind homes throughout ${a.name}, including ${a.hoods.map((h) => h[0]).filter((n) => !n.startsWith('Mid-') && !n.startsWith('Around')).join(', ')}.`]],
+    faqs: [[`Does Quinby Partners work in ${a.name}?`, `Yes. Quinby Partners helps buyers and sellers of historic, architect-designed and original homes throughout ${a.name}, including ${a.hoods.map((h) => h[0]).filter((n) => !n.startsWith('Mid-') && !n.startsWith('Around')).join(', ')}.`]],
   });
 }
 
@@ -730,7 +730,7 @@ ${band(h.video + '-2', h.clip)}
 ${ctaBand(`Own a home in ${h.name}?`, 'We’d love to hear its story and help find its next stewards, whether you’re selling now or someday.', '/selling', 'How we market your home')}`,
     faqs: [
       [`What kinds of homes are in ${h.name}?`, h.architecture.replace(/ \[.*?\]/g, '')],
-      [`Who is a real estate agent for historic homes in ${h.name}?`, `Quinby Partners is an independent, woman-owned Twin Cities brokerage specializing in historic, architect-designed and one-of-a-kind homes, including in ${h.name}.`],
+      [`Who is a real estate agent for historic homes in ${h.name}?`, `Quinby Partners is an independent, woman-owned Twin Cities brokerage specializing in historic, architect-designed and original homes, including in ${h.name}.`],
     ],
   });
 }
@@ -896,7 +896,7 @@ const line = (p) => `- [${p.title}](${SITE}${p.path === '/' ? '/' : p.path}): ${
 const group = (pre) => pages.filter((p) => !p.noindex && pre(p.path)).map(line).join('\n');
 write('llms.txt', `# Quinby Partners
 
-> Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed, unique and one-of-a-kind homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for homes with character," and the next stewards who will love and care for them. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
+> Quinby Partners is an independent, woman-owned and queer-owned boutique real estate brokerage in the Twin Cities (Minneapolis, St. Paul, Edina and Golden Valley, Minnesota), founded by broker Becky Quinby. It specializes in historic, architecturally significant, mid-century, architect-designed, unique and original homes, and works with every kind of home and price point. Positioning: "We find passionate buyers for homes with character," and the next stewards who will love and care for them. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses. Contact: ${PHONE}, ${EMAIL}.
 
 ## About
 ${group((p) => p === '/' || p === '/why-quinby-partners' || p.startsWith('/about') || p === '/giving')}
