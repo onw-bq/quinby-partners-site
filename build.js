@@ -551,8 +551,8 @@ ${PATHS.map(([id, label], i) => `<button class="path-tab" role="tab" id="tab-${i
 <div class="path-copy">
 ${PATHS.map(([id, , , h, p, steps], i) => `<div class="path-body" data-path="${id}"${i ? ' hidden' : ''}>
 <h3>${h}</h3><p class="lede">${p}</p>
+${{ selling: '<a class="link" href="/selling">How we market your home</a>', buying: '<a class="link" href="/buying">How we help buyers</a>', both: '<a class="link" href="/selling">Selling with us</a> &nbsp; <a class="link" href="/buying">Buying with us</a>' }[id] ? `<p style="margin-top:22px">${{ selling: '<a class="link" href="/selling">How we market your home</a>', buying: '<a class="link" href="/buying">How we help buyers</a>', both: '<a class="link" href="/selling">Selling with us</a> &nbsp; <a class="link" href="/buying">Buying with us</a>' }[id]}</p>` : ''}
 <ol class="mini-steps">${steps.map(([t, d]) => `<li><strong>${t}</strong><span>${d}</span></li>`).join('')}</ol>
-${{ selling: '<a class="link" href="/selling">How we market your home</a>', buying: '<a class="link" href="/buying">How we help buyers</a>', both: '<a class="link" href="/selling">Selling with us</a> &nbsp; <a class="link" href="/buying">Buying with us</a>' }[id] ? `<p style="margin-top:28px">${{ selling: '<a class="link" href="/selling">How we market your home</a>', buying: '<a class="link" href="/buying">How we help buyers</a>', both: '<a class="link" href="/selling">Selling with us</a> &nbsp; <a class="link" href="/buying">Buying with us</a>' }[id]}</p>` : ''}
 </div>`).join('')}
 </div>
 <div class="path-form" data-paths='${esc(JSON.stringify(Object.fromEntries(PATHS.map(([id, label, tags, , , , ph]) => [id, { tags, source: 'Work with us: ' + label, ph }]))))}'>
