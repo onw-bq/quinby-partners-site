@@ -47,7 +47,7 @@ export async function onRequestPost({ request, env }) {
     const id = out && out.contact && out.contact.id;
     if (!up.ok || !id) return json({ ok: false, error: 'Could not save right now.' }, 502);
     await fetch(`${API}/contacts/${id}/tags`, { method: 'POST', headers, body: JSON.stringify({ tags }) });
-    const note = [clean(data.source, 100) && `From: ${clean(data.source, 100)}`, clean(data.message, 2000) && `Message: ${clean(data.message, 2000)}`, data.address && `Mailing address: ${[data.address, data.city, data.postalCode].map((x) => clean(x, 200)).filter(Boolean).join(', ')}`].filter(Boolean).join('\n');
+    const note = [clean(data.source, 100) && `From: ${clean(data.source, 100)}`, clean(data.message, 2000) && `Message: ${clean(data.message, 2000)}`, clean(data.timeline, 40) && `Timeline: ${clean(data.timeline, 40)}`, data.address && `Mailing address: ${[data.address, data.city, data.postalCode].map((x) => clean(x, 200)).filter(Boolean).join(', ')}`].filter(Boolean).join('\n');
     if (note) await fetch(`${API}/contacts/${id}/notes`, { method: 'POST', headers, body: JSON.stringify({ body: note }) });
     return json({ ok: true, saved: true });
   } catch {

@@ -230,6 +230,7 @@ const FIELD = {
   name: (id) => `<label for="${id}-name">Name</label><input id="${id}-name" name="name" autocomplete="name" required>`,
   email: (id) => `<label for="${id}-email">Email</label><input id="${id}-email" name="email" type="email" autocomplete="email" required>`,
   phone: (id) => `<label for="${id}-phone">Phone (optional)</label><input id="${id}-phone" name="phone" type="tel" autocomplete="tel">`,
+  timeline: (id) => `<label for="${id}-when">When are you thinking?</label><select id="${id}-when" name="timeline"><option value="">Choose one</option><option>Now</option><option>In the next 6 months</option><option>6 to 12 months</option><option>Just exploring</option></select>`,
   message: (id) => `<label for="${id}-msg">Anything we should know?</label><textarea id="${id}-msg" name="message"></textarea>`,
   address: (id) => `<label for="${id}-addr">Mailing address</label><input id="${id}-addr" name="address" autocomplete="street-address" required>
 <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px"><div><label for="${id}-city">City</label><input id="${id}-city" name="city" autocomplete="address-level2" required></div><div><label for="${id}-zip">ZIP</label><input id="${id}-zip" name="postalCode" autocomplete="postal-code" required></div></div>`,
@@ -518,19 +519,56 @@ ${compare('A typical search', 'Searching with Quinby Partners', [
   ],
 });
 
-// Work with us
+// Work with us: pick a path, the copy and the form's tags follow
+const PATHS = [
+  ['selling', 'I’m selling', 'form: seller consult', 'Your home is a work of art.', 'We start with a walk through the house and your story in it. Then a plan: what to protect, what to fix, what it’s worth, and how we’ll find its next stewards.', [['A conversation', 'Your home, your timing, and what matters most to you.'], ['A walk-through', 'What’s original, what to protect, which updates pay back.'], ['A plan', 'Pricing, preparation, photography, film and a campaign built for your home.']], 'Tell us about your home, the neighborhood, and your timing.'],
+  ['buying', 'I’m buying', 'form: buyer consult', 'Find the home you’ll love for its details.', 'Tell us what you’re drawn to. We’ll help you see what’s original, what’s been changed, and what a home will need, and we know many owners before they list.', [['A conversation', 'What you love, where you want to be, and your budget.'], ['A search', 'Homes on the market, and homes that aren’t yet.'], ['An expert eye', 'Every showing, every inspection, the real costs up front.']], 'What are you looking for? Styles, neighborhoods, timing.'],
+  ['both', 'Both', 'form: seller consult, form: buyer consult', 'Selling one home, finding the next.', 'We plan the two together, so the timing, the money and the move fit, and neither home gets less care.', [['A conversation', 'Both homes, your timing, and what has to happen first.'], ['A sequence', 'Sell first, buy first, or both at once: the trade-offs, plainly.'], ['One team', 'The same people on both sides of your move.']], 'Tell us about the home you have and the one you want.'],
+  ['exploring', 'Just exploring', 'form: consult', 'Questions are a fine place to start.', 'What’s my home worth? Is this the right time? What would it take to buy in Kenwood or Golden Valley? Ask us anything. There’s no cost and no obligation.', [['A conversation', 'Honest answers, even if they aren’t what you hoped.'], ['A point of view', 'The market in your neighborhood, right now.'], ['No pressure', 'We’ll be here when you’re ready.']], 'What’s on your mind?'],
+];
 page({
   path: '/work-with-us', title: 'Work With Us | Quinby Partners',
-  description: 'Start a conversation with Quinby Partners about selling or buying a home in the Twin Cities.',
-  body: `<section class="section"><div class="wrap">
-<p class="eyebrow">Work with us</p><h1 style="max-width:900px">Let's talk about your home, or the one you're looking for.</h1>
-<div class="grid" style="margin-top:72px">
-<div class="principle"><p class="num">Selling</p><h3>Your home is a work of art.</h3><p>Your home’s story, editorial photography and film, and a campaign to find its next stewards.</p><p><a class="link" href="/selling">How we market your home</a></p></div>
-<div class="principle"><p class="num">Buying</p><h3>Find the home you'll love for its details.</h3><p>An expert eye on every home, the real costs up front, and owners we know before they list.</p><p><a class="link" href="/buying">Buying with us</a></p></div>
+  description: 'Start a conversation with Quinby Partners about selling, buying or simply exploring a home with character in the Twin Cities. No cost and no obligation.',
+  body: `${hero('work', 'a front door opening onto a sunlit entry hall', { eyebrow: 'Work with us', title: 'Let’s talk about your home, or the one you’re looking for.', sub: 'Every client works directly with Becky and Elena, from the first conversation to the day you get the keys.', short: true })}
+<section class="section" aria-labelledby="path-h"><div class="wrap">
+<p class="eyebrow">Where are you starting?</p><h2 id="path-h">Choose your path.</h2>
+<div class="paths" role="tablist" aria-label="Where are you starting?">
+${PATHS.map(([id, label], i) => `<button class="path-tab" role="tab" id="tab-${id}" aria-controls="path-panel" aria-selected="${i === 0}" data-path="${id}"><span class="n">${['I.', 'II.', 'III.', 'IV.'][i]}</span>${label}</button>`).join('')}
 </div>
-<div style="margin-top:80px;max-width:640px">${consultForm('consult')}</div>
+<div class="path-panel" id="path-panel" role="tabpanel" aria-labelledby="tab-${PATHS[0][0]}">
+<div class="path-copy">
+${PATHS.map(([id, , , h, p, steps], i) => `<div class="path-body" data-path="${id}"${i ? ' hidden' : ''}>
+<h3>${h}</h3><p class="lede">${p}</p>
+<ol class="mini-steps">${steps.map(([t, d]) => `<li><strong>${t}</strong><span>${d}</span></li>`).join('')}</ol>
+</div>`).join('')}
+</div>
+<div class="path-form" data-paths='${esc(JSON.stringify(Object.fromEntries(PATHS.map(([id, label, tags, , , , ph]) => [id, { tags, source: 'Work with us: ' + label, ph }]))))}'>
+${leadForm({ tags: PATHS[0][2], source: 'Work with us: I’m selling', fields: ['name', 'email', 'phone', 'timeline', 'message'], button: 'Start the conversation' })}
+<p class="small" style="margin-top:18px">Or call or text <a href="tel:+1${PHONE.replace(/-/g, '')}">${PHONE}</a>, or email <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
+</div>
+</div></div></section>
+${band('work-detail', 'hands on original woodwork; a key turning in an old lock')}
+<section class="section white"><div class="wrap">
+<p class="eyebrow">Working together</p><h2 style="margin-bottom:52px">What it’s like with us</h2>
+<div class="grid">
+${principle('I.', 'The people on the door', 'You work with Becky and Elena directly, not a hand-off. Fewer clients means more attention for yours.')}
+${principle('II.', 'Honest, always', 'Candid advice on price, condition and timing, even when it isn’t what you hoped to hear.')}
+${principle('III.', 'Care for the home, too', 'We know older and original homes from the inside, and we treat every one, of any age, as something worth caring for.')}
+</div></div></section>
+${(() => { const f = TESTIMONIALS.find((t) => t.featured) || TESTIMONIALS[0]; return f ? `<section class="section tight"><div class="wrap narrow"><blockquote class="pull"><p>${quote(f)}</p><footer>${metaLine(f.name, f.detail)}</footer></blockquote></div></section>` : ''; })()}
+<section class="section paper"><div class="wrap split" style="align-items:center">
+<div class="main"><p class="eyebrow">And at every closing</p><h2>$1,000 to a nonprofit you choose.</h2><p style="margin-top:18px;max-width:560px">From our side of the transaction, never added to your costs. Your move becomes a gift to a cause you care about.</p><p style="margin-top:22px"><a class="link" href="/giving">See every gift</a></p></div>
+<div class="side"><div class="stat"><p class="big">${STATS.given}</p><p class="cap">Given so far</p></div></div>
 </div></section>
-<section class="section white"><div class="wrap">${values}</div></section>`,
+<section class="section"><div class="wrap grid">
+<a class="card" href="/about/becky-quinby"><div class="ph"></div><p class="name">Becky Quinby</p><p class="meta">Founder and broker</p></a>
+<a class="card" href="/about/elena-quinby"><div class="ph"></div><p class="name">Elena Quinby</p><p class="meta">Realtor</p></a>
+</div></section>`,
+  faqs: [
+    ['Is there a cost to talk with Quinby Partners?', 'No. A first conversation is free, with no obligation. We’ll talk about your home or your search, your timing, and what we’d recommend.'],
+    ['What happens after I reach out?', 'A member of our team will be in touch within one business day to set up a conversation, by phone, over coffee, or at your home.'],
+    ['Can you help if my home isn’t historic?', 'Yes. We specialize in homes with character, but we represent buyers and sellers of every kind of home and price point, with the same care.'],
+  ],
 });
 
 // Contact

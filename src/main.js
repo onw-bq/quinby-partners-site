@@ -134,3 +134,37 @@
   if (pr) pr.addEventListener('click', function () { window.print(); });
   update();
 })();
+
+// Work with us: choosing a path swaps the copy and sets the form's tags
+(function () {
+  var tabs = document.querySelectorAll('.path-tab');
+  var box = document.querySelector('.path-form');
+  if (!tabs.length || !box) return;
+  var cfg = {}; try { cfg = JSON.parse(box.getAttribute('data-paths')); } catch (e) {}
+  var form = box.querySelector('form');
+  function choose(tab, focus) {
+    var id = tab.getAttribute('data-path');
+    tabs.forEach(function (t) { var on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    document.querySelectorAll('.path-body').forEach(function (b) { b.hidden = b.getAttribute('data-path') !== id; });
+    document.getElementById('path-panel').setAttribute('aria-labelledby', tab.id);
+    var c = cfg[id];
+    if (c && form) {
+      form.querySelector('[name=tags]').value = c.tags;
+      form.querySelector('[name=source]').value = c.source;
+      var msg = form.querySelector('[name=message]'); if (msg) msg.placeholder = c.ph;
+      var when = form.querySelector('[name=timeline]'); if (when && id === 'exploring' && !when.value) when.value = 'Just exploring';
+    }
+    if (focus) tab.focus();
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  }
+  tabs.forEach(function (t, i) {
+    t.tabIndex = i ? -1 : 0;
+    t.addEventListener('click', function () { choose(t); });
+    t.addEventListener('keydown', function (e) {
+      var k = e.key, n = tabs.length;
+      if (k === 'ArrowRight' || k === 'ArrowLeft') { e.preventDefault(); choose(tabs[(i + (k === 'ArrowRight' ? 1 : n - 1)) % n], true); }
+    });
+  });
+  var start = document.querySelector('.path-tab[data-path="' + location.hash.slice(1) + '"]');
+  if (start) choose(start); else { var m = form && form.querySelector('[name=message]'); if (m && cfg.selling) m.placeholder = cfg.selling.ph; }
+})();
