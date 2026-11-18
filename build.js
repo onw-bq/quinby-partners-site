@@ -106,7 +106,8 @@ ${PUB_LIVE ? '' : `<section class="section pine tight" aria-labelledby="pub-soon
 <div class="wrap db-grid solo">
 <div class="soon-card">
 <p class="eyebrow">Coming in 2027</p>
-<h2 id="pub-soon">A new publication from Quinby Partners</h2>
+<h2 id="pub-soon"><em>${esc(PUB)}</em></h2>
+<p class="pub-from">A new publication from Quinby Partners</p>
 <p>Stories of the Twin Cities’ old homes: their original features, the people who made them, and the people who care for them now.</p>
 <form class="lead-form inline" action="/api/lead" method="post" data-thanks="You’re on the list. We’ll let you know when the first issue arrives.">
 <input type="hidden" name="tags" value="publication: waitlist"><input type="hidden" name="source" value="Publication waitlist">
