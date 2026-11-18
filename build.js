@@ -324,7 +324,7 @@ ${(() => { const m = media('architecture', 'a mix: leaded glass, a mid-century w
 
 <section class="section"><div class="wrap">
 <div class="head-row"><div><p class="eyebrow">Neighborhoods</p><h2>The neighborhoods we know best</h2>
-<p style="max-width:600px;margin-top:14px">Historic homes are everywhere in the Twin Cities. South Minneapolis is home base.</p></div>
+<p style="max-width:600px;margin-top:14px">Homes with character are everywhere in the Twin Cities, from the lakes and Minnehaha Creek to the bluffs of St. Paul.</p></div>
 <a class="link" href="/neighborhoods">All neighborhoods</a></div>
 <ul class="rows">
 ${HOODS.map((h) => `<li><a href="/neighborhoods/${h.slug}"><span class="n">${h.name}</span><span class="m">${h.city}</span></a></li>`).join('\n')}
@@ -346,8 +346,8 @@ ${HOODS.map((h) => `<li><a href="/neighborhoods/${h.slug}"><span class="n">${h.n
 ${GIFTS.slice(0, 4).map(giftRow).join('\n')}
 </ul></div></div></section>`,
   faqs: [
-    ['What kinds of homes does Quinby Partners specialize in?', 'Historic, architect-designed and one-of-a-kind homes across Minneapolis, St. Paul, Edina and Golden Valley: prewar homes, mid-century modern homes, standout contemporary homes and homes with exceptional craftsmanship. We work with every kind of home and every price point.'],
-    ['Where does Quinby Partners work?', 'Across the Twin Cities, with South Minneapolis as home base, plus the neighborhoods around the lakes, St. Paul south of I-94, Edina and Golden Valley.'],
+    ['What kinds of homes does Quinby Partners specialize in?', 'Homes with character, from every era: Craftsman bungalows and mid-century moderns, the Tudors and Mediterraneans that line Minnehaha Creek, artists’ lofts like the Bookmen Lofts, and pieces of history along Lake Minnetonka. We work with every kind of home and every price point.'],
+    ['Where does Quinby Partners work?', 'Across the Twin Cities: Minneapolis, the neighborhoods around the lakes, St. Paul south of I-94, Edina, Golden Valley and beyond.'],
     ['Does Quinby Partners give back?', 'Yes. At every closing, Quinby Partners gives $1,000 to a nonprofit the client chooses.'],
   ],
 });
@@ -515,7 +515,7 @@ ${compare('A typical search', 'Searching with Quinby Partners', [
   faqs: [
     ['What should I know before buying an older home?', 'Plan for specialist inspections (sewer, wiring, roof, foundation, plaster), realistic upkeep and restoration budgets, insurance questions, and any historic district rules that limit exterior changes.'],
     ['Can I search for homes by photo?', 'Yes. Quinby Partners buyers can search by image: save photos of homes, rooms or details you love, and the search finds homes on the market with similar features, alongside the usual filters.'],
-    ['Does Quinby Partners help with homes that aren’t historic?', 'Yes. We help buyers find homes with character of every era, from prewar to mid-century to contemporary, at every price point.'],
+    ['Does Quinby Partners help with homes that aren’t historic?', 'Yes. We help buyers find homes with character of every era, from Craftsman bungalows to mid-century moderns to new architect-designed homes, at every price point.'],
   ],
 });
 
@@ -699,7 +699,7 @@ page({
   path: '/neighborhoods', title: 'Neighborhoods | Historic & Architectural Homes in Minneapolis, St. Paul, Edina & Golden Valley',
   description: 'The Twin Cities neighborhoods Quinby Partners knows best, from South Minneapolis and the lakes to St. Paul, Edina and Golden Valley.',
   body: `<section class="section"><div class="wrap">
-<p class="eyebrow">Neighborhoods</p><h1 style="max-width:900px">Historic homes are everywhere in the Twin Cities. South Minneapolis is home base.</h1>
+<p class="eyebrow">Neighborhoods</p><h1 style="max-width:900px">Homes with character are everywhere in the Twin Cities.</h1>
 </div></section>
 ${AREAS.map((a, i) => `<section class="section ${i % 2 ? '' : 'white'} tight"><div class="wrap split">
 <div class="side"><h2><a href="/neighborhoods/${a.slug}" style="text-decoration:none">${a.name}</a></h2><p style="margin-top:16px">${a.lede}</p><p><a class="link" href="/neighborhoods/${a.slug}">Explore ${a.name}</a></p></div>
