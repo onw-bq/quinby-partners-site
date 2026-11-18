@@ -371,7 +371,7 @@ page({
 <div class="main prose">
 <p class="lede">Becky Quinby founded Quinby Partners on a simple conviction: to leave everything better than she found it. That applies to the homes we sell, the clients we serve, and the community we share.</p>
 <p>We built an independent brokerage so we could work the way we believe real estate should work. Fewer clients, more attention. Honest advice, even when it isn't what someone hoped to hear. And a share of every transaction directed back into the community.</p>
-<h2>Experts in older and original homes</h2>
+<h2>Experts in character-driven &amp; original homes</h2>
 <p>Homes with character are our specialty, and we know them from the inside. Becky has bought, renovated and lived in homes across nearly a century of design, and cares for historic properties of her own. Since 2012 we’ve sold Craftsman bungalows, Tudors, Victorians, mid-century moderns and artists’ lofts across Minneapolis, St. Paul, Edina and Golden Valley.</p>
 <p>We know what makes these homes valuable: the woodwork, leaded glass, tile, hardware and built-ins that can’t be replaced, and the updates that add value without erasing them. For sellers, that means advice on what to protect and what to fix, a home presented and priced for what it really is, and buyers who will care for it as well as you have. For buyers, it means knowing what’s original, what’s been changed, and what it will take to look after it.</p>
 <h2>Independent by design</h2>
