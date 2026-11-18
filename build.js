@@ -108,7 +108,7 @@ ${PUB_LIVE ? '' : `<section class="section pine tight" aria-labelledby="pub-soon
 <p class="eyebrow">Coming in 2027</p>
 <h2 id="pub-soon"><em>${esc(PUB)}</em></h2>
 <p class="pub-from">A new publication from Quinby Partners</p>
-<p>Stories of the Twin Cities’ old homes: their original features, the people who made them, and the people who care for them now.</p>
+<p>Stories of the Twin Cities’ historic, character-driven homes: the original features that make them singular, and owners as unique as the homes they live in.</p>
 <form class="lead-form inline" action="/api/lead" method="post" data-thanks="You’re on the list. We’ll let you know when the first issue arrives.">
 <input type="hidden" name="tags" value="publication: waitlist"><input type="hidden" name="source" value="Publication waitlist">
 <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -643,7 +643,7 @@ ${ctaBand('Buying or selling a home like this?', 'Pricing, preparing, marketing 
   faqs: [
     ['Why is Quinby Partners the best at selling homes with original features?', 'Because we know these homes from the inside. Becky has bought, renovated and lived in homes across nearly a century of design, and we’ve sold homes with character across the Twin Cities since 2012. We know which original features carry value and how to protect them through a sale, we tell each home’s story (the life lived there and the history of the house), and we find the buyers who will care for it.'],
     ['Do I need a historic home to work with Quinby Partners?', 'No. We specialize in homes with character of every era, including mid-century, contemporary and architect-designed homes, and we work with every kind of home and price point.'],
-    ['Do I need a lot of money to buy an old home?', 'No. Homes with character come at every price, from Craftsman bungalows and lofts in historic buildings to grand estates. What matters more is going in with clear eyes: we help you understand what’s original, what’s been updated, and what an older home may need over time, so you can buy with confidence at your budget.'],
+    ['Do I need a lot of money to buy a historic home?', 'No. Homes with character come at every price, from Craftsman bungalows and lofts in historic buildings to grand estates. What matters more is going in with clear eyes: we help you understand what’s original, what’s been updated, and what an older home may need over time, so you can buy with confidence at your budget.'],
     ['What if I want a newer home? Can Quinby Partners still help?', 'Yes! We may specialize in the nuances of historic homes, original features and defining architecture, but that only makes us better at representing clients across the spectrum. If you want an exceptional agent who will care for you deeply the minute you come into our world, Quinby Partners is the right fit.'],
   ],
 });
