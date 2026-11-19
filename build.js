@@ -411,7 +411,7 @@ page({
 <p>Her perspective is hands-on. Becky has bought, renovated, and lived in homes spanning nearly a century of Minneapolis architecture, from a 1938 two-story in Kingfield to a 1916 Craftsman in East Harriet to the 1928 Cape Cod in Edina she is restoring today. She also owns and restores a portfolio of historic investment properties, including a Shenandoah Terrace fourplex and a Nokomis duplex. She knows which details carry a home's value and which improvements earn their return at sale.</p>
 <p>Becky is also the founder of Onward, a platform that amplifies businesses who give back through their work and partners with nonprofits to generate more fundraising for the causes they serve. It's the same conviction behind Quinby Partners' giving model, extended to professionals across industries.</p>
 <p>Becky lives in Edina with her wife, Gracie, and their four children, Millie, Alma, Fitz, and Arthur. Away from work, you'll find her at every kids' activity imaginable, on the golf course, or pursuing her newest passion, tennis.</p>
-<p style="margin-top:36px"><a class="btn" href="/work-with-us">Meet with Becky</a></p>
+<p style="margin-top:36px"><a class="btn" href="/work-with-us?with=becky">Meet with Becky</a></p>
 </div></div></section>`,
 });
 page({
@@ -426,7 +426,7 @@ page({
 <p>Elena pairs a designer's eye with an advisor's judgment. She sees the potential in every space, understands how thoughtful changes reshape the way a home lives, and guides clients through one of life's most significant decisions with empathy, patience, and a steady hand.</p>
 <p>Elena believes a home is defined by how it feels: its flow, its light, and its emotional pull. Her background in film and advertising gives sellers a distinct advantage, with marketing that tells a property's story as compellingly as it shows it. Buyers value her just as highly, for her clear communication, close attention to detail, and skill at the negotiating table.</p>
 <p>Elena lives near Bryant Lake with her partner, Scott, their daughter, Maria, and two rescue dogs. In the off-season, they spend their time restoring their cabin in Wisconsin and traveling the world.</p>
-<p style="margin-top:36px"><a class="btn" href="/work-with-us">Meet with Elena</a></p>
+<p style="margin-top:36px"><a class="btn" href="/work-with-us?with=elena">Meet with Elena</a></p>
 </div></div></section>`,
 });
 

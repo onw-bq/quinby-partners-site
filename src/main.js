@@ -142,6 +142,10 @@
   if (!tabs.length || !box) return;
   var cfg = {}; try { cfg = JSON.parse(box.getAttribute('data-paths')); } catch (e) {}
   var form = box.querySelector('form');
+  var agent = (new URLSearchParams(location.search).get('with') || '').toLowerCase();
+  if (agent !== 'becky' && agent !== 'elena') agent = '';
+  var agentName = agent ? agent.charAt(0).toUpperCase() + agent.slice(1) : '';
+  if (agent) { var note = document.createElement('p'); note.className = 'small'; note.style.margin = '0 0 18px'; note.textContent = 'You’ll hear from ' + agentName + ' directly.'; box.insertBefore(note, box.firstChild); }
   function choose(tab, focus) {
     var id = tab.getAttribute('data-path');
     tabs.forEach(function (t) { var on = t === tab; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
@@ -149,8 +153,8 @@
     document.getElementById('path-panel').setAttribute('aria-labelledby', tab.id);
     var c = cfg[id];
     if (c && form) {
-      form.querySelector('[name=tags]').value = c.tags;
-      form.querySelector('[name=source]').value = c.source;
+      form.querySelector('[name=tags]').value = c.tags + (agent ? ', agent: ' + agent : '');
+      form.querySelector('[name=source]').value = c.source + (agent ? ' (asked for ' + agentName + ')' : '');
       var msg = form.querySelector('[name=message]'); if (msg) msg.placeholder = c.ph;
       var when = form.querySelector('[name=timeline]'); if (when && id === 'exploring' && !when.value) when.value = 'Just exploring';
     }
@@ -166,7 +170,7 @@
     });
   });
   var start = document.querySelector('.path-tab[data-path="' + location.hash.slice(1) + '"]');
-  if (start) choose(start); else { var m = form && form.querySelector('[name=message]'); if (m && cfg.selling) m.placeholder = cfg.selling.ph; }
+  if (start) choose(start); else if (agent) choose(tabs[0]); else { var m = form && form.querySelector('[name=message]'); if (m && cfg.selling) m.placeholder = cfg.selling.ph; }
 })();
 
 // Footer pop-ups (Doing Better)
